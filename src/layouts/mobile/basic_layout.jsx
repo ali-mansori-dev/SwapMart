@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 import Navbar from "../../shared/navbar";
-import MainContainer from "../../shared/container";
+import { Container } from "@mui/material";
 
 const BasicLayoutMobile = ({ children, searchText, filter = [] }) => {
   return (
@@ -24,12 +24,12 @@ const BasicLayoutMobile = ({ children, searchText, filter = [] }) => {
             ))}
           </div>
         )}
-        {/* <Container maxWidth="lg"></Container> */}
-        <MainContainer
+        <Container maxWidth="lg">{children}</Container>
+        {/* <MainContainer
           className={`w-full flex flex-col justify-center gap-8 py-8 `}
         >
-          {children}
-        </MainContainer>
+          
+        </MainContainer> */}
       </main>
     </>
   );

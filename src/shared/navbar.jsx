@@ -4,7 +4,7 @@ function Navbar() {
   return (
     <AppBar position="static" color="default">
       <Container maxWidth="lg">
-        <Toolbar>
+        <Toolbar className="!pl-0 !pr-0">
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             SWAP MART
           </Typography>
