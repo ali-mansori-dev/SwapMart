@@ -5,7 +5,7 @@ function Navbar() {
     <AppBar position="static" color="default">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          My Navbar
+          Swap Mart
         </Typography>
         <Button color="inherit" href="/">
           Home

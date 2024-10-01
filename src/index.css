@@ -1,21 +1,30 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
-  color-scheme: light dark;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 }
-
+:root {
+  background-color: white;
+  font-family: "Montserrat", sans-serif, system-ui, Avenir, Helvetica, Arial;
+}
 body {
   margin: 0 !important;
 }
-
-#root{
+#root {
   margin: 0;
   padding: auto;
+}
+body {
+  margin: 0;
+  direction: ltr;
+}
+* {
+  font-family: "Montserrat", sans-serif;
+  direction: ltr;
 }

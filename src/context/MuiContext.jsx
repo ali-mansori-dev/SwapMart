@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const theme = createTheme({
   direction: "ltr",
-  typography: { fontFamily: "IranYekanX" },
+  typography: { fontFamily: "Montserrat" },
   palette: {
     mode: "light",
     primary: {
