@@ -1,19 +1,21 @@
-import { AppBar, Toolbar, Typography, Button } from "@mui/material";
+import { AppBar, Toolbar, Typography, Button, Container } from "@mui/material";
 
 function Navbar() {
   return (
     <AppBar position="static" color="default">
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Swap Mart
-        </Typography>
-        <Button color="inherit" href="/">
-          Home
-        </Button>
-        <Button color="inherit" href="/about">
-          About
-        </Button>
-      </Toolbar>
+      <Container maxWidth="lg">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            SWAP MART
+          </Typography>
+          <Button color="inherit" href="/">
+            Home
+          </Button>
+          <Button color="inherit" href="/about">
+            About
+          </Button>
+        </Toolbar>
+      </Container>
     </AppBar>
   );
 }
