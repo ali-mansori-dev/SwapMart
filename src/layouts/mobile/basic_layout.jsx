@@ -9,7 +9,7 @@ const BasicLayoutMobile = ({ children, searchText, filter = [] }) => {
       <Navbar searchText={searchText} />
       <main
         className={`${
-          filter?.length > 0 ? `mt-[122px]` : `mt-[72px]`
+          filter?.length > 0 ? `mt-[122px]` : `mt-[12px]`
         } mb-[65px]`}
       >
         {filter?.length > 0 && (
@@ -24,6 +24,7 @@ const BasicLayoutMobile = ({ children, searchText, filter = [] }) => {
             ))}
           </div>
         )}
+        {/* <Container maxWidth="lg"></Container> */}
         <MainContainer
           className={`w-full flex flex-col justify-center gap-8 py-8 `}
         >
