@@ -7,9 +7,9 @@ const theme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      light: "#2B7FAD",
-      main: "#A40000",
-      dark: "#1E5979",
+      light: "#ad1a1a",
+      main: "#a40000",
+      dark: "#940000",
       contrastText: "#fff",
     },
   },
@@ -18,7 +18,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           backgroundColor: "#EAF2F7",
-          color: "#A40000",
+          color: "#a40000",
           borderRadius: "8px",
         },
       },
@@ -43,15 +43,15 @@ const theme = createTheme({
     MuiRadio: {
       styleOverrides: {
         root: {
-          color: "#D1D5DB",
+          color: "#940000",
         },
       },
     },
     MuiAlert: {
       styleOverrides: {
         standardError: {
-          background: "#FDE8E8",
-          color: "#C81E1E",
+          background: "#ad1a1a",
+          color: "#940000",
           borderRadius: "8px",
         },
       },
@@ -70,8 +70,8 @@ const theme = createTheme({
           fontWeight: 500,
         },
         outlined: {
-          borderColor: "#E5E7EB",
-          color: "#111928",
+          borderColor: "#940000",
+          color: "#ad1a1a",
         },
       },
     },
