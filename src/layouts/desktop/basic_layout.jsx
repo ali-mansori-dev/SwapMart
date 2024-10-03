@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
-import Navbar from "../../modules/auth/components/navbar/navbar";
-import MainContainer from "../../shared/components/container";
+import MainContainer from "../../shared/container";
+import Navbar from "../../shared/navbar/desktop";
 
 const BasicLayoutDesktop = ({ children, containerClass, searchText = "" }) => {
   return (
