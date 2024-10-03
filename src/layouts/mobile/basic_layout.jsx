@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-import Navbar from "../../shared/navbar";
+import Navbar from "../../shared/navbar/desktop";
 import { Container } from "@mui/material";
 
 const BasicLayoutMobile = ({ children, searchText, filter = [] }) => {
