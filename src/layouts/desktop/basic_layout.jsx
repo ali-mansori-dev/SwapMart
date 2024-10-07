@@ -6,8 +6,8 @@ import Navbar from "../../shared/navbar/desktop";
 const BasicLayoutDesktop = ({ children, containerClass, searchText = "" }) => {
   return (
     <>
-      <Navbar searchText={searchText} />
-      <main className="py-[64px]">
+      <Navbar searchText={searchText}  />
+      <main className="py-[130px]">
         <MainContainer
           className={`w-full flex justify-center gap-5 py-12 ${containerClass}`}
         >

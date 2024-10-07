@@ -1,7 +1,7 @@
+import { Container } from "@mui/material";
 import PropTypes from "prop-types";
 
 import Navbar from "../../shared/navbar/desktop";
-import { Container } from "@mui/material";
 
 const BasicLayoutMobile = ({ children, searchText, filter = [] }) => {
   return (
@@ -9,7 +9,7 @@ const BasicLayoutMobile = ({ children, searchText, filter = [] }) => {
       <Navbar searchText={searchText} />
       <main
         className={`${
-          filter?.length > 0 ? `mt-[122px]` : `mt-[12px]`
+          filter?.length > 0 ? `mt-[122px]` : `mt-[90px]`
         } mb-[65px]`}
       >
         {filter?.length > 0 && (

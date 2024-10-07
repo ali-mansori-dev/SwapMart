@@ -1,19 +1,9 @@
-import { useMutation } from "@tanstack/react-query";
-import { SearchCategoryFn } from "../../../../category/query";
-import { useCity } from "../../../../../context/CityContext";
-import { TextField } from "@mui/material";
-import Button from "../../../../../shared/components/button";
-import { MapPinIcon } from "lucide-react";
-import SearchResult from "./search_result";
+
+// import SearchResult from "./search_result";
 import PropTypes from "prop-types";
+import { Button, TextField } from "@mui/material";
 
-const Search = ({ open, onOpen, onClose, openCity, searchText }) => {
-  const { city } = useCity();
-  const searchMutation = useMutation({
-    mutationFn: SearchCategoryFn,
-  });
-  const searchFn = (query) => searchMutation.mutateAsync(query);
-
+const Search = ({ onOpen, openCity, searchText }) => {
   return (
     <div className="w-[400px] relative">
       <TextField
@@ -21,7 +11,7 @@ const Search = ({ open, onOpen, onClose, openCity, searchText }) => {
         fullWidth
         size="small"
         defaultValue={searchText}
-        placeholder="جستجو در پونز"
+        placeholder="Search in SwapMart"
         sx={{
           "& fieldset": { border: "none" },
           border: "1px solid #D1D5DB",
@@ -33,7 +23,6 @@ const Search = ({ open, onOpen, onClose, openCity, searchText }) => {
         }}
         onFocus={onOpen}
         autoComplete="off"
-        onChange={(e) => searchFn(e.target.value)}
         InputProps={{
           endAdornment: (
             <div className="flex flex-row  items-center">
@@ -42,18 +31,18 @@ const Search = ({ open, onOpen, onClose, openCity, searchText }) => {
                 size="small"
                 variant="textonly"
                 className="w-max pl-0 pr-4 gap-1"
-                rightIcon={<MapPinIcon size={12} />}
+                // rightIcon={<MapPinIcon size={12} />}
                 onClick={openCity}
               >
-                {city && city !== "" ? city : "شهر"}
+                city
               </Button>
             </div>
           ),
         }}
       />
-      {open && (
+      {/* {open && (
         <SearchResult searchMutation={searchMutation} onClose={onClose} />
-      )}
+      )} */}
     </div>
   );
 };

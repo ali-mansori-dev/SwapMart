@@ -1,4 +1,3 @@
-import React from "react";
 import "./dot_loader.css";
 
 const DotLoader = () => {

@@ -8,7 +8,7 @@
   width: 12px;
   height: 12px;
   margin: 0 5px;
-  background-color: #008c7b;
+  background-color: #a40000;
   border-radius: 50%;
   animation: dot-loader 1s infinite ease-in-out;
 }
