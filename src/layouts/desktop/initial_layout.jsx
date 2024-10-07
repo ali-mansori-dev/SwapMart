@@ -2,7 +2,6 @@ import { AppBar } from "@mui/material";
 import PropTypes from "prop-types";
 
 import MainContainer from "../../shared/components/container";
-import { ReactComponent as Logo } from "../../svgs/Logo.svg";
 
 const InitialLayoutDesktop = ({ children }) => {
   return (
@@ -12,7 +11,7 @@ const InitialLayoutDesktop = ({ children }) => {
         position="fixed"
       >
         <MainContainer className={`flex flex-row justify-center items-center`}>
-          <Logo />
+          
         </MainContainer>
       </AppBar>
       <main className={`mt-[65px]`}>

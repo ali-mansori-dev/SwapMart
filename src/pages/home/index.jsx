@@ -1,12 +1,19 @@
-import BasicLayoutMobile from "../../layouts/mobile/basic_layout";
+import { useQuery } from "react-query";
 
-// import { ReactComponent as Logo } from "../../assets/Logo.svg";
+import BasicLayoutMobile from "../../layouts/mobile/basic_layout";
+import { fetchData } from "../../queries/post";
+import CardsPreview from "./cards_preview";
+// import useToggle from "../../hooks/useToggle";
+import AuthModal from "../../components/auth/modal";
+// import { Button } from "@mui/material";
 
 const Index = () => {
+  const { isLoading, data } = useQuery("postData", fetchData);
   return (
     <BasicLayoutMobile>
-      <div className="text-red-500">Swap Mart</div>
-      {/* <Logo /> */}
+      {/* <Button onClick={toggle} variant="contained">111</Button> */}
+      <CardsPreview key={1} data={data} isLoading={isLoading} city="aaa" />
+      <AuthModal />
     </BasicLayoutMobile>
   );
 };

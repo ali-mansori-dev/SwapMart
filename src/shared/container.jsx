@@ -13,5 +13,4 @@ MainContainer.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
 };
-
 export default MainContainer;
