@@ -4,7 +4,6 @@ import BasicLayoutMobile from "../../layouts/mobile/basic_layout";
 import { fetchData } from "../../queries/post";
 import CardsPreview from "./cards_preview";
 // import useToggle from "../../hooks/useToggle";
-import AuthModal from "../../components/auth/modal";
 // import { Button } from "@mui/material";
 
 const Index = () => {
@@ -13,7 +12,6 @@ const Index = () => {
     <BasicLayoutMobile>
       {/* <Button onClick={toggle} variant="contained">111</Button> */}
       <CardsPreview key={1} data={data} isLoading={isLoading} city="aaa" />
-      <AuthModal />
     </BasicLayoutMobile>
   );
 };

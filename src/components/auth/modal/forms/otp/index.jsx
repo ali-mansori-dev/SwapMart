@@ -5,10 +5,10 @@ const OTPAuth = () => {
     <div>
       <div className="flex flex-col gap-4">
         <div className="inline-flex gap-4">
-          <Select>
-            <MenuItem value={10}>+98</MenuItem>
-            <MenuItem value={20}>+65</MenuItem>
-            <MenuItem value={30}>+1</MenuItem>
+          <Select value={98}>
+            <MenuItem value={98} selected>+98</MenuItem>
+            <MenuItem value={65}>+65</MenuItem>
+            <MenuItem value={1}>+1</MenuItem>
           </Select>
           <TextField label="Mobile" placeholder="9919536789" fullWidth autoFocus />
         </div>

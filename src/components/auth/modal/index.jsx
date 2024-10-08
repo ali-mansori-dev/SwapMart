@@ -7,7 +7,7 @@ import {
   IconButton,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import GoogleAuth from "./google_auth";
+// import GoogleAuth from "./google_auth";
 import { useState } from "react";
 import PasswordForm from "./forms/password/";
 import OTPForm from "./forms/otp/";
@@ -66,7 +66,7 @@ const AuthModal = () => {
               >
                 Continue with Email
               </Button>
-              <GoogleAuth />
+              {/* <GoogleAuth /> */}
             </div>
           </>
         )}

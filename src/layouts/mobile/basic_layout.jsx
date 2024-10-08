@@ -24,7 +24,7 @@ const BasicLayoutMobile = ({ children, searchText, filter = [] }) => {
             ))}
           </div>
         )}
-        <Container maxWidth="lg">{children}</Container>
+        <Container maxWidth="lg" className="h-[calc(100vh-170px)]">{children}</Container>
         {/* <MainContainer
           className={`w-full flex flex-col justify-center gap-8 py-8 `}
         >
