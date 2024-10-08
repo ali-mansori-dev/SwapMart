@@ -8,6 +8,7 @@ import Categories from "./categories";
 import Search from "./search";
 import { useDispatch } from "react-redux";
 import { open_auth_modal } from "../../../features/layout/layoutSlice";
+import AuthModal from "../../../components/auth/modal";
 
 function Navbar() {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function Navbar() {
           </div>
         </div>
       </Container>
+      <AuthModal />
     </AppBar>
   );
 }
