@@ -1,17 +1,17 @@
-import { AppBar, Typography, Button, Container } from "@mui/material";
+import { AppBar, Typography, Button, Container, Skeleton } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-// import useToggle from "../../../hooks/useToggle";
+import { open_auth_modal } from "../../../features/layout/layoutSlice";
+import AuthModal from "../../../components/auth/modal";
 import UserDropDown from "./user_drop_down";
 import Logo from "../../../assets/Logo.svg";
 import Categories from "./categories";
 import Search from "./search";
-import { useDispatch } from "react-redux";
-import { open_auth_modal } from "../../../features/layout/layoutSlice";
-import AuthModal from "../../../components/auth/modal";
 
 function Navbar() {
   const dispatch = useDispatch();
+  const { isAuthed, loading } = useSelector((redux) => redux.auth);
   const onClose = () => {
     dispatch(open_auth_modal());
   };
@@ -29,10 +29,20 @@ function Navbar() {
             <Search />
           </div>
           <div className="flex flex-row gap-5">
-            <UserDropDown />
-            <Button onClick={onClose} variant="contained" size="small">
-              Create Post
-            </Button>
+            {loading ? <Skeleton width={100} height={50} /> : <UserDropDown />}
+            {loading ? (
+              <Skeleton width={100} height={50} />
+            ) : isAuthed ? (
+              <Link to={"/new"}>
+                <Button variant="contained" size="small">
+                  Create Post
+                </Button>
+              </Link>
+            ) : (
+              <Button onClick={onClose} variant="contained" size="small">
+                Create Post
+              </Button>
+            )}
           </div>
         </div>
       </Container>

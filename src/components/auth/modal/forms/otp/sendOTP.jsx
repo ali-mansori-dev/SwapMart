@@ -1,21 +1,15 @@
-import {
-  Button,
-  DialogActions,
-  DialogContent,
-} from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import { Button, MenuItem, Select, TextField } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import { useMutation } from "react-query";
+import PropTypes from "prop-types";
 
-import TextInput from "../../../../shared/components/input/textInput";
-import { send_otp } from "../../../../features/auth/action";
+import { sendotp } from "../../../../../queries/auth";
 import { sendOtpSchema } from "./schemas";
 
-const SendOTP = ({ setMobile, nextLevel, setExpireCode, send_otp }) => {
+const SendOTP = ({ setMobile, nextLevel, setExpireCode }) => {
   const [loading, setLoading] = useState(false);
-  const [errore, setErrore] = useState("");
   const inputRef = useRef(null);
 
   useEffect(() => inputRef.current?.focus(), []);
@@ -28,75 +22,65 @@ const SendOTP = ({ setMobile, nextLevel, setExpireCode, send_otp }) => {
     resolver: yupResolver(sendOtpSchema),
   });
 
+  const { mutate } = useMutation("sendFormData", (formData) => {
+    return sendotp(formData)
+      .then((result) => {
+        setLoading(false);
+        if (result?.statusCode && result?.statusCode === 200) {
+          setMobile(`+${formData?.prefix}${formData?.mobile}`);
+          setExpireCode(result?.expiresIn);
+          nextLevel();
+        }
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log(error);
+      });
+  });
+
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-
-      const { payload } = await send_otp({
-        mobile: "0" + data?.mobile,
-      });
-
-      if (payload?.statusCode && payload?.statusCode === 200) {
-        setLoading(false);
-        setMobile("0" + data?.mobile);
-        setExpireCode(payload?.expiresIn);
-        nextLevel();
-      } else {
-        setLoading(false);
-        if (payload === " last code not expire") {
-          setErrore("کد ارسال شده به دستگاه شما هنوز منقضی نشده است");
-        }
-      }
+      mutate(data);
     } catch (err) {
-      setLoading(false);
+      console.log(err);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="h-full">
-      <DialogContent className="w-auto lg:!w-[430px] h-[calc(100%-70px)] lg:!max-h-[50vh] !py-14">
-        <h3 className="text-lg text-gray-700 mb-4">
-          شماره موبایل خود را وارد کنید
-        </h3>
-        <p className=" pb-6 text-sm text-gray-400 leading-7">
-          قبل از ثبت آگهی، لطفاً وارد حساب خود شوید. کد تأیید به این شماره پیامک
-          می‌شود.
-        </p>
-
-        <TextInput
-          inputRef={inputRef}
-          type="number"
-          register={register("mobile")}
-          placeholder="شماره موبایل"
-          errorMessage={errors?.mobile?.message || errore || undefined}
-          prefix={"۹۸+"}
-          label={"موبایل"}
-          fullWidth
-          autoFocus
-        />
-        <div className="text-sm pb-4 mt-2">
-          <span className="text-primary-default">شرایط استفاده از خدمات</span>
-          {"  و  "}
-          <span className="text-primary-default"> حریم خصوصی</span> پونز را
-          می‌پذیرم.
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col w-full h-full gap-4"
+    >
+      <div className="w-full inline-flex items-center gap-3">
+        <Select {...register("prefix")} value={98}>
+          <MenuItem value={98}>+98</MenuItem>
+          <MenuItem value={1}>+1</MenuItem>
+          <MenuItem value={23}>+23</MenuItem>
+          <MenuItem value={2}>+2</MenuItem>
+        </Select>
+        <div className="w-full flex flex-col gap-1">
+          <TextField
+            type="tel"
+            {...register("mobile")}
+            placeholder="9919654789"
+            label={"Mobile"}
+            fullWidth
+            autoComplete="off"
+            autoFocus
+          />
         </div>
-      </DialogContent>
-      <DialogActions className="gap-2 border-t border-gray-300 !p-4">
-        <Button
-          fullWidth
-          variant="contained"
-          disabled={loading}
-          loading={loading}
-          type="submit"
-        >
-          تایید
-        </Button>
-      </DialogActions>
+      </div>
+      <span className="text-red-700 text-xs">{errors?.mobile?.message}</span>
+      <Button variant="contained" type="submit" fullWidth>
+        {loading ? "Loading" : "Send Code"}
+      </Button>
     </form>
   );
 };
-
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ send_otp }, dispatch);
-
-export default connect(null, mapDispatchToProps)(SendOTP);
+SendOTP.propTypes = {
+  setMobile: PropTypes.func,
+  nextLevel: PropTypes.func,
+  setExpireCode: PropTypes.func,
+};
+export default SendOTP;

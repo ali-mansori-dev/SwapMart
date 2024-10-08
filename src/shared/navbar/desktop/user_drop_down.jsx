@@ -1,14 +1,15 @@
+import { connect, useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
-import { connect, useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
-import { log_out } from "../../../features/auth/authSlice";
 import {
   open_user_dropdown,
+  open_auth_modal,
   close_all,
 } from "../../../features/layout/layoutSlice";
+import { log_out } from "../../../features/auth/authSlice";
 
 const DropItemComponent = ({
   title,
@@ -53,7 +54,7 @@ const DropItemComponent = ({
 
 const UserDropDown = () => {
   const { isUserDropDownOpen } = useSelector((state) => state.layout);
-  const auth = useSelector((state) => state.auth);
+  const { isAuthed, userInfo } = useSelector((redux) => redux.auth);
   const dispatch = useDispatch();
   const toggle = () => {
     if (!isUserDropDownOpen) return dispatch(open_user_dropdown());
@@ -67,7 +68,8 @@ const UserDropDown = () => {
   // };
 
   const handleLogout = () => {
-    log_out();
+    dispatch(log_out());
+    dispatch(close_all());
   };
 
   const authDropDownItems = [
@@ -80,18 +82,25 @@ const UserDropDown = () => {
   return (
     <div>
       <div className="relative">
-        <Button
-          size="small"
-          className={`${isUserDropDownOpen && `!bg-gray-100`}`}
-          variant="textonly"
-          // startIcon={<User size={16} />}
-          onClick={toggle}
-        >
-          my panel
-        </Button>
-        {/* {auth?.isAuthed && isUserDropDownOpen && (
-          
-        )} */}
+        {isAuthed ? (
+          <Button
+            size="small"
+            className={`${isUserDropDownOpen && `!bg-gray-100`}`}
+            variant="textonly"
+            onClick={toggle}
+          >
+            my panel
+          </Button>
+        ) : (
+          <Button
+            size="small"
+            className={`${isUserDropDownOpen && `!bg-gray-100`}`}
+            variant="textonly"
+            onClick={() => dispatch(open_auth_modal())}
+          >
+            Sign in
+          </Button>
+        )}
         {isUserDropDownOpen && (
           <ul
             className="absolute bg-white border border-gray-300 rounded-md w-[170px] mt-1 overflow-hidden shadow"
@@ -101,7 +110,7 @@ const UserDropDown = () => {
               className="border-b"
               title="My Account"
               link={`/my-panel/my-post`}
-              secondary={auth?.userInfo?.mobile}
+              secondary={userInfo?.mobile}
             />
             {authDropDownItems.map((value, index) => {
               return <DropItemComponent key={index} {...value} />;
