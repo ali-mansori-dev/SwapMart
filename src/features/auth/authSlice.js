@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-import { removeAccessTokenCookies } from "../../utils/accessTokenCookie";
+import { removeAccessToken, setAccessToken } from "../../utils/localStorage";
 
 const initialState = {
   isAuthed: false,
@@ -16,9 +15,12 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     log_in: (state, action) => {
+      
       state.isAuthed = true;
       state.userInfo = action.payload.userInfo;
       state.userToken = action.payload.userToken;
+      setAccessToken(action.payload.userToken);
+      state.loading = false;
     },
     fetch_data: (state) => {
       state.loading = true;
@@ -27,7 +29,8 @@ export const authSlice = createSlice({
       state.isAuthed = false;
       state.userInfo = {};
       state.userToken = null;
-      removeAccessTokenCookies();
+      removeAccessToken();
+      state.loading = false;
     },
   },
 });

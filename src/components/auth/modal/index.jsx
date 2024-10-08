@@ -1,18 +1,18 @@
 import {
-  Button,
-  Dialog,
   DialogContent,
   DialogTitle,
-  Divider,
   IconButton,
+  Divider,
+  Button,
+  Dialog,
 } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-// import GoogleAuth from "./google_auth";
 import { useState } from "react";
+
+import { close_all } from "../../../features/layout/layoutSlice";
 import PasswordForm from "./forms/password/";
 import OTPForm from "./forms/otp/";
-import { useDispatch, useSelector } from "react-redux";
-import { close_all } from "../../../features/layout/layoutSlice";
 
 const AuthModal = () => {
   const [authMethod, setAuthMethod] = useState("otp");
@@ -77,7 +77,7 @@ const AuthModal = () => {
               onClick={setAuthMethod.bind(this, "otp")}
               fullWidth
             >
-              back
+              Continue with Mobile
             </Button>
           </div>
         )}

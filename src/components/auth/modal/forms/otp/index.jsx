@@ -1,23 +1,30 @@
-import { Button, MenuItem, Select, TextField } from "@mui/material";
+import {  useState } from "react";
+
+import CheckOTP from "./checkOTP";
+import SendOTP from "./sendOTP";
 
 const OTPAuth = () => {
-  return (
-    <div>
-      <div className="flex flex-col gap-4">
-        <div className="inline-flex gap-4">
-          <Select value={98}>
-            <MenuItem value={98} selected>+98</MenuItem>
-            <MenuItem value={65}>+65</MenuItem>
-            <MenuItem value={1}>+1</MenuItem>
-          </Select>
-          <TextField label="Mobile" placeholder="9919536789" fullWidth autoFocus />
-        </div>
+  const [mobile, setMobile] = useState("");
+  const [expireCode, setExpireCode] = useState(0);
+  const [isSendOtpLevel, setIsSendOtpLevel] = useState(true);
 
-        <Button variant="contained" fullWidth>
-          Continue
-        </Button>
-      </div>
-    </div>
+  return (
+    <>
+      {isSendOtpLevel ? (
+        <SendOTP
+          setMobile={setMobile}
+          nextLevel={() => {
+            setIsSendOtpLevel(false);
+          }}
+          setExpireCode={setExpireCode}
+        />
+      ) : (
+        <CheckOTP
+          mobile={mobile}
+          expireCode={expireCode}
+        />
+      )}
+    </>
   );
 };
 
