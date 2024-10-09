@@ -10,13 +10,6 @@ import PropTypes from "prop-types";
 
 function MyNotePostCard({
   // onDelete,
-  // _id,
-  savedContent,
-  title,
-  images,
-  // district,
-  slug,
-  // createdAt,
   post,
 }) {
   console.log(post);
@@ -41,7 +34,7 @@ function MyNotePostCard({
   return (
     <>
       <Link
-        to={`/v/${slug}`}
+        to={`/v/${post?.slug}`}
         className="flex flex-row gap-4 p-3 border border-gray-200 rounded-2xl  cursor-pointer relative h-max"
       >
         <div className="relative w-[80px] h-[80px] pb-2/3  rounded-md">
@@ -49,7 +42,7 @@ function MyNotePostCard({
             <img
               className="absolute w-[80px] h-full inset-0 object-cover object-top rounded-xl"
               src={`${API_UPLOADED_IMAGES_URL}${post?.images[0]}`}
-              alt={title}
+              alt={post?.title}
             />
           ) : (
             <div className="w-full h-full bg-gray-100 rounded-md flex justify-center items-center text-gray-400"></div>
@@ -60,7 +53,7 @@ function MyNotePostCard({
             {post?.title}
           </h1>
           <div className="flex flex-row items-center gap-1 text-gray-500 text-xs pt-8">
-            <p className="line-clamp-1">{savedContent}</p>
+            {/* <p className="line-clamp-1">{savedContent}</p> */}
           </div>
           <div className=" absolute bottom-2 left-2" onClick={handleOpen}>
             <IconButton size="medium"></IconButton>
