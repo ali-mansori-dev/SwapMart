@@ -1,5 +1,4 @@
-import { connect, useDispatch, useSelector } from "react-redux";
-import { bindActionCreators } from "redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import PropTypes from "prop-types";
@@ -22,6 +21,11 @@ const DropItemComponent = ({
     return;
   },
 }) => {
+  const dispatch = useDispatch();
+  // const HandleClick = () => {
+  //   onClick();
+  //   dispatch(close_all());
+  // };
   return (
     <li
       onClick={onClick}
@@ -29,6 +33,7 @@ const DropItemComponent = ({
     >
       {link && link !== "" ? (
         <Link
+          onClick={() => dispatch(close_all())}
           className="Fanum w-full flex flex-col justify-start gap-1 px-3 py-3"
           to={link}
         >
@@ -75,7 +80,7 @@ const UserDropDown = () => {
   const authDropDownItems = [
     { title: "My Posts", link: `/my-panel/my-post` },
     { title: "My Notes", link: `/my-panel/notes` },
-    { title: "My Bookmark", link: `/my-panel/saved` },
+    { title: "My Saved", link: `/my-panel/saved` },
     { title: "Recently Viwed", link: `/my-panel/recent` },
   ];
 
@@ -118,7 +123,9 @@ const UserDropDown = () => {
             <DropItemComponent
               className="border-t"
               title="Logout"
-              onClick={handleLogout}
+              onClick={() => {
+                handleLogout;
+              }}
             />
           </ul>
         )}
@@ -126,14 +133,7 @@ const UserDropDown = () => {
     </div>
   );
 };
-const mapStateToProps = ({ auth }) => {
-  return {
-    auth,
-  };
-};
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ log_out }, dispatch);
-export default connect(mapStateToProps, mapDispatchToProps)(UserDropDown);
+export default UserDropDown;
 
 UserDropDown.propTypes = {
   loginFn: PropTypes.func,
