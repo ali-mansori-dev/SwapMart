@@ -11,6 +11,9 @@ import MyPost from "./pages/panel/my_post";
 import MyBookmark from "./pages/panel/my_bookmark";
 import MyNotes from "./pages/panel/my_notes";
 import Dashboard from "./pages/panel";
+import CreatePost from "./pages/create_post";
+import MySeens from "./pages/panel/my_seens";
+import EditPost from "./pages/edit_post";
 
 const App = () => {
   return (
@@ -19,6 +22,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/new" element={<CreatePost />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/v/:slug" element={<SinglePost />} />
@@ -26,6 +30,8 @@ const App = () => {
           <Route path="/my-panel/my-post" element={<MyPost />} />
           <Route path="/my-panel/saved" element={<MyBookmark />} />
           <Route path="/my-panel/notes" element={<MyNotes />} />
+          <Route path="/my-panel/recent" element={<MySeens />} />
+          <Route path="/my-panel/my-post/edit/:slug" element={<EditPost />} />
         </Routes>
       </Suspense>
     </Router>

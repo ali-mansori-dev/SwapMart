@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import BasicLayoutMobile from "../../layouts/mobile/basic_layout";
 import { FindPostbySlugFn } from "../../queries/post";
 import { useQuery } from "react-query";
-import { useEffect } from "react";
 import PostBreadcrumbs from "./post_breadcrumbs";
 import { formatteCurrency } from "../../utils/formatNumber";
 import { fromNow } from "../../utils/dateFormat";
@@ -16,9 +15,6 @@ const SinglePost = () => {
     "singlepost",
     FindPostbySlugFn.bind(this, slug)
   );
-  useEffect(() => {
-    console.log(isLoading, data);
-  }, [isLoading, data]);
   return (
     <BasicLayoutMobile>
       {!isLoading && data?.data && data?.data?.title ? (

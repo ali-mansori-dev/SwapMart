@@ -1,15 +1,15 @@
 import axios from "axios";
 
-import { API_USER_URL, POST_AUTH_URL } from "../config";
+import { API_USER_URL, API_POST_URL } from "../config";
 import authorizedAxios from "../api/authrized_axios";
 
 export const fetchData = async () => {
-  const response = await axios.post(`${POST_AUTH_URL}`);
+  const response = await axios.post(`${API_POST_URL}`);
   return response.data;
 };
 export const FindPostbySlugFn = async (slug) => {
   try {
-    const data = await axios.get(`${POST_AUTH_URL}/${slug ?? ``}`);
+    const data = await axios.get(`${API_POST_URL}/${slug ?? ``}`);
     return data.data;
   } catch (error) {
     console.error(error);
@@ -25,5 +25,9 @@ export const fetchMyBookmark = async () => {
 };
 export const fetchMyNotes = async () => {
   const response = await authorizedAxios.get(`${API_USER_URL}/my-note`);
+  return response.data;
+};
+export const fetchMySeens = async () => {
+  const response = await authorizedAxios.get(`${API_USER_URL}/my-seen`);
   return response.data;
 };
