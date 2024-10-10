@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import MyPost from "./pages/panel/my_post";
 import MyBookmark from "./pages/panel/my_bookmark";
 import MyNotes from "./pages/panel/my_notes";
+import Dashboard from "./pages/panel";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/v/:slug" element={<SinglePost />} />
+          <Route path="/my-panel/dashboard" element={<Dashboard />} />
           <Route path="/my-panel/my-post" element={<MyPost />} />
           <Route path="/my-panel/saved" element={<MyBookmark />} />
           <Route path="/my-panel/notes" element={<MyNotes />} />
