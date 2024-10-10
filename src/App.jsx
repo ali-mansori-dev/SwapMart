@@ -11,6 +11,7 @@ import MyPost from "./pages/panel/my_post";
 import MyBookmark from "./pages/panel/my_bookmark";
 import MyNotes from "./pages/panel/my_notes";
 import CreatePost from "./pages/create_post";
+import EditPost from "./pages/edit_post";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/my-panel/my-post" element={<MyPost />} />
           <Route path="/my-panel/saved" element={<MyBookmark />} />
           <Route path="/my-panel/notes" element={<MyNotes />} />
+          <Route path="/my-panel/my-post/edit/:slug" element={<EditPost />} />
         </Routes>
       </Suspense>
     </Router>
