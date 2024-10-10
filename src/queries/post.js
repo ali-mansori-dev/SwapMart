@@ -27,3 +27,7 @@ export const fetchMyNotes = async () => {
   const response = await authorizedAxios.get(`${API_USER_URL}/my-note`);
   return response.data;
 };
+export const fetchMySeens = async () => {
+  const response = await authorizedAxios.get(`${API_USER_URL}/my-seen`);
+  return response.data;
+};
