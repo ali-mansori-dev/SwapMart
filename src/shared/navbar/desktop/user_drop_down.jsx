@@ -114,7 +114,7 @@ const UserDropDown = () => {
             <DropItemComponent
               className="border-b"
               title="My Account"
-              link={`/my-panel/my-post`}
+              link={`/my-panel/dashboard`}
               secondary={userInfo?.mobile}
             />
             {authDropDownItems.map((value, index) => {
