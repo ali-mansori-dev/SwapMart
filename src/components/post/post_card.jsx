@@ -43,7 +43,10 @@ function PostCard({ title, images, district, slug, amount, updatedAt }) {
           </>
         ) : (
           <div className="w-full h-full bg-gray-100 rounded-md flex justify-center items-center text-gray-400">
-            {/* <ImageOffIcon size={32} /> */}
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9cSGzVkaZvJD5722MU5A-JJt_T5JMZzotcw&s"
+              className="w-full h-full object-cover"
+            />
           </div>
         )}
       </div>

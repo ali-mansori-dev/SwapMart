@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import MyPost from "./pages/panel/my_post";
 import MyBookmark from "./pages/panel/my_bookmark";
 import MyNotes from "./pages/panel/my_notes";
+import CreatePost from "./pages/create_post";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/new" element={<CreatePost />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/v/:slug" element={<SinglePost />} />
