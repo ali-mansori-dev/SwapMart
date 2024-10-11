@@ -15,7 +15,6 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     log_in: (state, action) => {
-      
       state.isAuthed = true;
       state.userInfo = action.payload.userInfo;
       state.userToken = action.payload.userToken;
@@ -24,6 +23,11 @@ export const authSlice = createSlice({
     },
     fetch_data: (state) => {
       state.loading = true;
+    },
+    no_token_status: (state) => {
+      state.loading = false;
+      state.isAuthed = false;
+      state.success = false;
     },
     log_out: (state) => {
       state.isAuthed = false;
@@ -34,5 +38,6 @@ export const authSlice = createSlice({
     },
   },
 });
-export const { fetch_data, log_in, log_out } = authSlice.actions;
+export const { fetch_data, log_in, log_out, no_token_status } =
+  authSlice.actions;
 export default authSlice.reducer;

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { open_auth_modal } from "../../../features/layout/layoutSlice";
-import AuthModal from "../../../components/auth/modal";
 import UserDropDown from "./user_drop_down";
 import Logo from "../../../assets/Logo.svg";
 import Categories from "./categories";
@@ -46,7 +45,6 @@ function Navbar() {
           </div>
         </div>
       </Container>
-      <AuthModal />
     </AppBar>
   );
 }

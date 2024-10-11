@@ -22,10 +22,6 @@ const DropItemComponent = ({
   },
 }) => {
   const dispatch = useDispatch();
-  // const HandleClick = () => {
-  //   onClick();
-  //   dispatch(close_all());
-  // };
   return (
     <li
       onClick={onClick}
@@ -73,6 +69,8 @@ const UserDropDown = () => {
   // };
 
   const handleLogout = () => {
+    console.log('dddd');
+    
     dispatch(log_out());
     dispatch(close_all());
   };
@@ -123,9 +121,7 @@ const UserDropDown = () => {
             <DropItemComponent
               className="border-t"
               title="Logout"
-              onClick={() => {
-                handleLogout;
-              }}
+              onClick={handleLogout}
             />
           </ul>
         )}
