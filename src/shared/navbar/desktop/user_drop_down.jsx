@@ -2,13 +2,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import PropTypes from "prop-types";
-
+import ChevrowDown from "../../../assets/chevron-down.svg";
 import {
   open_user_dropdown,
   open_auth_modal,
   close_all,
 } from "../../../features/layout/layoutSlice";
 import { log_out } from "../../../features/auth/authSlice";
+import Supabase from "../../../lib/helper/ClientSupabase";
 
 const DropItemComponent = ({
   title,
@@ -22,6 +23,7 @@ const DropItemComponent = ({
   },
 }) => {
   const dispatch = useDispatch();
+
   return (
     <li
       onClick={onClick}
@@ -55,7 +57,7 @@ const DropItemComponent = ({
 
 const UserDropDown = () => {
   const { isUserDropDownOpen } = useSelector((state) => state.layout);
-  const { isAuthed, userInfo } = useSelector((redux) => redux.auth);
+  const { is_authed, user_info } = useSelector((redux) => redux.auth);
   const dispatch = useDispatch();
   const toggle = () => {
     if (!isUserDropDownOpen) return dispatch(open_user_dropdown());
@@ -69,8 +71,7 @@ const UserDropDown = () => {
   // };
 
   const handleLogout = () => {
-    console.log('dddd');
-    
+    Supabase.auth.signOut({ scope: "local" });
     dispatch(log_out());
     dispatch(close_all());
   };
@@ -85,14 +86,23 @@ const UserDropDown = () => {
   return (
     <div>
       <div className="relative">
-        {isAuthed ? (
+        {is_authed ? (
           <Button
             size="small"
-            className={`${isUserDropDownOpen && `!bg-gray-100`}`}
-            variant="textonly"
+            className={`${isUserDropDownOpen && `!bg-gray-100`} !px-4`}
+            variant="text"
             onClick={toggle}
+            endIcon={
+              <span className="flex ">
+                <img className="w-4 h-4" src={ChevrowDown} alt="chevrow-down" />
+              </span>
+            }
           >
-            my panel
+            <img
+              src={user_info?.user_metadata?.avatar_url}
+              className="w-7 h-7 rounded-full"
+              alt="avatar_pictures"
+            />
           </Button>
         ) : (
           <Button
@@ -113,7 +123,7 @@ const UserDropDown = () => {
               className="border-b"
               title="My Account"
               link={`/my-panel/dashboard`}
-              secondary={userInfo?.mobile}
+              secondary={user_info?.mobile}
             />
             {authDropDownItems.map((value, index) => {
               return <DropItemComponent key={index} {...value} />;

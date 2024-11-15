@@ -2,7 +2,6 @@ import { IconButton } from "@mui/material";
 import { memo } from "react";
 import { Link } from "react-router-dom";
 
-import { API_UPLOADED_IMAGES_URL } from "../../../config";
 import PropTypes from "prop-types";
 
 function MyNotePostCard({ title, slug, images }) {
@@ -19,7 +18,7 @@ function MyNotePostCard({ title, slug, images }) {
           {images[0] ? (
             <img
               className="absolute w-[80px] h-full inset-0 object-cover object-top rounded-xl"
-              src={`${API_UPLOADED_IMAGES_URL}${images[0]}`}
+              src={`${images[0]}`}
               alt={title}
             />
           ) : (

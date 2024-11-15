@@ -7,16 +7,16 @@ import { open_auth_modal } from "../features/layout/layoutSlice";
 import DotLoader from "../shared/loader/dot_loader";
 
 const AuthGuard = ({ component }) => {
-  const { isAuthed, loading, success } = useSelector((state) => state.auth);
+  const { is_authed, loading, success } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [auth, setAuth] = useState("loading");
   useEffect(() => {
-    if (!loading && !isAuthed && !success) {
+    if (!loading && !is_authed && !success) {
       setAuth(false);
       dispatch(open_auth_modal());
     }
-    if (!loading && isAuthed) setAuth(true);
-  }, [loading, isAuthed, success, dispatch]);
+    if (!loading && is_authed) setAuth(true);
+  }, [loading, is_authed, success, dispatch]);
 
   return (
     <>

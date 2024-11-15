@@ -4,7 +4,6 @@ import { IconButton } from "@mui/material";
 import { memo } from "react";
 import { Link } from "react-router-dom";
 
-import { API_UPLOADED_IMAGES_URL } from "../../../config";
 import PropTypes from "prop-types";
 // import { DeleteNoteFn } from "../mutation";
 
@@ -41,7 +40,7 @@ function MyNotePostCard({
           {post?.images[0] ? (
             <img
               className="absolute w-[80px] h-full inset-0 object-cover object-top rounded-xl"
-              src={`${API_UPLOADED_IMAGES_URL}${post?.images[0]}`}
+              src={`${post?.images[0]}`}
               alt={post?.title}
             />
           ) : (

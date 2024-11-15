@@ -13,9 +13,12 @@ import { useState } from "react";
 import { close_all } from "../../../features/layout/layoutSlice";
 import PasswordForm from "./forms/password/";
 import OTPForm from "./forms/otp/";
+import OAuth from "./forms/oauth";
+import { Link } from "react-router-dom";
+// import Supabase from "../../../config/supabase";
 
 const AuthModal = () => {
-  const [authMethod, setAuthMethod] = useState("otp");
+  const [authMethod, setAuthMethod] = useState("password"); // password, mobile-login, email-otp,
   const { isAuthModalOpen } = useSelector((state) => state.layout);
   const dispatch = useDispatch();
 
@@ -52,8 +55,17 @@ const AuthModal = () => {
       </DialogTitle>
       <DialogContent className="w-auto lg:!w-[430px] h-[calc(100%-100px)] lg:!max-h-[60vh] !py-6">
         {renderAuthForm()}
-
-        {authMethod === "otp" && (
+        <div className="py-4">
+          <Divider>or</Divider>
+        </div>
+        <OAuth />
+        <div className="flex flex-row items-center justify-center gap-2 pt-4">
+          <span className="">New User?</span>
+          <Link to={`/signup`} className="text-primary-60">
+            SignUp
+          </Link>
+        </div>
+        {/* {authMethod === "otp" && (
           <>
             <div className="py-4">
               <Divider>or</Divider>
@@ -66,11 +78,11 @@ const AuthModal = () => {
               >
                 Continue with Email
               </Button>
-              {/* <GoogleAuth /> */}
+              <GoogleAuth /> 
             </div>
           </>
-        )}
-        {authMethod === "password" && (
+        )} */}
+        {/* {authMethod === "password" && (
           <div className="flex flex-col gap-4 pt-4">
             <Button
               variant="outlined"
@@ -80,7 +92,7 @@ const AuthModal = () => {
               Continue with Mobile
             </Button>
           </div>
-        )}
+        )} */}
       </DialogContent>
     </Dialog>
   );

@@ -1,7 +1,8 @@
 import { Container } from "@mui/material";
 import PropTypes from "prop-types";
 
-import Navbar from "../../shared/navbar/desktop";
+import Navbar from "../../shared/navbar";
+import ButtonNavigation from "./button_navigation";
 
 const BasicLayoutMobile = ({ children, searchText, filter = [] }) => {
   return (
@@ -10,22 +11,14 @@ const BasicLayoutMobile = ({ children, searchText, filter = [] }) => {
       <main
         className={`${
           filter?.length > 0 ? `mt-[122px]` : `mt-[90px]`
-        } mb-[65px]`}
+        } mb-[165px] pb-72`}
       >
-        {filter?.length > 0 && (
-          <div className="fixed top-[72px] right-0 left-0 flex flex-row gap-2 border-b border-gray-300 px-3 py-2 bg-white z-40">
-            {filter?.map((value, index) => (
-              <span
-                key={index}
-                className=" flex flex-row gap-2 items-center justify-center border border-primary-default text-primary-default w-max h-max text-xs px-3 py-2 rounded-full"
-              >
-                {value.key}: {value.value}
-              </span>
-            ))}
-          </div>
-        )}
-        <Container maxWidth="lg" className="h-[calc(100vh-170px)]">{children}</Container>
+        <Container maxWidth="lg" className="h-[calc(100vh-170px)] !pb-36">
+          {children}
+        </Container>
+        <div className="h-28"></div>
       </main>
+      <ButtonNavigation />
     </>
   );
 };

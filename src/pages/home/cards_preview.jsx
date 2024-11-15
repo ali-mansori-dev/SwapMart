@@ -7,7 +7,7 @@ import EmptyState from "./empty_state";
 const CardsPreview = ({ isLoading, data }) => {
   const skeleton = "0".repeat(12).split("");
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 h-full w-full gap-5">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-5 pb-5 mb-10">
       {/* {categoryData?.name && (
         <div className="text-xs col-span-1 lg:col-span-3 text-gray-800">
           {categoryData?.name} در <span className="text-gray-400">{city}</span>
@@ -15,8 +15,8 @@ const CardsPreview = ({ isLoading, data }) => {
       )} */}
       {isLoading ? (
         skeleton.map((_, index) => <PostCardSkeleton key={index} />)
-      ) : data?.result?.length > 0 ? (
-        data?.result?.map((value, index) => <PostCard key={index} {...value} />)
+      ) : data?.length > 0 ? (
+        data?.map((value, index) => <PostCard key={index} {...value} />)
       ) : (
         <EmptyState />
       )}

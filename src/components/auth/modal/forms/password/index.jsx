@@ -1,16 +1,24 @@
-import { Button, Divider, TextField } from "@mui/material";
+import { Button, CircularProgress, TextField } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+// import { useDispatch } from "react-redux";
+// import { Link } from "react-router-dom";
 
-import { close_all } from "../../../../../features/layout/layoutSlice";
-import { log_in } from "../../../../../features/auth/authSlice";
-import { signin } from "../../../../../queries/auth";
+// import { close_all } from "../../../../../features/layout/layoutSlice";
+// import { log_in } from "../../../../../features/auth/authSlice";
+// import { signin } from "../../../../../queries/auth";
 import { basicAuthSchema } from "./schemas";
+import Supabase from "../../../../../lib/helper/ClientSupabase";
+import AlertComponent from "../../../../alert_component";
+import useAlert from "../../../../../hooks/useAlert";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const PasswordForm = () => {
+  const [alert, setAlertConent] = useAlert();
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -18,28 +26,25 @@ const PasswordForm = () => {
   } = useForm({
     resolver: yupResolver(basicAuthSchema),
   });
-  const dispatch = useDispatch();
+  
+  const navigate = useNavigate();
   const { mutate } = useMutation("sendFormData", (formData) => {
-    return signin(formData)
-      .then((result) => {
-        dispatch(
-          log_in({
-            userInfo: result?.user,
-            userToken: result?.token,
-          })
-        );
-        dispatch(close_all());
-      })
-      .catch((error) => {
-        console.log(error);
+    return Supabase.auth
+      .signUp({ email: formData?.email, password: formData?.password })
+      .then((res) => {
+        setLoading(false);
+        if (res?.error?.message)
+          return setAlertConent("error", res?.error?.message);
+        navigate("/my-panel/dashboard");
       });
   });
   const onSubmit = (dataParams) => {
+    setLoading(true);
     mutate(dataParams);
   };
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
         <div className="flex flex-col gap-1">
           <TextField
             {...register("email")}
@@ -63,20 +68,15 @@ const PasswordForm = () => {
           </span>
         </div>
 
+        <AlertComponent data={alert} />
         <Button variant="contained" type="submit" fullWidth>
-          Continue
+          {loading ? (
+            <CircularProgress size="30px" color="inherit" />
+          ) : (
+            "Continue"
+          )}
         </Button>
       </form>
-      <div className="py-4">
-        <Divider>or</Divider>
-      </div>
-      <div className="flex flex-col gap-4">
-        <Link to={`/signup`}>
-          <Button onClick={()=>dispatch(close_all())} variant="outlined" fullWidth>
-            signup
-          </Button>
-        </Link>
-      </div>
     </>
   );
 };

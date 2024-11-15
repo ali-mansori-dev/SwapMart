@@ -4,7 +4,6 @@ import { memo } from "react";
 
 // import { dateFormate } from "../../../shared/util/dateFormat";
 import { formatteCurrency } from "../../utils/formatNumber";
-import { API_UPLOADED_IMAGES_URL } from "../../config";
 import { fromNow } from "../../utils/dateFormat";
 
 function PostCard({ title, images, district, slug, amount, updatedAt }) {
@@ -31,8 +30,8 @@ function PostCard({ title, images, district, slug, amount, updatedAt }) {
           <>
             <img
               className="absolute w-[130px] h-full inset-0 object-cover object-top rounded-lg"
-              src={`${API_UPLOADED_IMAGES_URL}${images[0]}`}
-              srcSet={`${API_UPLOADED_IMAGES_URL}${images[0]}`}
+              src={`${images[0]}`}
+              srcSet={`${images[0]}`}
               alt={title}
               loading="lazy"
             />

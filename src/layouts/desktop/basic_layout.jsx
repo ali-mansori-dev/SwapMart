@@ -1,18 +1,30 @@
+import { Container } from "@mui/material";
 import PropTypes from "prop-types";
 
-import MainContainer from "../../shared/container";
-import Navbar from "../../shared/navbar/desktop";
+import Navbar from "../../shared/navbar";
 
-const BasicLayoutDesktop = ({ children, containerClass, searchText = "" }) => {
+const BasicLayoutDesktop = ({ children, searchText, filter = [] }) => {
   return (
     <>
-      <Navbar searchText={searchText}  />
-      <main className="py-[130px]">
-        <MainContainer
-          className={`w-full flex justify-center gap-5 py-12 ${containerClass}`}
-        >
-          {children}
-        </MainContainer>
+      <Navbar searchText={searchText} />
+      <main
+        className={`${
+          filter?.length > 0 ? `mt-[122px]` : `mt-[90px]`
+        } mb-[65px]`}
+      >
+        {filter?.length > 0 && (
+          <div className="fixed top-[72px] right-0 left-0 flex flex-row gap-2 border-b border-gray-300 px-3 py-2 bg-white z-40">
+            {filter?.map((value, index) => (
+              <span
+                key={index}
+                className=" flex flex-row gap-2 items-center justify-center border border-primary-default text-primary-default w-max h-max text-xs px-3 py-2 rounded-full"
+              >
+                {value.key}: {value.value}
+              </span>
+            ))}
+          </div>
+        )}
+        <Container maxWidth="lg" className="h-[calc(100vh-170px)]">{children}</Container>
       </main>
     </>
   );
@@ -20,6 +32,6 @@ const BasicLayoutDesktop = ({ children, containerClass, searchText = "" }) => {
 BasicLayoutDesktop.propTypes = {
   children: PropTypes.node.isRequired,
   searchText: PropTypes.string,
-  containerClass: PropTypes.string,
+  filter: PropTypes.array,
 };
 export default BasicLayoutDesktop;
