@@ -11,6 +11,7 @@ const SinglePost = ({ isMobile }) => {
     "singlepost",
     FindPostbySlugFn.bind(this, slug)
   );
+
   return isMobile ? (
     <Mobile isLoading={isLoading} data={data} />
   ) : (

@@ -1,16 +1,20 @@
-import { Alert, Button, Snackbar, TextField } from "@mui/material";
+import { Button, CircularProgress, Divider, TextField } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
-import { signup } from "../../queries/auth";
 import { signUpSchema } from "./schemas";
+import Supabase from "../../lib/helper/ClientSupabase";
+import useAlert from "../../hooks/useAlert";
+import AlertComponent from "../../components/alert_component";
+import { useState } from "react";
+import OAuth from "../../components/auth/modal/forms/oauth";
 
 const Form = () => {
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const navigate = useNavigate();
+  const [alert, setAlertConent] = useAlert();
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -20,18 +24,17 @@ const Form = () => {
   });
 
   const { mutate } = useMutation("sendFormData", (formData) => {
-    return signup(formData)
-      .then(() => {
-        navigate("/signin");
-      })
-      .catch((error) => {
-        if (error?.response?.data?.message) {
-          setOpenSnackbar(true);
-        }
-        console.log(error?.response?.data?.message);
+    return Supabase.auth
+      .signUp({ email: formData?.email, password: formData?.password })
+      .then((res) => {
+        setLoading(false);
+        if (res?.error?.message)
+          return setAlertConent("error", res?.error?.message);
+        setAlertConent("success", "Email Verification Send!");
       });
   });
   const onSubmit = (dataParams) => {
+    setLoading(true);
     mutate(dataParams);
   };
   return (
@@ -40,17 +43,6 @@ const Form = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-5 border border-gray-200 rounded-md p-8 py-8 w-full lg:w-[35%]"
       >
-        <div className="flex flex-col gap-1">
-          <TextField
-            {...register("fullname")}
-            label="FullName"
-            fullWidth
-            autoFocus
-          />
-          <span className="text-red-700 text-xs">
-            {errors?.fullname?.message}
-          </span>
-        </div>
         <div className="flex flex-col gap-1">
           <TextField {...register("email")} label="Email" fullWidth />
           <span className="text-red-700 text-xs">{errors?.email?.message}</span>
@@ -66,32 +58,25 @@ const Form = () => {
             {errors?.password?.message}
           </span>
         </div>
-        <Button variant="contained" type="submit" fullWidth>
-          Signup
+        <AlertComponent data={alert} />
+        <Button variant="contained" type="submit" disabled={loading} fullWidth>
+          {loading ? (
+            <CircularProgress size="30px" color="inherit" />
+          ) : (
+            "Signup"
+          )}
         </Button>
-        <Link to={`/signin`}>
-          <Button variant="text" fullWidth>
-            Signin
-          </Button>
-        </Link>
-        {/* <div className="py-1">
+        <div className="py-0">
           <Divider>or</Divider>
         </div>
-        <Button
-          variant="outlined"
-          fullWidth
-        >
-          Signup with Google
-        </Button> */}
-      </form>
-      <Snackbar open={openSnackbar} autoHideDuration={6000}>
-        <Alert severity="error" variant="filled" sx={{ width: "100%" }}>
-          This User Exist in Swap Mart!
-          <Link to={"/signin"} className="!ml-2">
-            <Button variant="text">Go to Login</Button>
+        <OAuth />
+        <div className="flex flex-row items-center justify-center gap-2 pt-3">
+          <span className="">Have Account ?</span>
+          <Link to={`/signin`} className="text-primary-60">
+            Signin
           </Link>
-        </Alert>
-      </Snackbar>
+        </div>
+      </form>
     </div>
   );
 };

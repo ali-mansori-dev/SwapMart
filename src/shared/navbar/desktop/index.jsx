@@ -10,7 +10,7 @@ import Search from "./search";
 
 function NavbarDesktop() {
   const dispatch = useDispatch();
-  const { isAuthed, loading } = useSelector((redux) => redux.auth);
+  const { is_authed, loading } = useSelector((redux) => redux.auth);
   const onClose = () => {
     dispatch(open_auth_modal());
   };
@@ -26,11 +26,11 @@ function NavbarDesktop() {
           <Categories />
           <Search />
         </div>
-        <div className="flex flex-row gap-5">
-          {loading ? <Skeleton width={100} height={50} /> : <UserDropDown />}
+        {is_authed}
+        <div className="flex flex-row gap-3 items-center">
           {loading ? (
             <Skeleton width={100} height={50} />
-          ) : isAuthed ? (
+          ) : is_authed ? (
             <Link to={"/new"}>
               <Button variant="contained" size="small">
                 Create Post
@@ -41,6 +41,7 @@ function NavbarDesktop() {
               Create Post
             </Button>
           )}
+          {loading ? <Skeleton width={100} height={50} /> : <UserDropDown />}
         </div>
       </div>
     </Container>

@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 import { StrictMode } from "react";
 import "./index.css";
 
-import { AuthProvider } from "./context/AuthContext.jsx";
 import MuiContext from "./context/MuiContext.jsx";
 import store from "./app/store.js";
 import App from "./App.jsx";
@@ -20,9 +19,7 @@ createRoot(document.getElementById("root")).render(
         <MuiContext>
           <CssBaseline />
           <ResponsiveProvider>
-            <AuthProvider>
-              <App />
-            </AuthProvider>
+            <App />
           </ResponsiveProvider>
         </MuiContext>
       </QueryClientProvider>

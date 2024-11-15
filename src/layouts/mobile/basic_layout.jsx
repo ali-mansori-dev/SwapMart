@@ -16,7 +16,7 @@ const BasicLayoutMobile = ({ children, searchText, filter = [] }) => {
         <Container maxWidth="lg" className="h-[calc(100vh-170px)] !pb-36">
           {children}
         </Container>
-        <div className="h-[30px]">111</div>
+        <div className="h-28"></div>
       </main>
       <ButtonNavigation />
     </>

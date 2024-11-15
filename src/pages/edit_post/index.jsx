@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 
-import { API_UPLOADED_IMAGES_URL } from "../../config/index";
 import { CreatePostSchema } from "../create_post/schema";
 import { FindPostbySlugFn } from "./query";
 import EditPostDesktop from "./desktop";
@@ -43,7 +42,7 @@ const EditPost = () => {
             data?.data?.images?.map((value) => {
               return {
                 name: value,
-                blob: `${API_UPLOADED_IMAGES_URL}${value}`,
+                blob: `${value}`,
                 uploaded: true,
                 id: value,
                 percent: 100,

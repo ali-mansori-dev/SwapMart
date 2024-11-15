@@ -48,15 +48,7 @@ const theme = createTheme({
         },
       },
     },
-    MuiAlert: {
-      styleOverrides: {
-        standardError: {
-          background: "#ad1a1a",
-          color: "#940000",
-          borderRadius: "8px",
-        },
-      },
-    },
+
     MuiDialog: { styleOverrides: { paper: { borderRadius: "8px" } } },
     MuiButton: {
       defaultProps: {

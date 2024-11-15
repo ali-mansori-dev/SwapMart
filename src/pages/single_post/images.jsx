@@ -1,7 +1,6 @@
 
 import { useState } from "react";
 
-import { API_UPLOADED_IMAGES_URL } from "../../config";
 import PropTypes from "prop-types";
 
 const Images = ({ images }) => {
@@ -12,14 +11,13 @@ const Images = ({ images }) => {
         {images[0] ? (
           <img
             className="absolute w-full h-full inset-0 object-cover object-top lg:rounded-md"
-            src={`${API_UPLOADED_IMAGES_URL}${images[imageIndex]}`}
+            src={`${images[imageIndex]}`}
             alt="metal post thumbnail"
             loading="lazy"
           />
         ) : (
           <div className="w-full h-full bg-gray-100 rounded-md flex justify-center items-center text-gray-400">
             {/* <ImageOffIcon size={32} /> */}
-            111
           </div>
         )}
       </div>
@@ -35,7 +33,7 @@ const Images = ({ images }) => {
             )}
             <img
               className="absolute w-full h-full inset-0 object-cover object-top rounded-md z-0"
-              src={`${API_UPLOADED_IMAGES_URL}${image}`}
+              src={`${image}`}
               alt="metal post thumbnail"
               loading="lazy"
             />
@@ -48,7 +46,7 @@ const Images = ({ images }) => {
             </div>
             <img
               className="absolute w-full h-full inset-0 object-cover object-top rounded-md z-0"
-              src={`${API_UPLOADED_IMAGES_URL}${images[6]}`}
+              src={`${images[6]}`}
               alt="metal post thumbnail"
               loading="lazy"
             />

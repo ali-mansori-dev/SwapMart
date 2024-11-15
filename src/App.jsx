@@ -16,8 +16,41 @@ import EditPost from "./pages/edit_post";
 import AuthGuard from "./middleware/AuthGuard";
 import AuthModal from "./components/auth/modal";
 import { useResponsive } from "./context/ResponsiveContext";
+import Supabase from "./lib/helper/ClientSupabase";
+import { useDispatch } from "react-redux";
+import {
+  log_in,
+  log_out,
+} from "./features/auth/authSlice";
 
 const App = () => {
+  const dispatch = useDispatch();
+  Supabase.auth.onAuthStateChange((event, session) => {
+    switch (event) {
+      case "INITIAL_SESSION":
+        if (session)
+          return log_in({
+            user_info: session?.user,
+            access_token: session?.user?.access_token,
+          });
+        return;
+      case "SIGNED_IN":
+        if (session)
+          dispatch(
+            log_in({
+              user_info: session?.user,
+              access_token: session?.user?.access_token,
+            })
+          );
+        return;
+      case "SIGNED_OUT":
+        dispatch(log_out());
+        return;
+      default:
+        return;
+    }
+  });
+
   const { isMobile } = useResponsive();
   return (
     <Router>

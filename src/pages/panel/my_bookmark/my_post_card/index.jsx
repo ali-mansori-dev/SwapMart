@@ -4,7 +4,6 @@ import { Alert, Button } from "@mui/material";
 // import { RWebShare } from "react-web-share";
 import { memo } from "react";
 
-import { API_UPLOADED_IMAGES_URL } from "../../../../config";
 // import useToggle from "../../../../hooks/useToggle";
 // import SpecialModal from "./special_modal";
 // import DeleteModal from "./delete_modal";
@@ -61,7 +60,7 @@ function MyPostCard({
             {images[0] ? (
               <img
                 className="absolute w-[130px] h-full inset-0 object-cover object-top rounded-xl"
-                src={`${API_UPLOADED_IMAGES_URL}${images[0]}`}
+                src={`${images[0]}`}
                 alt={title}
                 loading="lazy"
               />
