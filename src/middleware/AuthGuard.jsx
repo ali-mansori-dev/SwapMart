@@ -13,7 +13,7 @@ const AuthGuard = ({ component }) => {
   useEffect(() => {
     if (!loading && !is_authed && !success) {
       setAuth(false);
-      dispatch(open_auth_modal());
+      // dispatch(open_auth_modal());
     }
     if (!loading && is_authed) setAuth(true);
   }, [loading, is_authed, success, dispatch]);

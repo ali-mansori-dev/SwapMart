@@ -108,7 +108,7 @@ const UserDropDown = () => {
           <Button
             size="small"
             className={`${isUserDropDownOpen && `!bg-gray-100`}`}
-            variant="textonly"
+            variant="text"
             onClick={() => dispatch(open_auth_modal())}
           >
             Sign in

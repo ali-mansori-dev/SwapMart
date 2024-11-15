@@ -20,7 +20,16 @@ function NavbarDesktop() {
         <div className="flex flex-row gap-10 items-center">
           <Link to={`/`}>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              <img src={Logo} className="h-8" />
+              <img
+                srcSet={Logo}
+                loading="eager"
+                src={Logo}
+                className="h-8"
+                onError={(e) =>
+                  (e.target.src =
+                    "https://www.google.com/url?sa=i&url=https%3A%2F%2Fdepositphotos.com%2Fvectors%2Fmale-placeholder.html&psig=AOvVaw1zOHmukmoCvVm0G_KcfnMy&ust=1731779616467000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJi7j4L03okDFQAAAAAdAAAAABAE")
+                }
+              />
             </Typography>
           </Link>
           <Categories />
@@ -30,16 +39,14 @@ function NavbarDesktop() {
         <div className="flex flex-row gap-3 items-center">
           {loading ? (
             <Skeleton width={100} height={50} />
-          ) : is_authed ? (
-            <Link to={"/new"}>
-              <Button variant="contained" size="small">
-                Create Post
-              </Button>
-            </Link>
           ) : (
-            <Button onClick={onClose} variant="contained" size="small">
-              Create Post
-            </Button>
+            is_authed && (
+              <Link to={"/new"}>
+                <Button variant="contained" size="small">
+                  Create Post
+                </Button>
+              </Link>
+            )
           )}
           {loading ? <Skeleton width={100} height={50} /> : <UserDropDown />}
         </div>

@@ -1,9 +1,8 @@
 import axios from "axios";
-
-// import { API_CATEGORY_URL } from "../config";
+import Supabase from "../lib/helper/ClientSupabase";
 
 const fetchCategoryData = async () => {
-  // const response = await axios.get(`${API_CATEGORY_URL}`);
-  // return response.data;
+  const { data } = await Supabase.rpc("get_full_category_tree");
+  return data;
 };
 export { fetchCategoryData };
