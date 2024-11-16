@@ -5,7 +5,7 @@ import { LoadingScreenFixed } from "./shared/loader";
 import SinglePost from "./pages/single_post";
 import Signup from "./pages/signup";
 import Signin from "./pages/signin";
-import Home from "./pages/Home";
+import Home from "./pages/home";
 import MyPost from "./pages/panel/my_post";
 import MyBookmark from "./pages/panel/my_bookmark";
 import MyNotes from "./pages/panel/my_notes";
