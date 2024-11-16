@@ -1,16 +1,34 @@
-
-// import SearchResult from "./search_result";
-import PropTypes from "prop-types";
+import SearchResult from "./search_result";
 import { Button, TextField } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { open_search_result } from "../../../features/layout/layoutSlice";
+import Supabase from "../../../lib/helper/ClientSupabase";
+import { useEffect, useState } from "react";
 
-const Search = ({ onOpen, openCity, searchText }) => {
+const Search = () => {
+  const [text, setText] = useState("");
+  const [data, setData] = useState({});
+  const dispatch = useDispatch();
+  const openResultHandle = () => {
+    dispatch(open_search_result());
+  };
+  useEffect(() => {
+    (async function () {
+      const { data: result_data } = await Supabase.rpc("search_categories", {
+        search_term: text,
+      });
+      setData(result_data);
+    })();
+  }, [text]);
+  const onChangeText = (e) => {
+    setText(e.target.value);
+  };
   return (
     <div className="w-[400px] relative">
       <TextField
         variant="outlined"
         fullWidth
         size="small"
-        defaultValue={searchText}
         placeholder="Search in SwapMart"
         sx={{
           "& fieldset": { border: "none" },
@@ -21,7 +39,8 @@ const Search = ({ onOpen, openCity, searchText }) => {
           borderColor: "#E5E7EB",
           fontStyle: "normal",
         }}
-        onFocus={onOpen}
+        onFocus={openResultHandle}
+        onChange={onChangeText}
         autoComplete="off"
         InputProps={{
           endAdornment: (
@@ -31,8 +50,6 @@ const Search = ({ onOpen, openCity, searchText }) => {
                 size="small"
                 variant="textonly"
                 className="w-max pl-0 pr-4 gap-1"
-                // rightIcon={<MapPinIcon size={12} />}
-                onClick={openCity}
               >
                 city
               </Button>
@@ -40,17 +57,8 @@ const Search = ({ onOpen, openCity, searchText }) => {
           ),
         }}
       />
-      {/* {open && (
-        <SearchResult searchMutation={searchMutation} onClose={onClose} />
-      )} */}
+      <SearchResult data={data} />
     </div>
   );
-};
-Search.propTypes = {
-  open: PropTypes.bool,
-  onOpen: PropTypes.func,
-  onClose: PropTypes.func,
-  openCity: PropTypes.func,
-  searchText: PropTypes.string,
 };
 export default Search;

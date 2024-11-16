@@ -1,17 +1,31 @@
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import BasicLayoutMobile from "../../layouts/mobile/basic_layout";
+import BasicLayoutMobile from "../../layouts/desktop/basic_layout";
+import SideBar from "./side_bar";
+import Supabase from "../../lib/helper/ClientSupabase";
+import { useEffect } from "react";
 
 const Dashboard = () => {
-  const { userInfo } = useSelector((redux) => redux.auth);
+  const { user_info } = useSelector((redux) => redux.auth);
+  useEffect(() => {
+    (async function () {
+      const { data, error } = await Supabase.rpc("get_full_category_tree");
+      console.log(data, error);
+    })();
+  }, []);
+
   return (
     <BasicLayoutMobile>
-      <div className="flex flex-col gap-2">
-        {userInfo?.mobile || userInfo?.email}
-        <Link to={'/my-panel/my-post'}>My Post</Link>
-        <Link to={'/my-panel/notes'}>My Notes</Link>
-        <Link to={'/my-panel/saved'}>My Saved</Link>
-        <Link to={'/my-panel/recent'}>Recently Viewd</Link>
+      <div className="flex flex-row gap-4">
+        <SideBar />
+        <div className="border flex flex-col gap-4 w-3/4 border-gray-300 rounded-md p-4">
+          <img
+            src={user_info?.user_metadata?.avatar_url}
+            className="w-14 h-w-14 rounded-full"
+            alt="avatar_pictures"
+          />
+          <div>{user_info?.user_metadata?.full_name}</div>
+          <div>{user_info?.phone || user_info?.email}</div>
+        </div>
       </div>
     </BasicLayoutMobile>
   );

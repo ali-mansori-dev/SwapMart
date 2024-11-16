@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import { useQuery } from "react-query";
 import PropTypes from "prop-types";
 
@@ -26,11 +26,11 @@ const Categories = () => {
     dispatch(close_all());
   };
 
-  const categoryQuery = useQuery("drop_categories", fetchCategoryData);
+  const { data } = useQuery("drop_categories", fetchCategoryData);
 
   useEffect(() => {
-    if (categoryQuery?.data?.length > 0) setCategory(categoryQuery?.data[0]);
-  }, [categoryQuery?.data]);
+    if (data?.length > 0) setCategory(data[0]);
+  }, [data]);
 
   return (
     <>
@@ -56,18 +56,18 @@ const Categories = () => {
               className="fixed top-[64px] left-0 right-0 bottom-0 bg-black bg-opacity-25 z-0"
             ></div>
             <div className="absolute top-[130%] flex gap-4 left-0 bg-white z-30 w-[40vw] rounded-md p-6 drop-shadow-modal">
-              {categoryQuery?.data ? (
+              {data ? (
                 <>
                   <div className="w-1/4 flex flex-col gap-2 border-r pr-3">
-                    {categoryQuery?.data?.map((value, index) => (
+                    {data?.map((value, index) => (
                       <Link
                         key={index}
                         onMouseEnter={setCategory.bind(this, value)}
                         onClick={closeDropDown}
-                        to={`/s/${value.slug}`}
+                        to={`/${value.slug}`}
                         className={`flex flex-row justify-between items-center gap-2 text-gray-400  px-2 py-2 rounded-lg ${
                           category?._id === value._id
-                            ? `bg-gray-100 text-gray-800`
+                            ? `hover:bg-gray-100 text-gray-800`
                             : `hover:bg-gray-100 hover:text-gray-800`
                         }`}
                       >
@@ -86,7 +86,7 @@ const Categories = () => {
                         <div key={index} className="flex flex-col gap-4 pb-8">
                           <Link
                             key={index}
-                            to={`/s/${value.slug}`}
+                            to={`/${value.slug}`}
                             onClick={closeDropDown}
                             className={`flex flex-row items-center gap-2 text-gray-800`}
                           >
@@ -98,7 +98,7 @@ const Categories = () => {
                                 value?.children?.map((value, index) => (
                                   <Link
                                     key={index}
-                                    to={`/s/${value.slug}`}
+                                    to={`/${value.slug}`}
                                     onClick={closeDropDown}
                                     className={`flex flex-row items-center gap-2 text-gray-400 hover:text-primary-default`}
                                   >
@@ -114,8 +114,7 @@ const Categories = () => {
                   </div>
                 </>
               ) : (
-                <div>ddd</div>
-                // <Spinner />
+                <CircularProgress size="30px" color="inherit" />
               )}
             </div>
           </>
