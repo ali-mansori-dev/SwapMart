@@ -1,5 +1,3 @@
-// import { useMutation } from "react-query";
-// import { DeleteImageFn } from "../mutation";
 import PropTypes from "prop-types";
 
 const PreviewImage = ({
@@ -11,16 +9,14 @@ const PreviewImage = ({
   percent = 0,
   // deleteFn,
 }) => {
-  // const DeleteImageMutation = useMutation({
-  //   mutationFn: DeleteImageFn,
-  // });
+
 
   return (
     <div className="w-max h-max relative">
       {uploaded === false && (
         <div className="flex items-center justify-center bg-white bg-opacity-35 absolute top-0 left-0 bottom-0 right-0 z-50">
           <progress
-            className="progress progress-error w-[70%] border border-white bg-gray-100"
+            className="progress !bg-primary-50 w-[70%] h-3 border border-white !rounded-lg overflow-hidden"
             value={percent}
             max="100"
           ></progress>

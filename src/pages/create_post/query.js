@@ -1,22 +1,24 @@
 import axios from "axios";
-// import { API_CATEGORY_URL } from "../../config";
 
+import Supabase from "../../lib/helper/ClientSupabase";
 
 export const FindCategoryFn = async () => {
   // const data = await axios.get(`${API_CATEGORY_URL}/`);
   // return data.data;
 };
 export const FindCategorybySlugFn = async (slug) => {
-  // const data = await axios.get(
-  //   `${API_CATEGORY_URL}/get-by-slug/${slug ?? "root"}`
-  // );
-  // return data.data;
+  if (slug && slug !== "root") {
+    const { data } = await Supabase.from("sw_category")
+      .select("*")
+      .eq("slug", slug);
+    return data;
+  }
+  const { data } = await Supabase.from("sw_category").select("*");
+  return data;
 };
-export const FindChildrenCategorybySlugFn = async (slug) => {
-  // const data = await axios.get(
-  //   `${API_CATEGORY_URL}/get-children-by-slug/${slug ?? "root"}`
-  // );
-  // return data.data;
+export const find_all_categories = async () => {
+  const { data } = await Supabase.from("sw_category").select("*");
+  return data;
 };
 export const SearchCategoryFn = async (query) => {
   // const trimedQuery = query.trim();
