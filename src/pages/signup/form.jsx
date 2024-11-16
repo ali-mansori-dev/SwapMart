@@ -31,7 +31,8 @@ const Form = () => {
         if (res?.error?.message)
           return setAlertConent("error", res?.error?.message);
         setAlertConent("success", "Email Verification Send!");
-      });
+      })
+      .catch((res) => console.log(res));
   });
   const onSubmit = (dataParams) => {
     setLoading(true);

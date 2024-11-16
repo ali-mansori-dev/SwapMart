@@ -4,7 +4,11 @@ import PropTypes from "prop-types";
 const AlertComponent = ({ data }) => {
   return (
     data?.type &&
-    data?.content && <Alert severity='error' variant="standard">{data?.content}</Alert>
+    data?.content && (
+      <Alert severity="error" variant="standard">
+        {data?.content}
+      </Alert>
+    )
   );
 };
 AlertComponent.propTypes = {

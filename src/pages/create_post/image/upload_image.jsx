@@ -1,67 +1,93 @@
-import { uploadImageFn } from "./mutation";
 import Image from "./preview_image";
 import { makeBlob } from "../../../utils/blob";
 import PropTypes from "prop-types";
-import { useMutation } from "react-query";
+import Supabase from "../../../lib/helper/ClientSupabase";
+import useAlert from "../../../hooks/useAlert";
+import AlertComponent from "../../../components/alert_component";
+import { get_file_extension } from "../../../utils/file";
+import download_image from "../../../assets/icon/download-outline.svg";
 
 const UploadImages = ({ images, setImages, uploadImageFn: noname }) => {
-  const UploadImageMutation = useMutation({
-    mutationFn: uploadImageFn.bind(this),
-  });
+  const [alert, setAlert] = useAlert();
+
   async function handleChange(e) {
     const inputFiles = e.target.files;
     if (inputFiles.length > 0) {
       Array.from(inputFiles).forEach(async (file) => {
-        const blob = await makeBlob(file);
+        const ext = get_file_extension(file.name);
+        if (ext !== "jpg")
+          return setAlert("error", `image ${ext} type not supported`);
+
+        const maxSize = 120 * 1024;
+        if (file.size > maxSize) {
+          return setAlert("error", `file size not should over 120KB`);
+        }
+
+        if (images.length >= 2) {
+          return setAlert("error", `you can only select 2 image`);
+        }
+
+        //file name
+        const fileName = `${Date.now()}.${ext}`;
+        const url = `${
+          import.meta.env.VITE_SUPABASE_URL
+        }/storage/v1/object/images/${fileName}`;
+
+        const blob = makeBlob(file);
         setImages([
           ...images,
           {
-            name: file.name,
+            url,
             blob,
             uploaded: false,
-            id: "",
             percent: 0,
           },
         ]);
-        const formData = new FormData();
-        formData.append("image", file);
-        const onUploadProgressFn = (e) => {
+
+        const headers = {
+          Authorization: `Bearer ${
+            (await Supabase.auth.getSession()).data.session.access_token
+          }`,
+          "Content-Type": file.type,
+        };
+
+        const req = new XMLHttpRequest();
+        req.upload.onprogress = updateProgress;
+        req.onload = transferComplete;
+        req.onerror = transferFailed;
+        req.open("POST", url);
+        for (const [key, value] of Object.entries(headers)) {
+          req.setRequestHeader(key, value);
+        }
+        req.send(file);
+
+        function updateProgress(e) {
+          const pct = (e.loaded / e.total) * 100;
           setImages([
-            ...images.filter((item) => item.name !== file.name),
+            ...images.filter((item) => item.url !== file.url),
             {
-              name: file.name,
+              url,
               blob,
               uploaded: false,
-              id: "",
-              percent: e,
+              percent: pct,
             },
           ]);
-        };
-        try {
-          UploadImageMutation.mutateAsync(
-            { data: formData, onUploadProgressFn },
+        }
+
+        function transferComplete() {
+          setImages([
+            ...images.filter((item) => item.url !== file.url),
             {
-              onSuccess: (data) => {
-                if (data) {
-                  setImages([
-                    ...images.filter((item) => item.name !== file.name),
-                    {
-                      name: file.name,
-                      blob,
-                      uploaded: true,
-                      id: data.data.name,
-                      percent: 100,
-                    },
-                  ]);
-                }
-              },
-              onError: (error) => {
-                console.error(error);
-              },
-            }
-          );
-        } catch (error) {
-          console.error(error);
+              url,
+              blob,
+              uploaded: true,
+              percent: 100,
+            },
+          ]);
+        }
+
+        function transferFailed() {
+          console.error("Upload failed.");
         }
       });
     }
@@ -79,9 +105,12 @@ const UploadImages = ({ images, setImages, uploadImageFn: noname }) => {
         >
           <span
             htmlFor="photo-dropbox"
-            className="flex items-center space-x-2 text-[#2F80C0]"
+            className="flex items-center space-x-2 text-primary-50"
           >
-            {/* <ImageUpIcon /> */}
+            <img
+              src={download_image}
+              className="w-8 rotate-180 text-primary-50"
+            />
           </span>
           <input
             id="photo-dropbox"
@@ -97,10 +126,10 @@ const UploadImages = ({ images, setImages, uploadImageFn: noname }) => {
             return <Image key={index} {...value} />;
           })}
       </div>
-
+      <AlertComponent data={alert} />
       <div className="label">
         <span className="text-gray-400 text-xs">
-          choose a maximum of 20 photos.
+          only .png file accepted <br /> choose a maximum of 2 photos.
         </span>
       </div>
     </section>

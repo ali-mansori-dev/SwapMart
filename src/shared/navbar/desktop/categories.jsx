@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 // import { CategoryIconsXs } from "../../../../category/category_icons";
 // import Spinner from "../../../../../shared/components/spiner";
 // import Button from "../../../../../shared/components/button";
-import { fetchCategoryData } from "../../../queries/category";
+import { fetch_category_data } from "../../../queries/category";
 import {
   close_all,
   open_category_modal,
@@ -26,7 +26,7 @@ const Categories = () => {
     dispatch(close_all());
   };
 
-  const { data } = useQuery("drop_categories", fetchCategoryData);
+  const { data } = useQuery("drop_categories", fetch_category_data);
 
   useEffect(() => {
     if (data?.length > 0) setCategory(data[0]);
