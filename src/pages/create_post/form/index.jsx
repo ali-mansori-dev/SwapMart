@@ -21,8 +21,11 @@ const Form = () => {
   const redirectHome = () => navigate("/");
 
   const onSubmit = async (data) => {
+    if (!category?.id) return setAlert("error", "category not selected!");
+    const hasUnuploadedImages = images.some((image) => !image.uploaded);
+    if (hasUnuploadedImages) return setAlert("error", "upload all images not completed please wait!");
+    
     setLoading(true);
-
     const post_images = images
       .filter((value) => value.url !== "")
       .map((value) => value.url);
