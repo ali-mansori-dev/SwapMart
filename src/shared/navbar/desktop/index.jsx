@@ -43,7 +43,7 @@ function NavbarDesktop() {
             is_authed && (
               <Link to={"/new"}>
                 <Button variant="contained" size="small">
-                  Create Post
+                  sell
                 </Button>
               </Link>
             )

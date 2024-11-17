@@ -8,8 +8,6 @@ import Mobile from "./mobile";
 const Index = ({ isMobile }) => {
   const { isLoading, data } = useQuery("postData", fetchData);
 
-  
-
   return isMobile ? (
     <Mobile isLoading={isLoading} data={data} />
   ) : (

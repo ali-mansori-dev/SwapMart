@@ -3,13 +3,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-import { signUpSchema } from "./schemas";
+import AlertComponent from "../../components/alert_component";
+import OAuth from "../../components/auth/modal/forms/oauth";
 import Supabase from "../../lib/helper/ClientSupabase";
 import useAlert from "../../hooks/useAlert";
-import AlertComponent from "../../components/alert_component";
-import { useState } from "react";
-import OAuth from "../../components/auth/modal/forms/oauth";
+import { signUpSchema } from "./schemas";
 
 const Form = () => {
   const [alert, setAlertConent] = useAlert();

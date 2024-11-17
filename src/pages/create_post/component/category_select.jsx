@@ -1,16 +1,16 @@
 import {
   CircularProgress,
-  Dialog,
   DialogContent,
   DialogTitle,
+  Dialog,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
-
-import SearchItemComponent from "./search_item";
-import { fetch_category_data } from "../../../queries/category";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
+
+import { fetch_category_data } from "../../../queries/category";
+import SearchItemComponent from "./search_item";
 
 const CategorySelect = ({ setCategory, onClose }) => {
   const [selected, setSelected] = useState({});
