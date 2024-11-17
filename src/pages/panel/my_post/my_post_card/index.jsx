@@ -1,12 +1,8 @@
 
 import { Link, useNavigate } from "react-router-dom";
 import { Alert, Button } from "@mui/material";
-// import { RWebShare } from "react-web-share";
 import { memo } from "react";
 
-// import useToggle from "../../../../hooks/useToggle";
-// import SpecialModal from "./special_modal";
-// import DeleteModal from "./delete_modal";
 import PropTypes from "prop-types";
 import { formatteCurrency } from "../../../../utils/formatNumber";
 import { fromNow } from "../../../../utils/dateFormat";
