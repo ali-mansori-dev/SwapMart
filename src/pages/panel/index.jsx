@@ -22,7 +22,8 @@ const Dashboard = () => {
           <img
             src={user_info?.user_metadata?.avatar_url}
             onError={(e) =>
-              (e.target.src = `https://fwpdokjfwfokcqrgoanf.supabase.co/storage/v1/object/public/images/person.png`)
+              (e.target.src = `https://fwpdokjfwfokcqrgoanf.supabase.co/storage/v1/object/public/images/person-circle-outline.svg
+              `)
             }
             className="w-14 h-w-14 rounded-full"
             alt="avatar_pictures"

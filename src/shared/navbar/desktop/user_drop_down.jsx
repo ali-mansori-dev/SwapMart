@@ -102,9 +102,9 @@ const UserDropDown = () => {
             <img
               src={user_info?.user_metadata?.avatar_url}
               onError={(e) =>
-                (e.target.src = `https://fwpdokjfwfokcqrgoanf.supabase.co/storage/v1/object/public/images/person.png`)
+                (e.target.src = `https://fwpdokjfwfokcqrgoanf.supabase.co/storage/v1/object/public/images/person-circle-outline.svg`)
               }
-              className="w-7 h-7 rounded-full"
+              className="w-8 h-8 rounded-full border border-gray-300"
               alt="avatar_pictures"
             />
           </Button>
