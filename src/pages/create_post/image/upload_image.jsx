@@ -1,11 +1,12 @@
-import Image from "./preview_image";
-import { makeBlob } from "../../../utils/blob";
 import PropTypes from "prop-types";
-import Supabase from "../../../lib/helper/ClientSupabase";
-import useAlert from "../../../hooks/useAlert";
-import AlertComponent from "../../../components/alert_component";
-import { get_file_extension } from "../../../utils/file";
+
 import download_image from "../../../assets/icon/download-outline.svg";
+import AlertComponent from "../../../components/alert_component";
+import Supabase from "../../../lib/helper/ClientSupabase";
+import { get_file_extension } from "../../../utils/file";
+import { makeBlob } from "../../../utils/blob";
+import useAlert from "../../../hooks/useAlert";
+import Image from "./preview_image";
 
 const UploadImages = ({ images, setImages, uploadImageFn: noname }) => {
   const [alert, setAlert] = useAlert();

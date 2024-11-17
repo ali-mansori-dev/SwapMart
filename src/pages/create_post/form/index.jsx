@@ -1,15 +1,15 @@
 import { Alert, Button, CircularProgress, Snackbar } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
-import { CreatePostSchema } from "../schema";
-import Supabase from "../../../lib/helper/ClientSupabase";
-import { generateUniqueSlug } from "../../../utils/random";
-import Fildes from "./fildes";
-import useAlert from "../../../hooks/useAlert";
 import SnackbarComponent from "../../../components/snackbar_component";
+import { generateUniqueSlug } from "../../../utils/random";
+import Supabase from "../../../lib/helper/ClientSupabase";
+import useAlert from "../../../hooks/useAlert";
+import { CreatePostSchema } from "../schema";
+import Fildes from "./fildes";
 
 const Form = () => {
   const [alert, setAlert] = useAlert(false);

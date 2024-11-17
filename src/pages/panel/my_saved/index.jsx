@@ -3,15 +3,15 @@ import { useSelector } from "react-redux";
 import { useQuery } from "react-query";
 
 import BasicLayoutDesktop from "../../../layouts/desktop/basic_layout";
-import My_post_card from "./note_post_card";
-import { find_my_notes } from "./query";
+import My_post_card from "./my_post_card";
+import { find_my_saved } from "./query";
 import SideBar from "../side_bar";
 
-const MyNotes = () => {
+const MyBookmark = () => {
   const { user_info } = useSelector((redux) => redux.auth);
   const { data, isLoading } = useQuery(
-    "my_notes",
-    find_my_notes.bind(this, user_info?.id)
+    "my_saved",
+    find_my_saved.bind(this, user_info?.id)
   );
   return (
     <BasicLayoutDesktop>
@@ -21,7 +21,7 @@ const MyNotes = () => {
           {isLoading ? (
             <CircularProgress color="inherit" />
           ) : (
-            data?.map((item, index) => <My_post_card key={index} post={item.sw_posts} />)
+            data?.map((item, index) => <My_post_card key={index} {...item.sw_posts} />)
           )}
         </div>
       </div>
@@ -29,4 +29,4 @@ const MyNotes = () => {
   );
 };
 
-export default MyNotes;
+export default MyBookmark;

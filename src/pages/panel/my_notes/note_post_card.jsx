@@ -1,10 +1,10 @@
 // import { ImageOffIcon, Info, NotebookPenIcon, TrashIcon } from "lucide-react";
-import { IconButton } from "@mui/material";
 // import { useMutation } from "@tanstack/react-query";
-import { memo } from "react";
+import { IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
-
 import PropTypes from "prop-types";
+import { memo } from "react";
+
 // import { DeleteNoteFn } from "../mutation";
 
 function MyNotePostCard({
@@ -52,7 +52,7 @@ function MyNotePostCard({
             {post?.title}
           </h1>
           <div className="flex flex-row items-center gap-1 text-gray-500 text-xs pt-8">
-            {/* <p className="line-clamp-1">{savedContent}</p> */}
+            {/* <p className="line-clamp-1">{body}</p> */}
           </div>
           <div className=" absolute bottom-2 left-2" onClick={handleOpen}>
             <IconButton size="medium"></IconButton>
@@ -97,13 +97,6 @@ function MyNotePostCard({
 }
 MyNotePostCard.propTypes = {
   onDelete: PropTypes.any,
-  _id: PropTypes.any,
-  savedContent: PropTypes.any,
-  title: PropTypes.any,
-  images: PropTypes.any,
-  district: PropTypes.any,
-  slug: PropTypes.any,
-  createdAt: PropTypes.any,
   post: PropTypes.any,
 };
 export default memo(MyNotePostCard);

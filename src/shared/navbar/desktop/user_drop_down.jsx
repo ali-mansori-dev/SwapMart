@@ -2,12 +2,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import PropTypes from "prop-types";
-import ChevrowDown from "../../../assets/chevron-down.svg";
+
 import {
   open_user_dropdown,
   open_auth_modal,
   close_all,
 } from "../../../features/layout/layoutSlice";
+import ChevrowDown from "../../../assets/chevron-down.svg";
 import { log_out } from "../../../features/auth/authSlice";
 import Supabase from "../../../lib/helper/ClientSupabase";
 
@@ -100,6 +101,9 @@ const UserDropDown = () => {
           >
             <img
               src={user_info?.user_metadata?.avatar_url}
+              onError={(e) =>
+                (e.target.src = `https://fwpdokjfwfokcqrgoanf.supabase.co/storage/v1/object/public/images/person.png`)
+              }
               className="w-7 h-7 rounded-full"
               alt="avatar_pictures"
             />

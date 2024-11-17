@@ -1,7 +1,9 @@
 import Supabase from "../lib/helper/ClientSupabase";
 
 export const fetchData = async () => {
-  const { data, error } = await Supabase.from("sw_posts").select("*");
+  const { data, error } = await Supabase.from("sw_posts")
+    .select("*")
+    .order("created_at", { ascending: false });
   if (error) {
     throw error;
   }

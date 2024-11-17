@@ -7,7 +7,7 @@ import Signup from "./pages/signup";
 import Signin from "./pages/signin";
 import Home from "./pages/home";
 import MyPost from "./pages/panel/my_post";
-import MyBookmark from "./pages/panel/my_bookmark";
+import MyBookmark from "./pages/panel/my_saved";
 import MyNotes from "./pages/panel/my_notes";
 import Dashboard from "./pages/panel";
 import CreatePost from "./pages/create_post";
