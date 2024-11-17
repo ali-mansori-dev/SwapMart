@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Navbar from "../../shared/navbar";
 import ButtonNavigation from "./button_navigation";
 
+
 const BasicLayoutMobile = ({ children, searchText, filter = [] }) => {
   return (
     <>

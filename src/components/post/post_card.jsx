@@ -2,18 +2,17 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { memo } from "react";
 
-// import { dateFormate } from "../../../shared/util/dateFormat";
 import { formatteCurrency } from "../../utils/formatNumber";
 import { fromNow } from "../../utils/dateFormat";
 
-function PostCard({ title, images, district, slug, amount, updatedAt }) {
+function PostCard({ title, images, district, slug, amount, created_at }) {
   return (
     <Link
       to={`/v/${slug}`}
       className="flex p-4 border border-gray-200 justify-between rounded-xl gap-2 cursor-pointer min-w-[310px]"
     >
       <div className="flex flex-col justify-between w-max h-full max-w-[50%]">
-        <h1 className="text-gray-700 text-sm max-h-[70px]  font-semibold w-full leading-5 line-clamp-2 Fanum">
+        <h1 className="text-gray-700 text-sm max-h-[70px]  font-semibold w-full leading-5 line-clamp-2 ">
           {title}
         </h1>
         <div className="flex flex-col">
@@ -21,7 +20,7 @@ function PostCard({ title, images, district, slug, amount, updatedAt }) {
             {amount && amount > 0 ? formatteCurrency(amount) : "Best Offer"}
           </div>
           <div className="text-gray-400 text-xs line-clamp-1">
-            <span>{fromNow(updatedAt)}</span> in {district}
+            <span>{fromNow(created_at)}</span>
           </div>
         </div>
       </div>
@@ -34,16 +33,18 @@ function PostCard({ title, images, district, slug, amount, updatedAt }) {
               srcSet={`${images[0]}`}
               alt={title}
               loading="lazy"
+              onError={(e) =>
+                (e.target.src = `https://fwpdokjfwfokcqrgoanf.supabase.co/storage/v1/object/public/images/post_place_holder.png`)
+              }
             />
             <span className="absolute top-1 left-1 text-white bg-gray-600 text-xs px-2 p-1 inline-flex items-center flex-row-reverse gap-1 rounded-md bg-opacity-75">
-              {/* <ImagesIcon size={12} /> */}
-              <span className="text-xs Fanum">{images.length}</span>
+              <span className="text-xs">{images.length}</span>
             </span>
           </>
         ) : (
           <div className="w-full h-full bg-gray-100 rounded-md flex justify-center items-center text-gray-400">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9cSGzVkaZvJD5722MU5A-JJt_T5JMZzotcw&s"
+              src="https://fwpdokjfwfokcqrgoanf.supabase.co/storage/v1/object/public/images/post_place_holder.png"
               className="w-full h-full object-cover"
             />
           </div>
@@ -58,6 +59,6 @@ PostCard.propTypes = {
   district: PropTypes.number,
   slug: PropTypes.string,
   amount: PropTypes.number,
-  updatedAt: PropTypes.any,
+  created_at: PropTypes.any,
 };
 export default memo(PostCard);

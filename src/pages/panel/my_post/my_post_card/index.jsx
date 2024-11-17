@@ -47,7 +47,7 @@ function MyPostCard({
                   ? `${formatteCurrency(amount)}`
                   : "Best offer"}
               </div>
-              <span className="text-gray-400 text-xs Fanum">
+              <span className="text-gray-400 text-xs ">
                 {fromNow(createdAt)} in {district}
               </span>
             </div>

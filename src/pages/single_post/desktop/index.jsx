@@ -35,12 +35,12 @@ const Desktop = ({ data, isLoading }) => {
               <h5 className="text-xl text-gray-900 leading-10">
                 {data?.title}
               </h5>
-              <div className="Fanum text-sm lg:text-md w-2/3 text-left text-gray-600 ">
+              <div className=" text-sm lg:text-md w-2/3 text-left text-gray-600 ">
                 {data?.amount && data?.amount > 0
                   ? formatteCurrency(data?.amount)
                   : "Best Offer"}
               </div>
-              <span className="text-gray-400 text-xs Fanum mb-3">
+              <span className="text-gray-400 text-xs  mb-3">
                 {fromNow(data?.updatedAt)} in {data?.district}
               </span>
               {data?.isDelete ? (

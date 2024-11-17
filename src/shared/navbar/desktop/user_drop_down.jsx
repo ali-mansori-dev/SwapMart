@@ -28,27 +28,27 @@ const DropItemComponent = ({
   return (
     <li
       onClick={onClick}
-      className={`flex border-gray-200 text-gray-800 Fanum cursor-pointer hover:bg-gray-50 ${className}`}
+      className={`flex border-gray-200 text-gray-800  cursor-pointer hover:bg-gray-50 ${className}`}
     >
       {link && link !== "" ? (
         <Link
           onClick={() => dispatch(close_all())}
-          className="Fanum w-full flex flex-col justify-start gap-1 px-3 py-3"
+          className=" w-full flex flex-col justify-start gap-1 px-3 py-3"
           to={link}
         >
           <div className="text-sm">{title}</div>
           {secondary && (
-            <div className="Fanum text-xs text-gray-400">{secondary}</div>
+            <div className=" text-xs text-gray-400">{secondary}</div>
           )}
         </Link>
       ) : (
         <div
-          className="Fanum flex flex-col justify-start gap-1 px-3 py-3"
+          className=" flex flex-col justify-start gap-1 px-3 py-3"
           onClick={onClick}
         >
           <div className="text-sm">{title}</div>
           {secondary && (
-            <div className="Fanum text-xs text-gray-400">{secondary}</div>
+            <div className=" text-xs text-gray-400">{secondary}</div>
           )}
         </div>
       )}
@@ -64,12 +64,6 @@ const UserDropDown = () => {
     if (!isUserDropDownOpen) return dispatch(open_user_dropdown());
     dispatch(close_all());
   };
-  // const handleClick = () => {
-  //   if (auth?.isAuthed) {
-  //     return toggle_drop_down();
-  //   }
-  //   loginFn();
-  // };
 
   const handleLogout = () => {
     Supabase.auth.signOut({ scope: "local" });
