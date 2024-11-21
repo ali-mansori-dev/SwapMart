@@ -8,7 +8,7 @@ import {
   open_auth_modal,
   close_all,
 } from "../../../features/layout/layoutSlice";
-import ChevrowDown from "../../../assets/chevron-down.svg";
+import ChevrowDown from "../../../assets/icon/chevron-down.svg";
 import { log_out } from "../../../features/auth/authSlice";
 import Supabase from "../../../lib/helper/ClientSupabase";
 
@@ -57,11 +57,11 @@ const DropItemComponent = ({
 };
 
 const UserDropDown = () => {
-  const { isUserDropDownOpen } = useSelector((state) => state.layout);
+  const { is_user_drop_down_open } = useSelector((state) => state.layout);
   const { is_authed, user_info } = useSelector((redux) => redux.auth);
   const dispatch = useDispatch();
   const toggle = () => {
-    if (!isUserDropDownOpen) return dispatch(open_user_dropdown());
+    if (!is_user_drop_down_open) return dispatch(open_user_dropdown());
     dispatch(close_all());
   };
 
@@ -84,7 +84,7 @@ const UserDropDown = () => {
         {is_authed ? (
           <Button
             size="small"
-            className={`${isUserDropDownOpen && `!bg-gray-100`} !px-4`}
+            className={`${is_user_drop_down_open && `!bg-gray-100`} !px-4`}
             variant="text"
             onClick={toggle}
             endIcon={
@@ -105,14 +105,14 @@ const UserDropDown = () => {
         ) : (
           <Button
             size="small"
-            className={`${isUserDropDownOpen && `!bg-gray-100`}`}
+            className={`${is_user_drop_down_open && `!bg-gray-100`}`}
             variant="text"
             onClick={() => dispatch(open_auth_modal())}
           >
             Sign in
           </Button>
         )}
-        {isUserDropDownOpen && (
+        {is_user_drop_down_open && (
           <ul
             className="absolute bg-white border border-gray-300 rounded-md w-[170px] mt-1 overflow-hidden shadow"
             onBlur={toggle}

@@ -15,7 +15,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 const Categories = () => {
-  const { isCategoryDropOpen } = useSelector((state) => state.layout);
+  const { is_category_drop_open } = useSelector((state) => state.layout);
   const [category, setCategory] = useState();
   const dispatch = useDispatch();
 
@@ -38,7 +38,7 @@ const Categories = () => {
         <Button
           size="small"
           variant="textonly"
-          className={isCategoryDropOpen && `!bg-gray-200`}
+          className={is_category_drop_open && `!bg-gray-200`}
           // rightIcon={
           //   <ChevronDownIcon
           //     className={isCategoryOpen && `rotate-180`}
@@ -49,7 +49,7 @@ const Categories = () => {
         >
           Categories
         </Button>
-        {isCategoryDropOpen && (
+        {is_category_drop_open && (
           <>
             <div
               onClick={closeDropDown}

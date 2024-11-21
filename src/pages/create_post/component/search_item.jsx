@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-import ChevrowDown from "../../../assets/chevron-down.svg";
+import ChevrowDown from "../../../assets/icon/chevron-down.svg";
 
 const SearchItemComponent = ({
   setSelected,

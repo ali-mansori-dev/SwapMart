@@ -11,9 +11,7 @@ import Search from "./search";
 function NavbarDesktop() {
   const dispatch = useDispatch();
   const { is_authed, loading } = useSelector((redux) => redux.auth);
-  const onClose = () => {
-    dispatch(open_auth_modal());
-  };
+  
   return (
     <Container maxWidth="lg">
       <div className="flex justify-between items-center h-[65px]">

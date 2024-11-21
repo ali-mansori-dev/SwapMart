@@ -1,8 +1,7 @@
 import { IconButton } from "@mui/material";
-import { memo } from "react";
 import { Link } from "react-router-dom";
-
 import PropTypes from "prop-types";
+import { memo } from "react";
 
 function MyNotePostCard({ title, slug, images }) {
   const handleOpen = (event) => {
@@ -12,7 +11,7 @@ function MyNotePostCard({ title, slug, images }) {
     <>
       <Link
         to={`/v/${slug}`}
-        className="flex flex-row gap-4 p-3 border border-gray-200 rounded-2xl  cursor-pointer relative h-max"
+        className="flex flex-row gap-4 p-3 border border-gray-200 rounded-2xl bg-white cursor-pointer relative h-max"
       >
         <div className="relative w-[80px] h-[80px] pb-2/3  rounded-md">
           {images[0] ? (

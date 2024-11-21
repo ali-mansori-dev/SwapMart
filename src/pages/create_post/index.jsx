@@ -1,6 +1,10 @@
-import CreatePostDesktop from "./desktop";
+import PropTypes from "prop-types";
 
-const Index = () => {
-  return <CreatePostDesktop />;
+import CreatePostDesktop from "./desktop";
+import CreatePostMobile from "./mobile";
+
+const Index = ({ isMobile }) => {
+  return isMobile ? <CreatePostMobile /> : <CreatePostDesktop />;
 };
+Index.propTypes = { isMobile: PropTypes.bool };
 export default Index;

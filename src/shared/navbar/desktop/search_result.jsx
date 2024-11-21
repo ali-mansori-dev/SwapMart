@@ -7,10 +7,10 @@ import { close_all } from "../../../features/layout/layoutSlice";
 
 const SearchResult = ({ data }) => {
   const dispatch = useDispatch();
-  const { isSearchResultOpen } = useSelector((redux) => redux.layout);
+  const { is_search_result_open } = useSelector((redux) => redux.layout);
   const onClose = () => dispatch(close_all());
   return (
-    isSearchResultOpen && (
+    is_search_result_open && (
       <>
         <div
           onClick={onClose}

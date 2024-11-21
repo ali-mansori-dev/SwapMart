@@ -1,9 +1,8 @@
-
 import { Link, useNavigate } from "react-router-dom";
 import { Alert, Button } from "@mui/material";
+import PropTypes from "prop-types";
 import { memo } from "react";
 
-import PropTypes from "prop-types";
 import { formatteCurrency } from "../../../../utils/formatNumber";
 import { fromNow } from "../../../../utils/dateFormat";
 
@@ -23,8 +22,6 @@ function MyPostCard({
     e.preventDefault();
     navigate(`/my-panel/my-post/edit/${slug}`);
   };
-  // const [deleteModelOpen, toggleDeleteModelOpen] = useToggle(false);
-  // const [promoteModelOpen, togglePromoteModelOpen] = useToggle(false);
 
   const handleEdit = (event) => {
     event.stopPropagation();
@@ -34,7 +31,7 @@ function MyPostCard({
     <>
       <Link
         to={`/v/${slug}`}
-        className="relative flex flex-col gap-6 p-4 border border-gray-200 rounded-2xl  cursor-pointer h-max"
+        className="relative flex flex-col gap-6 p-4 border rounded-2xl  cursor-pointer h-max bg-white border-gray-300"
       >
         <div className="flex flex-row gap-2 justify-between">
           <div className="flex flex-col justify-between w-max h-[130px] max-w-[50%]">
@@ -62,7 +59,6 @@ function MyPostCard({
               />
             ) : (
               <div className="w-full h-full bg-gray-100 rounded-md flex justify-center items-center text-gray-400">
-                {/* <ImageOffIcon size={32} /> */}
               </div>
             )}
             
@@ -75,59 +71,28 @@ function MyPostCard({
         ) : (
           <div className="flex flex-col gap-3" onClick={handleEdit}>
             <div className="w-full flex flex-row lg:flex-row gap-3">
-              {/* <RWebShare
-                data={{
-                  url: `/v/${slug}`,
-                  title: `${title}`,
-                }}
-              >
-                <Button
-                  variant="outlined"
-                  size="small"
-                  className="!w-full"
-                  startIcon={<Share2Icon className="!stroke-[1px]" size={16} />}
-                >
-                  اشتراک
-                </Button>
-              </RWebShare> */}
               <Button
                 onClick={navigateEditHandle}
                 variant="outlined"
                 size="small"
                 className="!w-full"
-                // startIcon={<PenLineIcon className="!stroke-[1px]" size={16} />}
               >
                 edit
               </Button>
               <Button
-                // onClick={toggleDeleteModelOpen}
                 variant="outlined"
                 size="small"
                 className="!w-full"
-                // startIcon={<TrashIcon className="!stroke-[1px]" size={16} />}
               >
                 delete
               </Button>
             </div>
             <div className="w-full flex flex-row lg:flex-row gap-3">
               <Button
-                // onClick={togglePromoteModelOpen}
                 variant="outlined"
                 size="small"
                 className="!w-full"
-                // startIcon={
-                //   special ? (
-                //     <StarOffIcon
-                //       className="!stroke-[1px] text-yellow-600"
-                //       size={18}
-                //     />
-                //   ) : (
-                //     <StarIcon
-                //       className="!stroke-[1px] text-yellow-600"
-                //       size={18}
-                //     />
-                //   )
-                // }
+
                 type="link"
                 href={`/my-panel/my-post/edit/${slug}`}
               >
@@ -137,19 +102,6 @@ function MyPostCard({
           </div>
         )}
       </Link>
-      {/* <DeleteModal
-        _id={_id}
-        onDelete={onDelete}
-        open={deleteModelOpen}
-        setOpen={toggleDeleteModelOpen}
-      />
-      <SpecialModal
-        _id={_id}
-        onDelete={onDelete}
-        open={promoteModelOpen}
-        setOpen={togglePromoteModelOpen}
-        special={special}
-      /> */}
     </>
   );
 }

@@ -1,21 +1,12 @@
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 
-import BasicLayoutMobile from "../../layouts/desktop/basic_layout";
-import Supabase from "../../lib/helper/ClientSupabase";
-import SideBar from "./side_bar";
+import SideBar from "../side_bar";
+import BasicLayoutDesktop from "../../../layouts/desktop/basic_layout";
 
-const Dashboard = () => {
-  const { user_info } = useSelector((redux) => redux.auth);
-  useEffect(() => {
-    (async function () {
-      const { data, error } = await Supabase.rpc("get_full_category_tree");
-      console.log(data, error);
-    })();
-  }, []);
-
+const DashboardDesktop = ({ user_info }) => {
   return (
-    <BasicLayoutMobile>
+    <BasicLayoutDesktop>
       <div className="flex flex-row gap-4">
         <SideBar />
         <div className="border flex flex-col gap-4 w-3/4 border-gray-300 rounded-md p-4">
@@ -32,8 +23,8 @@ const Dashboard = () => {
           <div>{user_info?.phone || user_info?.email}</div>
         </div>
       </div>
-    </BasicLayoutMobile>
+    </BasicLayoutDesktop>
   );
 };
-
-export default Dashboard;
+DashboardDesktop.propTypes = { user_info: PropTypes.any };
+export default DashboardDesktop;
