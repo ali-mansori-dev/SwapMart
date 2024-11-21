@@ -97,7 +97,6 @@ const Form = () => {
         </Button>
       </div>
       <SnackbarComponent data={alert} />
-      {/* <Snackbar data={alert} /> */}
     </form>
   );
 };

@@ -8,7 +8,7 @@ import {
   open_auth_modal,
   close_all,
 } from "../../../features/layout/layoutSlice";
-import ChevrowDown from "../../../assets/chevron-down.svg";
+import ChevrowDown from "../../../assets/icon/chevron-down.svg";
 import { log_out } from "../../../features/auth/authSlice";
 import Supabase from "../../../lib/helper/ClientSupabase";
 
@@ -28,27 +28,27 @@ const DropItemComponent = ({
   return (
     <li
       onClick={onClick}
-      className={`flex border-gray-200 text-gray-800 Fanum cursor-pointer hover:bg-gray-50 ${className}`}
+      className={`flex border-gray-200 text-gray-800  cursor-pointer hover:bg-gray-50 ${className}`}
     >
       {link && link !== "" ? (
         <Link
           onClick={() => dispatch(close_all())}
-          className="Fanum w-full flex flex-col justify-start gap-1 px-3 py-3"
+          className=" w-full flex flex-col justify-start gap-1 px-3 py-3"
           to={link}
         >
           <div className="text-sm">{title}</div>
           {secondary && (
-            <div className="Fanum text-xs text-gray-400">{secondary}</div>
+            <div className=" text-xs text-gray-400">{secondary}</div>
           )}
         </Link>
       ) : (
         <div
-          className="Fanum flex flex-col justify-start gap-1 px-3 py-3"
+          className=" flex flex-col justify-start gap-1 px-3 py-3"
           onClick={onClick}
         >
           <div className="text-sm">{title}</div>
           {secondary && (
-            <div className="Fanum text-xs text-gray-400">{secondary}</div>
+            <div className=" text-xs text-gray-400">{secondary}</div>
           )}
         </div>
       )}
@@ -57,19 +57,13 @@ const DropItemComponent = ({
 };
 
 const UserDropDown = () => {
-  const { isUserDropDownOpen } = useSelector((state) => state.layout);
+  const { is_user_drop_down_open } = useSelector((state) => state.layout);
   const { is_authed, user_info } = useSelector((redux) => redux.auth);
   const dispatch = useDispatch();
   const toggle = () => {
-    if (!isUserDropDownOpen) return dispatch(open_user_dropdown());
+    if (!is_user_drop_down_open) return dispatch(open_user_dropdown());
     dispatch(close_all());
   };
-  // const handleClick = () => {
-  //   if (auth?.isAuthed) {
-  //     return toggle_drop_down();
-  //   }
-  //   loginFn();
-  // };
 
   const handleLogout = () => {
     Supabase.auth.signOut({ scope: "local" });
@@ -90,7 +84,7 @@ const UserDropDown = () => {
         {is_authed ? (
           <Button
             size="small"
-            className={`${isUserDropDownOpen && `!bg-gray-100`} !px-4`}
+            className={`${is_user_drop_down_open && `!bg-gray-100`} !px-4`}
             variant="text"
             onClick={toggle}
             endIcon={
@@ -111,14 +105,14 @@ const UserDropDown = () => {
         ) : (
           <Button
             size="small"
-            className={`${isUserDropDownOpen && `!bg-gray-100`}`}
+            className={`${is_user_drop_down_open && `!bg-gray-100`}`}
             variant="text"
             onClick={() => dispatch(open_auth_modal())}
           >
             Sign in
           </Button>
         )}
-        {isUserDropDownOpen && (
+        {is_user_drop_down_open && (
           <ul
             className="absolute bg-white border border-gray-300 rounded-md w-[170px] mt-1 overflow-hidden shadow"
             onBlur={toggle}

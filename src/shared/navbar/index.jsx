@@ -7,7 +7,7 @@ import NavbarMobile from "./mobile";
 const Navbar = () => {
   const { isMobile } = useResponsive();
   return (
-    <AppBar position="fixed" color="default">
+    <AppBar position="fixed" color="default" className="!shadow-none border-b border-gray-300 !bg-white">
       {isMobile ? <NavbarMobile /> : <NavbarDesktop />}
     </AppBar>
   );

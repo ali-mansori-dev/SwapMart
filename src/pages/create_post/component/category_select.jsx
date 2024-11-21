@@ -2,6 +2,7 @@ import {
   CircularProgress,
   DialogContent,
   DialogTitle,
+  IconButton,
   Dialog,
 } from "@mui/material";
 import React, { useState } from "react";
@@ -9,12 +10,15 @@ import { useQuery } from "react-query";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 
+import { useResponsive } from "../../../context/ResponsiveContext";
 import { fetch_category_data } from "../../../queries/category";
 import SearchItemComponent from "./search_item";
 
 const CategorySelect = ({ setCategory, onClose }) => {
   const [selected, setSelected] = useState({});
   const { data, isLoading } = useQuery("categories", fetch_category_data);
+
+  const { isMobile } = useResponsive();
 
   useEffect(() => {
     if (selected?.id && !selected?.children) {
@@ -25,7 +29,7 @@ const CategorySelect = ({ setCategory, onClose }) => {
 
   return (
     <Dialog
-      //   fullScreen={isMobile}
+      fullScreen={isMobile}
       open={true}
       onClose={onClose}
       keepMounted
@@ -34,9 +38,12 @@ const CategorySelect = ({ setCategory, onClose }) => {
     >
       <DialogTitle
         id="scroll-dialog-title"
-        className="flex flex-row justify-between items-center gap-1 border-b border-gray-300 !py-5"
+        className="flex flex-row justify-between items-center gap-1 border-b border-gray-300 !py-4"
       >
         <h1 className="text-base  text-gray-800">Choose Category</h1>
+        <IconButton size="small" onClick={onClose}>
+          X
+        </IconButton>
       </DialogTitle>
       <DialogContent className="w-auto lg:!w-[430px] h-[calc(100%-100px)] lg:!max-h-[60vh] !py-6">
         {isLoading ? (

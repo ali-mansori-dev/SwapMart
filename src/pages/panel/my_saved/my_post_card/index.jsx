@@ -1,19 +1,12 @@
-
 import { Link, useNavigate } from "react-router-dom";
 import { Alert, Button } from "@mui/material";
-// import { RWebShare } from "react-web-share";
+import PropTypes from "prop-types";
 import { memo } from "react";
 
-// import useToggle from "../../../../hooks/useToggle";
-// import SpecialModal from "./special_modal";
-// import DeleteModal from "./delete_modal";
-import PropTypes from "prop-types";
 import { formatteCurrency } from "../../../../utils/formatNumber";
 import { fromNow } from "../../../../utils/dateFormat";
 
 function MyPostCard({
-  // onDelete,
-  // _id,
   title,
   images,
   district,
@@ -27,8 +20,6 @@ function MyPostCard({
     e.preventDefault();
     navigate(`/my-panel/my-post/edit/${slug}`);
   };
-  // const [deleteModelOpen, toggleDeleteModelOpen] = useToggle(false);
-  // const [promoteModelOpen, togglePromoteModelOpen] = useToggle(false);
 
   const handleEdit = (event) => {
     event.stopPropagation();
@@ -38,7 +29,7 @@ function MyPostCard({
     <>
       <Link
         to={`/v/${slug}`}
-        className="relative flex flex-col gap-6 p-4 border border-gray-200 rounded-2xl  cursor-pointer h-max"
+        className="relative flex flex-col gap-6 p-4 border bg-white border-gray-200 rounded-2xl  cursor-pointer h-max"
       >
         <div className="flex flex-row gap-2 justify-between">
           <div className="flex flex-col justify-between w-max h-[130px] max-w-[50%]">
@@ -51,7 +42,7 @@ function MyPostCard({
                   ? `${formatteCurrency(amount)}`
                   : "Best offer"}
               </div>
-              <span className="text-gray-400 text-xs Fanum">
+              <span className="text-gray-400 text-xs ">
                 {fromNow(createdAt)} in {district}
               </span>
             </div>
@@ -79,21 +70,6 @@ function MyPostCard({
         ) : (
           <div className="flex flex-col gap-3" onClick={handleEdit}>
             <div className="w-full flex flex-row lg:flex-row gap-3">
-              {/* <RWebShare
-                data={{
-                  url: `/v/${slug}`,
-                  title: `${title}`,
-                }}
-              >
-                <Button
-                  variant="outlined"
-                  size="small"
-                  className="!w-full"
-                  startIcon={<Share2Icon className="!stroke-[1px]" size={16} />}
-                >
-                  اشتراک
-                </Button>
-              </RWebShare> */}
               <Button
                 onClick={navigateEditHandle}
                 variant="outlined"
@@ -119,19 +95,6 @@ function MyPostCard({
                 variant="outlined"
                 size="small"
                 className="!w-full"
-                // startIcon={
-                //   special ? (
-                //     <StarOffIcon
-                //       className="!stroke-[1px] text-yellow-600"
-                //       size={18}
-                //     />
-                //   ) : (
-                //     <StarIcon
-                //       className="!stroke-[1px] text-yellow-600"
-                //       size={18}
-                //     />
-                //   )
-                // }
                 type="link"
                 href={`/my-panel/my-post/edit/${slug}`}
               >

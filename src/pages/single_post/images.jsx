@@ -41,7 +41,7 @@ const Images = ({ images }) => {
         ))}
         {images.length > 5 && (
           <div className="relative w-[60px] h-[60px] lg:w-1/6 lg:h-[60px] pb-2/3  rounded-md">
-            <div className="absolute top-0 left-0 right-0 bottom-0 bg-black bg-opacity-45 rounded-md z-10 text-white flex items-center justify-center Fanum">
+            <div className="absolute top-0 left-0 right-0 bottom-0 bg-black bg-opacity-45 rounded-md z-10 text-white flex items-center justify-center ">
               {images.length > 6 && images.length - 6 + "+"}
             </div>
             <img

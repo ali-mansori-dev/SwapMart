@@ -3,48 +3,46 @@ import {
   DialogTitle,
   IconButton,
   Divider,
-  Button,
   Dialog,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { useState } from "react";
 
+import { useResponsive } from "../../../context/ResponsiveContext";
 import { close_all } from "../../../features/layout/layoutSlice";
 import PasswordForm from "./forms/password/";
-import OTPForm from "./forms/otp/";
 import OAuth from "./forms/oauth";
-import { Link } from "react-router-dom";
-// import Supabase from "../../../config/supabase";
 
 const AuthModal = () => {
-  const [authMethod, setAuthMethod] = useState("password"); // password, mobile-login, email-otp,
-  const { isAuthModalOpen } = useSelector((state) => state.layout);
+  const { is_auth_modal_open } = useSelector((state) => state.layout);
   const dispatch = useDispatch();
+  const { isMobile } = useResponsive();
 
   const onClose = () => {
     dispatch(close_all());
   };
 
-  const renderAuthForm = () => {
-    switch (authMethod) {
-      case "otp":
-        return <OTPForm />;
-      case "password":
-        return <PasswordForm />;
-      default:
-        return null;
-    }
-  };
+  // const renderAuthForm = () => {
+  //   switch (authMethod) {
+  //     case "otp":
+  //       return <OTPForm />;
+  //     case "password":
+  //       return <PasswordForm />;
+  //     default:
+  //       return null;
+  //   }
+  // };
 
   return (
     <Dialog
-      //   fullScreen={isMobile}
-      open={isAuthModalOpen}
+      fullScreen={isMobile}
+      open={is_auth_modal_open}
       onClose={onClose}
       keepMounted
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
+      className="select-none"
     >
       <DialogTitle
         id="scroll-dialog-title"
@@ -54,7 +52,7 @@ const AuthModal = () => {
         <IconButton onClick={onClose}>X{/* <X size={16} /> */}</IconButton>
       </DialogTitle>
       <DialogContent className="w-auto lg:!w-[430px] h-[calc(100%-100px)] lg:!max-h-[60vh] !py-6">
-        {renderAuthForm()}
+        <PasswordForm />
         <div className="py-4">
           <Divider>or</Divider>
         </div>
@@ -65,34 +63,6 @@ const AuthModal = () => {
             SignUp
           </Link>
         </div>
-        {/* {authMethod === "otp" && (
-          <>
-            <div className="py-4">
-              <Divider>or</Divider>
-            </div>
-            <div className="flex flex-col gap-4">
-              <Button
-                variant="outlined"
-                onClick={setAuthMethod.bind(this, "password")}
-                fullWidth
-              >
-                Continue with Email
-              </Button>
-              <GoogleAuth /> 
-            </div>
-          </>
-        )} */}
-        {/* {authMethod === "password" && (
-          <div className="flex flex-col gap-4 pt-4">
-            <Button
-              variant="outlined"
-              onClick={setAuthMethod.bind(this, "otp")}
-              fullWidth
-            >
-              Continue with Mobile
-            </Button>
-          </div>
-        )} */}
       </DialogContent>
     </Dialog>
   );

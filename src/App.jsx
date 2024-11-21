@@ -1,27 +1,25 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Suspense } from "react";
 
+import { log_out, log_in } from "./features/auth/authSlice";
+import { useResponsive } from "./context/ResponsiveContext";
 import { LoadingScreenFixed } from "./shared/loader";
+import ScrollToTop from "./components/scroll_to_top";
+import Supabase from "./lib/helper/ClientSupabase";
+import MyBookmark from "./pages/panel/my_saved";
+import AuthModal from "./components/auth/modal";
+import Dashboard from "./pages/panel/dashboard";
+import AuthGuard from "./middleware/AuthGuard";
 import SinglePost from "./pages/single_post";
+import MyNotes from "./pages/panel/my_notes";
+import CreatePost from "./pages/create_post";
+import MySeens from "./pages/panel/my_seens";
+import MyPost from "./pages/panel/my_post";
+import EditPost from "./pages/edit_post";
 import Signup from "./pages/signup";
 import Signin from "./pages/signin";
 import Home from "./pages/home";
-import MyPost from "./pages/panel/my_post";
-import MyBookmark from "./pages/panel/my_saved";
-import MyNotes from "./pages/panel/my_notes";
-import Dashboard from "./pages/panel";
-import CreatePost from "./pages/create_post";
-import MySeens from "./pages/panel/my_seens";
-import EditPost from "./pages/edit_post";
-import AuthGuard from "./middleware/AuthGuard";
-import AuthModal from "./components/auth/modal";
-import { useResponsive } from "./context/ResponsiveContext";
-import Supabase from "./lib/helper/ClientSupabase";
-import { useDispatch } from "react-redux";
-import {
-  log_in,
-  log_out,
-} from "./features/auth/authSlice";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -54,6 +52,7 @@ const App = () => {
   const { isMobile } = useResponsive();
   return (
     <Router>
+      <ScrollToTop />
       <Suspense fallback={<LoadingScreenFixed />}>
         <Routes>
           <Route path="/" element={<Home isMobile={isMobile} />} />

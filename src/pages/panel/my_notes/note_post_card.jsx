@@ -1,40 +1,17 @@
-// import { ImageOffIcon, Info, NotebookPenIcon, TrashIcon } from "lucide-react";
-// import { useMutation } from "@tanstack/react-query";
 import { IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { memo } from "react";
 
-// import { DeleteNoteFn } from "../mutation";
-
-function MyNotePostCard({
-  // onDelete,
-  post,
-}) {
-  console.log(post);
-
-  // const [open, setOpen] = useState(false);
-
-  // const deletePostMutation = useMutation({
-  //   mutationFn: DeleteNoteFn,
-  // });
-  // const handleDelete = async (event) => {
-  //   event.preventDefault();
-  //   if (_id) {
-  //     // await deletePostMutation.mutateAsync(_id);
-  //     onDelete();
-  //   }
-  // };
-  // const handleClose = setOpen.bind(this, false);
+function MyNotePostCard({ post }) {
   const handleOpen = (event) => {
     event.preventDefault();
-    // setOpen(true);
   };
   return (
     <>
       <Link
         to={`/v/${post?.slug}`}
-        className="flex flex-row gap-4 p-3 border border-gray-200 rounded-2xl  cursor-pointer relative h-max"
+        className="flex flex-row gap-4 p-3 border bg-white border-gray-200 rounded-2xl  cursor-pointer relative h-max"
       >
         <div className="relative w-[80px] h-[80px] pb-2/3  rounded-md">
           {post?.images[0] ? (
@@ -59,39 +36,6 @@ function MyNotePostCard({
           </div>
         </div>
       </Link>
-      {/* <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogContent
-          sx={{ justifyContent: "center", gap: "0.5rem", padding: "1rem" }}
-        >
-          <div className="w-[74vw] lg:w-[300px] items-center flex flex-col gap-8">
-            <div className="w-full flex flex-col items-center gap-4">
-              <span className="text-gray-400">
-                <Info size={36} />
-              </span>
-
-              <p className="text-base">از حذف آگهی مطمئن هستید؟</p>
-            </div>
-            <div className="flex flex-row gap-4">
-              <Button
-                onClick={handleClose}
-                variant="contained"
-                color="error"
-                size="small"
-              >
-                نه، لغو
-              </Button>
-              <Button onClick={handleDelete} variant="outlined" size="small">
-                بله من مطمئن هستم
-              </Button>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog> */}
     </>
   );
 }

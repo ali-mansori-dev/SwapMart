@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import chevrow from "../../assets/icon/chevron-down.svg";
 import Supabase from "../../lib/helper/ClientSupabase";
 
-const SideBar = () => {
+const SideBarMobile = () => {
   const navigate = useNavigate();
   const handleSignout = () => {
     Supabase.auth.signOut({ scope: "local" }).then(() => {
@@ -12,7 +12,6 @@ const SideBar = () => {
     });
   };
   const items = [
-    { title: "Dashboard", link: "/my-panel/dashboard" },
     { title: "My Post", link: "/my-panel/my-post" },
     { title: "My Notes", link: "/my-panel/notes" },
     { title: "My Saved", link: "/my-panel/saved" },
@@ -47,4 +46,4 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+export default SideBarMobile;
