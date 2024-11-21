@@ -5,8 +5,8 @@ import { useMutation } from "react-query";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-import AlertComponent from "../../components/alert_component";
-import OAuth from "../../components/auth/modal/forms/oauth";
+import AlertComponent from "../../shared/components/notifications/alert_component";
+import OAuth from "../../shared/components/auth/forms/oauth";
 import Supabase from "../../lib/helper/ClientSupabase";
 import useAlert from "../../hooks/useAlert";
 import { signUpSchema } from "./schemas";

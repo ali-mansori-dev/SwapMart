@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 import download_image from "../../../assets/icon/download-outline.svg";
-import AlertComponent from "../../../components/alert_component";
+import AlertComponent from "../../../shared/components/notifications/alert_component";
 import Supabase from "../../../lib/helper/ClientSupabase";
 import { get_file_extension } from "../../../utils/file";
 import { makeBlob } from "../../../utils/blob";

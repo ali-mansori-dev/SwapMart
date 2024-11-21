@@ -1,8 +1,8 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-import chevrow from "../../assets/icon/chevron-down.svg";
-import Supabase from "../../lib/helper/ClientSupabase";
+import chevrow from "../../../assets/icon/chevron-down.svg";
+import Supabase from "../../../lib/helper/ClientSupabase";
 
 const SideBarMobile = () => {
   const navigate = useNavigate();

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import SingleLayoutMobile from "../../../layouts/mobile/single_layout";
-import SideBar from "../side_bar_mobile";
+import SideBar from "../sidebar/mobile";
 
 const DashboardMobile = ({ user_info }) => {
   return (

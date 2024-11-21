@@ -5,11 +5,11 @@ import { useMutation } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 
 import { signInSchema } from "./schemas";
-import AlertComponent from "../../components/alert_component";
+import AlertComponent from "../../shared/components/notifications/alert_component";
 import useAlert from "../../hooks/useAlert";
 import { useState } from "react";
 import Supabase from "../../lib/helper/ClientSupabase";
-import OAuth from "../../components/auth/modal/forms/oauth";
+import OAuth from "../../shared/components/auth/forms/oauth";
 
 const Form = () => {
   const [alert, setAlertConent] = useAlert();

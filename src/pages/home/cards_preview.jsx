@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
-import PostCardSkeleton from "../../components/post/post_card_skeleton";
-import PostCard from "../../components/post/post_card";
+import PostCardSkeleton from "../../shared/components/post/post_card_skeleton";
+import PostCard from "../../shared/components/post/post_card";
 import EmptyState from "./empty_state";
 
 const CardsPreview = ({ isLoading, data }) => {

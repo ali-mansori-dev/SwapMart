@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
 import PropTypes from "prop-types";
 
-import ButtonNavigation from "./button_navigation";
+import ButtonNavigation from "../../shared/components/layout/button_navigation";
 import Navbar from "../../shared/navbar";
 
 const BasicLayoutMobile = ({ children, searchText, filter = [] }) => {

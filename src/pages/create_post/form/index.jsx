@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 
-import SnackbarComponent from "../../../components/snackbar_component";
+import SnackbarComponent from "../../../shared/components/notifications/snackbar_component";
 import { generateUniqueSlug } from "../../../utils/random";
 import Supabase from "../../../lib/helper/ClientSupabase";
 import useAlert from "../../../hooks/useAlert";

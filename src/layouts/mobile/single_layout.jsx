@@ -31,7 +31,7 @@ const SingleLayoutMobile = ({
         </MainContainer>
       </AppBar>
       <main
-        className={`pt-[56px] ${buttonNavigation !== "off" && `pb-[100px]`} bg-slate-200`}
+        className={`pt-[56px] ${buttonNavigation !== "off" && `pb-[100px]`}`}
       >
         {container === "off" ? (
           children

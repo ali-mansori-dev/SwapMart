@@ -5,10 +5,10 @@ import { Suspense } from "react";
 import { log_out, log_in } from "./features/auth/authSlice";
 import { useResponsive } from "./context/ResponsiveContext";
 import { LoadingScreenFixed } from "./shared/loader";
-import ScrollToTop from "./components/scroll_to_top";
+import ScrollToTop from "./shared/components/layout/scroll_to_top";
 import Supabase from "./lib/helper/ClientSupabase";
 import MyBookmark from "./pages/panel/my_saved";
-import AuthModal from "./components/auth/modal";
+import AuthModal from "./shared/components/auth/modal";
 import Dashboard from "./pages/panel/dashboard";
 import AuthGuard from "./middleware/AuthGuard";
 import SinglePost from "./pages/single_post";
@@ -56,6 +56,7 @@ const App = () => {
       <Suspense fallback={<LoadingScreenFixed />}>
         <Routes>
           <Route path="/" element={<Home isMobile={isMobile} />} />
+          <Route path="/:slug" element={<Home isMobile={isMobile} />} />
           <Route path="/new" element={<CreatePost isMobile={isMobile} />} />
           <Route path="/signup" element={<Signup isMobile={isMobile} />} />
           <Route path="/signin" element={<Signin isMobile={isMobile} />} />

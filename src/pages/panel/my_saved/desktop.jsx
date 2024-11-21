@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import SideBar from "../side_bar";
+import SideBar from "../sidebar/desktop";
 import BasicLayoutDesktop from "../../../layouts/desktop/basic_layout";
+import { CircularProgress } from "@mui/material";
+import My_post_card from "./my_post_card/index";
 
 const MySavedDesktop = ({ data, isLoading }) => {
   return (
