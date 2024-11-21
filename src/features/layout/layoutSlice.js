@@ -15,6 +15,7 @@ export const layoutSlice = createSlice({
       state.is_auth_modal_open = true;
       state.is_category_drop_open = false;
       state.is_user_drop_down_open = false;
+      state.is_search_result_open = false;
     },
     close_all: (state) => {
       state.is_auth_modal_open = false;

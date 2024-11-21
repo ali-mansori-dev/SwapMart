@@ -53,15 +53,14 @@ function MyPostCard({
             {images[0] ? (
               <img
                 className="absolute w-[130px] h-full inset-0 object-cover object-top rounded-xl"
-                src={`${images[0]}`}
+                // src={`${images[0]}`}
+                src={`https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Glossary.svg`}
                 alt={title}
                 loading="lazy"
               />
             ) : (
-              <div className="w-full h-full bg-gray-100 rounded-md flex justify-center items-center text-gray-400">
-              </div>
+              <div className="w-full h-full bg-gray-100 rounded-md flex justify-center items-center text-gray-400"></div>
             )}
-            
           </div>
         </div>
         {isDelete ? (
@@ -79,24 +78,8 @@ function MyPostCard({
               >
                 edit
               </Button>
-              <Button
-                variant="outlined"
-                size="small"
-                className="!w-full"
-              >
+              <Button variant="outlined" size="small" className="!w-full">
                 delete
-              </Button>
-            </div>
-            <div className="w-full flex flex-row lg:flex-row gap-3">
-              <Button
-                variant="outlined"
-                size="small"
-                className="!w-full"
-
-                type="link"
-                href={`/my-panel/my-post/edit/${slug}`}
-              >
-                special
               </Button>
             </div>
           </div>

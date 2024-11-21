@@ -51,13 +51,14 @@ function MyPostCard({
             {images[0] ? (
               <img
                 className="absolute w-[130px] h-full inset-0 object-cover object-top rounded-xl"
-                src={`${images[0]}`}
+                // src={`${images[0]}`}
+                src={`https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Glossary.svg`}
                 alt={title}
                 loading="lazy"
               />
             ) : (
               <div className="w-full h-full bg-gray-100 rounded-md flex justify-center items-center text-gray-400">
-                {/* <ImageOffIcon size={32} /> */}
+
               </div>
             )}
             
@@ -75,16 +76,13 @@ function MyPostCard({
                 variant="outlined"
                 size="small"
                 className="!w-full"
-                // startIcon={<PenLineIcon className="!stroke-[1px]" size={16} />}
               >
                 edit
               </Button>
               <Button
-                // onClick={toggleDeleteModelOpen}
                 variant="outlined"
                 size="small"
                 className="!w-full"
-                // startIcon={<TrashIcon className="!stroke-[1px]" size={16} />}
               >
                 delete
               </Button>
@@ -104,19 +102,6 @@ function MyPostCard({
           </div>
         )}
       </Link>
-      {/* <DeleteModal
-        _id={_id}
-        onDelete={onDelete}
-        open={deleteModelOpen}
-        setOpen={toggleDeleteModelOpen}
-      />
-      <SpecialModal
-        _id={_id}
-        onDelete={onDelete}
-        open={promoteModelOpen}
-        setOpen={togglePromoteModelOpen}
-        special={special}
-      /> */}
     </>
   );
 }

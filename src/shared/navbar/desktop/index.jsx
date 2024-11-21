@@ -11,7 +11,8 @@ import Search from "./search";
 function NavbarDesktop() {
   const dispatch = useDispatch();
   const { is_authed, loading } = useSelector((redux) => redux.auth);
-  
+  const { is_category_drop_open } = useSelector((redux) => redux.layout);
+
   return (
     <Container maxWidth="lg">
       <div className="flex justify-between items-center h-[65px]">
@@ -30,7 +31,7 @@ function NavbarDesktop() {
               />
             </Typography>
           </Link>
-          <Categories />
+          {is_category_drop_open && <Categories />}
           <Search />
         </div>
         {is_authed}

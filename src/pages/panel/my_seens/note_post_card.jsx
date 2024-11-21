@@ -17,7 +17,8 @@ function MyNotePostCard({ title, slug, images }) {
           {images[0] ? (
             <img
               className="absolute w-[80px] h-full inset-0 object-cover object-top rounded-xl"
-              src={`${images[0]}`}
+              // src={`${images[0]}`}
+              src={`https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Glossary.svg`}
               alt={title}
             />
           ) : (

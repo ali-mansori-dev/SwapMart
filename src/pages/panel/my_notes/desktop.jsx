@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import SideBar from "../side_bar";
+import SideBar from "../sidebar/desktop";
 import BasicLayoutDesktop from "../../../layouts/desktop/basic_layout";
+import { CircularProgress } from "@mui/material";
+import My_post_card from "./note_post_card";
 
 const MyNotesDesktop = ({ data, isLoading }) => {
   return (
@@ -14,7 +16,7 @@ const MyNotesDesktop = ({ data, isLoading }) => {
             <CircularProgress color="inherit" />
           ) : (
             data?.map((item, index) => (
-              <My_post_card key={index} post={item.sw_posts} />
+              <My_post_card key={index} post={item?.sw_posts} />
             ))
           )}
         </div>

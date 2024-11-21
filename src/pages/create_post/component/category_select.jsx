@@ -21,7 +21,7 @@ const CategorySelect = ({ setCategory, onClose }) => {
   const { isMobile } = useResponsive();
 
   useEffect(() => {
-    if (selected?.id && !selected?.children) {
+    if (selected?.id && selected?.children.length < 0) {
       onClose();
       setCategory(selected);
     }

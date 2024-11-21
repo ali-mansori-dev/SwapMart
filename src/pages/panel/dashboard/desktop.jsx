@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import SideBar from "../side_bar";
+import SideBar from "../sidebar/desktop";
 import BasicLayoutDesktop from "../../../layouts/desktop/basic_layout";
 
 const DashboardDesktop = ({ user_info }) => {

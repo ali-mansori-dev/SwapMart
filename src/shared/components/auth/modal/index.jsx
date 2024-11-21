@@ -9,10 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import { useResponsive } from "../../../context/ResponsiveContext";
-import { close_all } from "../../../features/layout/layoutSlice";
-import PasswordForm from "./forms/password/";
-import OAuth from "./forms/oauth";
+import { useResponsive } from "../../../../context/ResponsiveContext";
+import { close_all } from "../../../../features/layout/layoutSlice";
+import PasswordForm from "../forms/password/";
+import OAuth from "../forms/oauth";
 
 const AuthModal = () => {
   const { is_auth_modal_open } = useSelector((state) => state.layout);
@@ -22,17 +22,6 @@ const AuthModal = () => {
   const onClose = () => {
     dispatch(close_all());
   };
-
-  // const renderAuthForm = () => {
-  //   switch (authMethod) {
-  //     case "otp":
-  //       return <OTPForm />;
-  //     case "password":
-  //       return <PasswordForm />;
-  //     default:
-  //       return null;
-  //   }
-  // };
 
   return (
     <Dialog

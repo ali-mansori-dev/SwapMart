@@ -10,7 +10,7 @@ import { useMutation } from "react-query";
 // import { signin } from "../../../../../queries/auth";
 import { basicAuthSchema } from "./schemas";
 import Supabase from "../../../../../lib/helper/ClientSupabase";
-import AlertComponent from "../../../../alert_component";
+import AlertComponent from "../../../notifications/alert_component";
 import useAlert from "../../../../../hooks/useAlert";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";

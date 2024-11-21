@@ -4,7 +4,7 @@ import React from "react";
 
 import BasicLayoutDesktop from "../../../layouts/desktop/basic_layout";
 import My_post_card from "./my_post_card";
-import SideBar from "../side_bar";
+import SideBar from "../sidebar/desktop";
 
 const MyPostDesktop = ({ data, isLoading }) => {
   return (
