@@ -67,7 +67,7 @@ const ButtonNavigation = () => {
     <>
       <BottomNavigation
         sx={{ position: "fixed", bottom: 0, left: 0, right: 0, color: "black" }}
-        className="!border-t border-gray-300 "
+        className="!border-t border-gray-300 !h-[64px]"
         elevation={1}
         style={{ color: "black" }}
         value={"/"}
@@ -80,11 +80,11 @@ const ButtonNavigation = () => {
             label={item?.title}
             value={item?.link}
             onClick={item?.onClick}
-            className="!px-0 !w-1/54"
+            className="!py-3"
             icon={
               <img
                 src={item?.icon}
-                className="w-[16px] stroke-teal-900"
+                className="w-[17px] stroke-teal-900"
                 alt={item?.title}
               />
             }
