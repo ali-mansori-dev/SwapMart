@@ -1,6 +1,6 @@
-import { Alert, Button, CircularProgress, Snackbar } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 
@@ -23,8 +23,9 @@ const Form = () => {
   const onSubmit = async (data) => {
     if (!category?.id) return setAlert("error", "category not selected!");
     const hasUnuploadedImages = images.some((image) => !image.uploaded);
-    if (hasUnuploadedImages) return setAlert("error", "upload all images not completed please wait!");
-    
+    if (hasUnuploadedImages)
+      return setAlert("error", "upload all images not completed please wait!");
+
     setLoading(true);
     const post_images = images
       .filter((value) => value.url !== "")
@@ -97,6 +98,7 @@ const Form = () => {
         </Button>
       </div>
       <SnackbarComponent data={alert} />
+      <div className="h-4"></div>
     </form>
   );
 };

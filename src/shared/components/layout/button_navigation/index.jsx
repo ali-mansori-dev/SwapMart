@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import {
   open_auth_modal,
-  open_category_modal,
+  open_category_modal_component,
 } from "../../../../features/layout/layoutSlice";
 import price_icon from "../../../../assets/icon/pricetag-outline.svg";
 import person_icon from "../../../../assets/icon/person-outline.svg";
@@ -15,7 +15,7 @@ import CategoryModal from "../../category/modal";
 
 const ButtonNavigation = () => {
   const { is_authed } = useSelector((redux) => redux.auth);
-  const { is_category_drop_open } = useSelector((redux) => redux.layout);
+  const { is_category_modal_component } = useSelector((redux) => redux.layout);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -26,9 +26,11 @@ const ButtonNavigation = () => {
     dispatch(open_auth_modal());
   };
   const openCategoryModal = () => {
-    dispatch(open_category_modal());
+    dispatch(open_category_modal_component());
   };
-
+  const onCategoryItemClick = (item) => {
+    item?.slug && navigate(`/${item?.slug}`);
+  };
   const items = !is_authed
     ? [
         { title: "Home", icon: home_icon, link: "/" },
@@ -68,7 +70,7 @@ const ButtonNavigation = () => {
         className="!border-t border-gray-300 "
         elevation={1}
         style={{ color: "black" }}
-        value={'/'}
+        value={"/"}
         onChange={handleChange}
         showLabels
       >
@@ -89,7 +91,9 @@ const ButtonNavigation = () => {
           />
         ))}
       </BottomNavigation>
-      {is_category_drop_open && <CategoryModal />}
+      {is_category_modal_component && (
+        <CategoryModal onCategorySelect={onCategoryItemClick} />
+      )}
     </>
   );
 };
