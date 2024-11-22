@@ -1,10 +1,11 @@
 import { Button, TextField } from "@mui/material";
-import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
-import CategorySelect from "../component/category_select";
-import useBoolean from "../../../hooks/useBoolean";
+import CategorySelect from "../../../shared/components/category/modal/index";
 import UploadImages from "../image/upload_image";
+import { open_category_modal_component } from "../../../features/layout/layoutSlice";
 
 const Fildes = ({
   register,
@@ -14,10 +15,25 @@ const Fildes = ({
   category,
   setCategory,
 }) => {
-  const [isVisible, show, hide] = useBoolean(true);
+  const { is_category_modal_component } = useSelector((redux) => redux.layout);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(open_category_modal_component());
+  }, [dispatch]);
+
+  const openCategoryModal = () => {
+    dispatch(open_category_modal_component());
+  };
+
   return (
     <>
-      {isVisible && <CategorySelect setCategory={setCategory} onClose={hide} />}
+      {is_category_modal_component && (
+        <CategorySelect
+          onCategorySelect={setCategory}
+          title="Choose Category"
+        />
+      )}
       <TextField
         label={"Categories"}
         value={category?.name}
@@ -26,7 +42,7 @@ const Fildes = ({
         InputProps={{
           endAdornment: (
             <Button
-              onClick={show}
+              onClick={openCategoryModal}
               variant="contained"
               size="small"
               className="!py-2 !px-5"
@@ -34,6 +50,7 @@ const Fildes = ({
               <span className="w-max">select</span>
             </Button>
           ),
+          readOnly: true,
         }}
       />
       <UploadImages images={images} setImages={setImages} />
