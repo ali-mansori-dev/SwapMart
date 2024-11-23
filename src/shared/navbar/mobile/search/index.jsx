@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 
 import { resetAll } from "../../../../features/layout/layoutSlice";
-import { useEffect, useState } from "react";
 import Supabase from "../../../../lib/helper/ClientSupabase";
 
 const Index = () => {
