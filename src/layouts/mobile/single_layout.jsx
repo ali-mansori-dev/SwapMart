@@ -20,12 +20,16 @@ const SingleLayoutMobile = ({
         className="!bg-white !shadow-none border-b h-[56px] justify-center"
         position="fixed"
       >
-        <MainContainer className={`w-full flex flex-row-reverse justify-between gap-5 py-3 `}>
+        <MainContainer
+          className={`w-full flex flex-row-reverse justify-between gap-5 py-3 `}
+        >
           <div className="flex flex-row-reverse justify-center items-center gap-2 w-3/4">
             <IconButton onClick={navigate.bind(this, -1)}>
-              <img src={chevrow} className="w-4 -rotate-90"/>
+              <img src={chevrow} className="w-4 -rotate-90" />
             </IconButton>
-            <span className="line-clamp-1 w-full text-sm text-right">{title}</span>
+            <span className="line-clamp-1 w-full text-sm text-right">
+              {title}
+            </span>
           </div>
           <div className="text-base font-bold">{navbarActions}</div>
         </MainContainer>
@@ -47,8 +51,8 @@ const SingleLayoutMobile = ({
 SingleLayoutMobile.propTypes = {
   children: PropTypes.node.isRequired,
   title: PropTypes.string,
-  navbarActions: PropTypes.array,
+  navbarActions: PropTypes.node,
   buttonNavigation: PropTypes.array,
-  container: PropTypes.array,
+  container: PropTypes.string,
 };
 export default SingleLayoutMobile;

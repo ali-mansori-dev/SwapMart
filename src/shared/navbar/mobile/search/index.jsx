@@ -1,27 +1,35 @@
-import { Dialog, DialogTitle, IconButton, TextField } from "@mui/material";
+import {
+  CircularProgress,
+  Dialog,
+  DialogTitle,
+  IconButton,
+  TextField,
+} from "@mui/material";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useQuery } from "react-query";
 
 import { resetAll } from "../../../../features/layout/layoutSlice";
 import { useEffect, useState } from "react";
 import Supabase from "../../../../lib/helper/ClientSupabase";
-import { Link } from "react-router-dom";
 
 const Index = () => {
   const dispatch = useDispatch();
   const [text, setText] = useState("");
-  const [data, setData] = useState({});
+
+  const { data, isLoading } = useQuery(
+    ["search_data", text],
+    async () =>
+      await Supabase.rpc("search_categories", {
+        search_term: text,
+      })
+  );
 
   const onClose = () => {
     dispatch(resetAll());
   };
-  useEffect(() => {
-    (async function () {
-      const { data: result_data } = await Supabase.rpc("search_categories", {
-        search_term: text,
-      });
-      setData(result_data);
-    })();
-  }, [text]);
+
   const onChangeText = (e) => {
     setText(e.target.value);
   };
@@ -51,8 +59,12 @@ const Index = () => {
           X
         </IconButton>
       </DialogTitle>
-      {data?.length ? (
-        data?.map((value, index) => (
+      {isLoading ? (
+        <div className="w-screen h-screen inline-flex justify-center items-center">
+          <CircularProgress size="30px" color="inherit" />
+        </div>
+      ) : data?.data?.length ? (
+        data?.data?.map((value, index) => (
           <Link
             className="flex flex-col gap-2 p-4 hover:bg-gray-100 w-full border-b"
             to={`/${value.slug}`}
@@ -60,7 +72,6 @@ const Index = () => {
             key={index}
           >
             <span className="text-gray-800 text-sm">{value.name}</span>
-
           </Link>
         ))
       ) : (

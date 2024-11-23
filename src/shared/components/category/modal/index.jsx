@@ -49,7 +49,7 @@ const Index = ({ onCategorySelect, title, all_item }) => {
         id="scroll-dialog-title"
         className="flex justify-between items-center gap-2 border-b border-gray-300 py-4"
       >
-        <h1 className="text-base text-gray-800">{title}</h1>
+        <div className="text-base  text-gray-800">{title}</div>
         <IconButton size="small" onClick={onClose}>
           X
         </IconButton>

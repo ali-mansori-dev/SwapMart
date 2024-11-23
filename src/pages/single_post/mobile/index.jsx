@@ -60,6 +60,6 @@ Mobile.propTypes = {
   data: PropTypes.any,
   isLoading: PropTypes.bool,
   onSaveBtnClick: PropTypes.any,
-  isBookmark: PropTypes.bool,
+  isBookmark: PropTypes.any,
 };
 export default Mobile;

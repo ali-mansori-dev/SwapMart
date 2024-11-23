@@ -37,7 +37,7 @@ const AuthModal = () => {
         id="scroll-dialog-title"
         className="flex flex-row justify-between items-center gap-1 border-b border-gray-300 !py-2"
       >
-        <h1 className="text-base  text-gray-800">Login to Account</h1>
+        <div className="text-base  text-gray-800">Login to Account</div>
         <IconButton onClick={onClose}>X{/* <X size={16} /> */}</IconButton>
       </DialogTitle>
       <DialogContent className="w-auto lg:!w-[430px] h-[calc(100%-100px)] lg:!max-h-[60vh] !py-6">

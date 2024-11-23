@@ -26,9 +26,9 @@ function MyNotePostCard({ post }) {
           )}
         </div>{" "}
         <div className="flex flex-col justify-between h-full w-[calc(100%-80px)] ">
-          <h1 className="text-gray-700 text-sm h-max font-semibold w-full leading-7 line-clamp-1">
+          <div className="text-gray-700 text-sm h-max font-semibold w-full leading-7 line-clamp-1">
             {post?.title}
-          </h1>
+          </div>
           <div className="flex flex-row items-center gap-1 text-gray-500 text-xs pt-8">
             {/* <p className="line-clamp-1">{body}</p> */}
           </div>

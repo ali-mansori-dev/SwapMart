@@ -33,9 +33,9 @@ function MyPostCard({
       >
         <div className="flex flex-row gap-2 justify-between">
           <div className="flex flex-col justify-between w-max h-[130px] max-w-[50%]">
-            <h1 className="text-gray-700 text-sm font-semibold w-full leading-7 line-clamp-1">
+            <div className="text-gray-700 text-sm font-semibold w-full leading-7 line-clamp-1">
               {title}
-            </h1>
+            </div>
             <div className="flex flex-col gap-1">
               <div className="text-gray-400 text-xs py-1">
                 {amount && amount > 0

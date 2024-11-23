@@ -19,9 +19,9 @@ function PostCard({ title, images = [], slug, amount, created_at }) {
     >
       {/* Post Details */}
       <div className="flex flex-col justify-between w-max h-full max-w-[50%]">
-        <h1 className="text-gray-700 text-sm max-h-[70px] font-semibold w-full leading-5 line-clamp-2">
+        <div className="text-gray-700 text-sm max-h-[70px]  font-semibold w-full leading-5 line-clamp-2 ">
           {title}
-        </h1>
+        </div>
         <div className="flex flex-col">
           <div className="text-gray-400 text-xs py-1">
             {amount && amount > 0 ? formatteCurrency(amount) : "Best Offer"}
