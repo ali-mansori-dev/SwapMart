@@ -8,7 +8,7 @@ import { makeBlob } from "../../../utils/blob";
 import useAlert from "../../../hooks/useAlert";
 import Image from "./preview_image";
 
-const UploadImages = ({ images, setImages, uploadImageFn: noname }) => {
+const UploadImages = ({ images, setImages }) => {
   const [alert, setAlert] = useAlert();
 
   async function handleChange(e) {
