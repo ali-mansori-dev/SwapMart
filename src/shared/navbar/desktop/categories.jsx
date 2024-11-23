@@ -6,10 +6,7 @@ import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetch_category_data } from "../../../queries/category";
-import {
-  close_all,
-  open_category_modal,
-} from "../../../features/layout/layoutSlice";
+import { resetAll, openLayout } from "../../../features/layout/layoutSlice";
 
 const Categories = () => {
   const { is_category_drop_open } = useSelector((state) => state.layout);
@@ -17,10 +14,10 @@ const Categories = () => {
   const dispatch = useDispatch();
 
   const openDropDown = () => {
-    dispatch(open_category_modal());
+    dispatch(openLayout("is_category_drop_open"));
   };
   const closeDropDown = () => {
-    dispatch(close_all());
+    dispatch(resetAll());
   };
 
   const { data, isLoading } = useQuery("catgories_data", fetch_category_data);

@@ -2,7 +2,7 @@ import { TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { open_search_result } from "../../../features/layout/layoutSlice";
+import { openLayout } from "../../../features/layout/layoutSlice";
 import Supabase from "../../../lib/helper/ClientSupabase";
 import SearchResult from "./search_result";
 
@@ -11,7 +11,7 @@ const Search = () => {
   const [data, setData] = useState({});
   const dispatch = useDispatch();
   const openResultHandle = () => {
-    dispatch(open_search_result());
+    dispatch(openLayout("is_search_result_open"));
   };
   useEffect(() => {
     (async function () {

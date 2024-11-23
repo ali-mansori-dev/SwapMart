@@ -1,25 +1,27 @@
 import PropTypes from "prop-types";
-
 import CategoryItem from "./category_item";
 
 const RightSide = ({ category, onCategorySelect, all_item }) => {
+  const renderCategoryItems = () => {
+    return (category?.children || []).map((item) => (
+      <CategoryItem
+        key={item.id}
+        item={item}
+        onCategorySelect={onCategorySelect}
+      />
+    ));
+  };
+
   return (
     <div className="flex flex-col w-3/4">
       {all_item && category?.name && (
         <CategoryItem
-          item={{ name: `All ${category?.name}`, slug: category?.slug }}
+          item={{ name: `All ${category.name}`, slug: category.slug }}
           onCategorySelect={onCategorySelect}
         />
       )}
-      {category?.children && category?.children[0] ? (
-        category?.children?.map((item, index) => (
-          <CategoryItem
-            key={index}
-            item={item}
-            onCategorySelect={onCategorySelect}
-          />
-        ))
-      ) : (
+      {renderCategoryItems()}
+      {(!category?.children || category?.children.length === 0) && (
         <CategoryItem
           item={{
             name: category?.name,
@@ -32,9 +34,24 @@ const RightSide = ({ category, onCategorySelect, all_item }) => {
     </div>
   );
 };
+
+// PropTypes Validation
 RightSide.propTypes = {
-  category: PropTypes.any,
-  onCategorySelect: PropTypes.any,
+  category: PropTypes.shape({
+    name: PropTypes.string,
+    slug: PropTypes.string,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    children: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+          .isRequired,
+        name: PropTypes.string.isRequired,
+        slug: PropTypes.string,
+      })
+    ),
+  }),
+  onCategorySelect: PropTypes.func.isRequired,
   all_item: PropTypes.bool,
 };
+
 export default RightSide;

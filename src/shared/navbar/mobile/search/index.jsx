@@ -10,7 +10,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 
-import { close_all } from "../../../../features/layout/layoutSlice";
+import { resetAll } from "../../../../features/layout/layoutSlice";
+import { useEffect, useState } from "react";
 import Supabase from "../../../../lib/helper/ClientSupabase";
 
 const Index = () => {
@@ -26,7 +27,7 @@ const Index = () => {
   );
 
   const onClose = () => {
-    dispatch(close_all());
+    dispatch(resetAll());
   };
 
   const onChangeText = (e) => {

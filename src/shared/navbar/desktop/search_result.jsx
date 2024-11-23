@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 // import Spinner from "../../../../../shared/components/spiner";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { close_all } from "../../../features/layout/layoutSlice";
+import { resetAll } from "../../../features/layout/layoutSlice";
 
 const SearchResult = ({ data }) => {
   const dispatch = useDispatch();
   const { is_search_result_open } = useSelector((redux) => redux.layout);
-  const onClose = () => dispatch(close_all());
+  const onClose = () => dispatch(resetAll());
   return (
     is_search_result_open && (
       <>

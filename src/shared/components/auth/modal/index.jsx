@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { useResponsive } from "../../../../context/ResponsiveContext";
-import { close_all } from "../../../../features/layout/layoutSlice";
+import { resetAll } from "../../../../features/layout/layoutSlice";
 import PasswordForm from "../forms/password/";
 import OAuth from "../forms/oauth";
 
@@ -20,7 +20,7 @@ const AuthModal = () => {
   const { isMobile } = useResponsive();
 
   const onClose = () => {
-    dispatch(close_all());
+    dispatch(resetAll());
   };
 
   return (

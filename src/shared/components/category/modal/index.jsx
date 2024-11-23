@@ -9,37 +9,36 @@ import { useDispatch } from "react-redux";
 import { useQuery } from "react-query";
 
 import { useResponsive } from "../../../../context/ResponsiveContext";
-import { close_all } from "../../../../features/layout/layoutSlice";
+import { resetAll } from "../../../../features/layout/layoutSlice";
 import { fetch_category_data } from "../../../../queries/category";
 
 import SideItem from "./side_item";
 import PropTypes from "prop-types";
 import RightSide from "./right_side";
 
-const Index = ({
-  onCategorySelect = (e) => {
-    return e;
-  },
-  title = "Categories",
-  all_item = false,
-}) => {
+const Index = ({ onCategorySelect, title, all_item }) => {
   const dispatch = useDispatch();
   const { isMobile } = useResponsive();
-  const [category, setCategory] = useState();
+  const [category, setCategory] = useState(null);
 
-  const { data, isLoading } = useQuery("catgories_data", fetch_category_data);
+  // Fetch categories
+  const { data, isLoading, error } = useQuery("categories_data", fetch_category_data);
 
+  // Set initial category
   useEffect(() => {
-    data && data.length > 0 && setCategory(data[0]);
+    if (data?.length > 0) {
+      setCategory(data[0]);
+    }
   }, [data]);
 
   const onClose = () => {
-    dispatch(close_all());
+    dispatch(resetAll());
   };
+
   return (
     <Dialog
       fullScreen={isMobile}
-      open={true}
+      open
       onClose={onClose}
       keepMounted
       aria-labelledby="alert-dialog-title"
@@ -48,30 +47,37 @@ const Index = ({
     >
       <DialogTitle
         id="scroll-dialog-title"
-        className="flex flex-row justify-between items-center gap-1 border-b border-gray-300 !py-4"
+        className="flex justify-between items-center gap-2 border-b border-gray-300 py-4"
       >
         <div className="text-base  text-gray-800">{title}</div>
         <IconButton size="small" onClick={onClose}>
           X
         </IconButton>
       </DialogTitle>
+
       {isLoading ? (
-        <div className="w-screen h-screen inline-flex justify-center items-center">
+        <div className="w-screen h-screen flex justify-center items-center">
           <CircularProgress size="30px" color="inherit" />
         </div>
+      ) : error ? (
+        <div className="w-screen h-screen flex justify-center items-center">
+          <p className="text-red-500">Failed to load categories.</p>
+        </div>
       ) : (
-        <div className="w-screen h-screen flex flex-row">
+        <div className="w-screen h-screen flex">
+          {/* Left Sidebar */}
           <div className="w-1/4 border-r border-gray-300">
-            {data &&
-              data?.map((item, index) => (
-                <SideItem
-                  key={index}
-                  item={item}
-                  setCategory={setCategory}
-                  isActive={category?.id && category?.id === item?.id}
-                />
-              ))}
+            {data.map((item) => (
+              <SideItem
+                key={item.id}
+                item={item}
+                setCategory={setCategory}
+                isActive={category?.id === item?.id}
+              />
+            ))}
           </div>
+
+          {/* Right Side Content */}
           <RightSide
             category={category}
             onCategorySelect={onCategorySelect}
@@ -82,9 +88,19 @@ const Index = ({
     </Dialog>
   );
 };
+
+// Default Props
+Index.defaultProps = {
+  onCategorySelect: () => {},
+  title: "Categories",
+  all_item: false,
+};
+
+// PropTypes Validation
 Index.propTypes = {
-  onCategorySelect: PropTypes.any,
+  onCategorySelect: PropTypes.func,
   title: PropTypes.string,
   all_item: PropTypes.bool,
 };
+
 export default Index;

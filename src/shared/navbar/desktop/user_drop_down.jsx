@@ -3,11 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import PropTypes from "prop-types";
 
-import {
-  open_user_dropdown,
-  open_auth_modal,
-  close_all,
-} from "../../../features/layout/layoutSlice";
+import { openLayout, resetAll } from "../../../features/layout/layoutSlice";
 import ChevrowDown from "../../../assets/icon/chevron-down.svg";
 import { log_out } from "../../../features/auth/authSlice";
 import Supabase from "../../../lib/helper/ClientSupabase";
@@ -32,7 +28,7 @@ const DropItemComponent = ({
     >
       {link && link !== "" ? (
         <Link
-          onClick={() => dispatch(close_all())}
+          onClick={() => dispatch(resetAll())}
           className=" w-full flex flex-col justify-start gap-1 px-3 py-3"
           to={link}
         >
@@ -61,14 +57,15 @@ const UserDropDown = () => {
   const { is_authed, user_info } = useSelector((redux) => redux.auth);
   const dispatch = useDispatch();
   const toggle = () => {
-    if (!is_user_drop_down_open) return dispatch(open_user_dropdown());
-    dispatch(close_all());
+    if (!is_user_drop_down_open)
+      return dispatch(openLayout("is_user_drop_down_open"));
+    dispatch(resetAll());
   };
 
   const handleLogout = () => {
     Supabase.auth.signOut({ scope: "local" });
     dispatch(log_out());
-    dispatch(close_all());
+    dispatch(resetAll());
   };
 
   const authDropDownItems = [
@@ -107,7 +104,7 @@ const UserDropDown = () => {
             size="small"
             className={`${is_user_drop_down_open && `!bg-gray-100`}`}
             variant="text"
-            onClick={() => dispatch(open_auth_modal())}
+            onClick={() => dispatch(openLayout("is_auth_modal_open"))}
           >
             Sign in
           </Button>

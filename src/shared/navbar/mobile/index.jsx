@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { open_search_result } from "../../../features/layout/layoutSlice";
+import { openLayout, resetAll } from "../../../features/layout/layoutSlice";
 import location_icon from "../../../assets/icon/location-outline.svg";
 import chevron from "../../../assets/icon/chevron-down.svg";
 import Search from "./search/index";
@@ -9,9 +9,9 @@ const NavbarMobile = () => {
   const dispatch = useDispatch();
   const { is_search_result_open } = useSelector((redux) => redux.layout);
   const onSeachClick = () => {
-    dispatch(open_search_result());
+    dispatch(openLayout("is_search_result_open"));
   };
-  
+
   return (
     <>
       <div className="w-full h-full px-4 py-2 inline-flex flex-col gap-3">
