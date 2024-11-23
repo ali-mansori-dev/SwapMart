@@ -46,25 +46,6 @@ const Mobile = ({ data, isLoading, onSaveBtnClick, isBookmark }) => {
                 <span className="text-gray-400 text-sm  mb-3">
                   {fromNow(data?.created_at)}
                 </span>
-
-                {/* {data?.isDelete ? (
-                  <Alert icon={<></>} severity="error">
-                    آگهی حذف شده است
-                  </Alert>
-                ) : (
-                  <div className="w-full flex justify-between">
-                    <div className="flex flex-row gap-3 ">
-                      <Button
-                        size="medium"
-                        variant="contained"
-                      >
-                        Contact Info
-                      </Button>
-                    </div>
-                    <div className="flex flex-row gap-3 "></div>
-                  </div>
-                )} */}
-                {/* <hr className="w-full" /> */}
               </div>
             </div>
           </MainContainer>
@@ -79,6 +60,6 @@ Mobile.propTypes = {
   data: PropTypes.any,
   isLoading: PropTypes.bool,
   onSaveBtnClick: PropTypes.any,
-  isBookmark: PropTypes.bool,
+  isBookmark: PropTypes.any,
 };
 export default Mobile;
