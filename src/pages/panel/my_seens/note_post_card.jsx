@@ -26,9 +26,9 @@ function MyNotePostCard({ title, slug, images }) {
           )}
         </div>{" "}
         <div className="flex flex-col justify-between h-full w-[calc(100%-80px)] ">
-          <h1 className="text-gray-700 text-sm h-max font-semibold w-full leading-7 line-clamp-1">
+          <div className="text-gray-700 text-sm h-max font-semibold w-full leading-7 line-clamp-1">
             {title}
-          </h1>
+          </div>
           <div className="flex flex-row items-center gap-1 text-gray-500 text-xs pt-8"></div>
           <div className=" absolute bottom-2 left-2" onClick={handleOpen}>
             <IconButton size="medium"></IconButton>

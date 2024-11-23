@@ -1,5 +1,3 @@
-import React from "react";
-
 import BasicLayoutDesktop from "../../../layouts/desktop/basic_layout";
 import Form from "../form";
 

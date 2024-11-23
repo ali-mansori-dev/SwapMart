@@ -12,9 +12,9 @@ function PostCard({ title, images, slug, amount, created_at }) {
       className="flex p-4 border border-gray-200 justify-between rounded-xl gap-2 cursor-pointer w-full"
     >
       <div className="flex flex-col justify-between w-max h-full max-w-[50%]">
-        <h1 className="text-gray-700 text-sm max-h-[70px]  font-semibold w-full leading-5 line-clamp-2 ">
+        <div className="text-gray-700 text-sm max-h-[70px]  font-semibold w-full leading-5 line-clamp-2 ">
           {title}
-        </h1>
+        </div>
         <div className="flex flex-col">
           <div className="text-gray-400 text-xs py-1">
             {amount && amount > 0 ? formatteCurrency(amount) : "Best Offer"}
@@ -58,7 +58,7 @@ function PostCard({ title, images, slug, amount, created_at }) {
 }
 PostCard.propTypes = {
   title: PropTypes.string,
-  images: PropTypes.string,
+  images: PropTypes.array,
   district: PropTypes.number,
   slug: PropTypes.string,
   amount: PropTypes.number,

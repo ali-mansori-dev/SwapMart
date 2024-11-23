@@ -1,7 +1,6 @@
 import { Button, TextField } from "@mui/material";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 
 import CategorySelect from "../../../shared/components/category/modal/index";
 import UploadImages from "../image/upload_image";
@@ -18,9 +17,6 @@ const Fildes = ({
   const { is_category_modal_component } = useSelector((redux) => redux.layout);
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(open_category_modal_component());
-  }, [dispatch]);
 
   const openCategoryModal = () => {
     dispatch(open_category_modal_component());
