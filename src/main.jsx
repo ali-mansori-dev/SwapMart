@@ -10,7 +10,13 @@ import store from "./app/store.js";
 import App from "./App.jsx";
 import { ResponsiveProvider } from "./context/ResponsiveContext.jsx";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false, // Disable refetch globally
+    },
+  },
+});
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

@@ -16,7 +16,6 @@ import MyNotes from "./pages/panel/my_notes";
 import CreatePost from "./pages/create_post";
 import MySeens from "./pages/panel/my_seens";
 import MyPost from "./pages/panel/my_post";
-import EditPost from "./pages/edit_post";
 import Signup from "./pages/signup";
 import Signin from "./pages/signin";
 import Home from "./pages/home";
@@ -88,12 +87,6 @@ const App = () => {
               path="recent"
               element={
                 <AuthGuard component={<MySeens isMobile={isMobile} />} />
-              }
-            />
-            <Route
-              path="my-post/edit/:slug"
-              element={
-                <AuthGuard component={<EditPost isMobile={isMobile} />} />
               }
             />
           </Route>

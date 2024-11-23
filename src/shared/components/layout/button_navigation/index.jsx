@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import {
-  open_auth_modal,
-  open_category_modal_component,
+  openLayout,
+  resetAll,
 } from "../../../../features/layout/layoutSlice";
 import price_icon from "../../../../assets/icon/pricetag-outline.svg";
 import person_icon from "../../../../assets/icon/person-outline.svg";
@@ -19,78 +19,84 @@ const ButtonNavigation = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleChange = (event, newValue) => {
-    navigate(newValue);
-  };
-  const openLoginModal = () => {
-    dispatch(open_auth_modal());
-  };
-  const openCategoryModal = () => {
-    dispatch(open_category_modal_component());
-  };
+  // Handlers
+  const handleChange = (event, newValue) => navigate(newValue);
+  const openLoginModal = () => dispatch(openLayout("is_auth_modal_open"));
+  const openCategoryModal = () => dispatch(openLayout("is_category_modal_component"));
   const onCategoryItemClick = (item) => {
-    item?.slug && navigate(`/${item?.slug}`);
+    if (item?.slug) navigate(`/${item.slug}`);
   };
-  const items = !is_authed
-    ? [
-        { title: "Home", icon: home_icon, link: "/" },
-        {
-          title: "Categories",
-          icon: grid_icon,
-          link: "#",
-          onClick: openCategoryModal,
-        },
-        {
-          title: "Login",
-          icon: login_icon,
-          link: "#",
-          onClick: openLoginModal,
-        },
-      ]
-    : [
-        { title: "Home", icon: home_icon, link: "/" },
-        {
-          title: "Categories",
-          icon: grid_icon,
-          link: "#",
-          onClick: openCategoryModal,
-        },
-        { title: "Sell", icon: price_icon, link: "/new" },
-        {
-          title: "Profile",
-          icon: person_icon,
-          link: "/my-panel/dashboard",
-        },
-      ];
+
+  // Generate navigation items dynamically
+  const getNavigationItems = () =>
+    is_authed
+      ? [
+          { title: "Home", icon: home_icon, link: "/" },
+          {
+            title: "Categories",
+            icon: grid_icon,
+            link: "#",
+            onClick: openCategoryModal,
+          },
+          { title: "Sell", icon: price_icon, link: "/new" },
+          {
+            title: "Profile",
+            icon: person_icon,
+            link: "/my-panel/dashboard",
+          },
+        ]
+      : [
+          { title: "Home", icon: home_icon, link: "/" },
+          {
+            title: "Categories",
+            icon: grid_icon,
+            link: "#",
+            onClick: openCategoryModal,
+          },
+          {
+            title: "Login",
+            icon: login_icon,
+            link: "#",
+            onClick: openLoginModal,
+          },
+        ];
+
+  // Navigation items
+  const items = getNavigationItems();
 
   return (
     <>
+      {/* Bottom Navigation */}
       <BottomNavigation
-        sx={{ position: "fixed", bottom: 0, left: 0, right: 0, color: "black" }}
-        className="!border-t border-gray-300 !h-[64px]"
-        elevation={1}
-        style={{ color: "black" }}
-        value={"/"}
+        sx={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          borderTop: "1px solid #e0e0e0",
+          height: 64,
+          bgcolor: "white",
+        }}
+        value="/"
         onChange={handleChange}
         showLabels
       >
-        {items?.map((item, index) => (
+        {items.map((item, index) => (
           <BottomNavigationAction
             key={index}
-            label={item?.title}
-            value={item?.link}
-            onClick={item?.onClick}
-            className="!py-3"
-            icon={
-              <img
-                src={item?.icon}
-                className="w-[17px] stroke-teal-900"
-                alt={item?.title}
-              />
-            }
+            label={item.title}
+            value={item.link}
+            onClick={item.onClick || (() => navigate(item.link))}
+            sx={{
+              py: 1,
+              "& img": { width: 17, color: "teal" },
+            }}
+            icon={<img src={item.icon} alt={item.title} />}
           />
         ))}
       </BottomNavigation>
+
+      {/* Category Modal */}
       {is_category_modal_component && (
         <CategoryModal onCategorySelect={onCategoryItemClick} all_item />
       )}

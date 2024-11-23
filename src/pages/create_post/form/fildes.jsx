@@ -1,11 +1,10 @@
 import { Button, TextField } from "@mui/material";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 
 import CategorySelect from "../../../shared/components/category/modal/index";
 import UploadImages from "../image/upload_image";
-import { open_category_modal_component } from "../../../features/layout/layoutSlice";
+import { openLayout } from "../../../features/layout/layoutSlice";
 
 const Fildes = ({
   register,
@@ -18,13 +17,10 @@ const Fildes = ({
   const { is_category_modal_component } = useSelector((redux) => redux.layout);
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(open_category_modal_component());
-  }, [dispatch]);
 
-  const openCategoryModal = () => {
-    dispatch(open_category_modal_component());
-  };
+  // Open category modal handler
+  const openCategoryModal = () =>
+    dispatch(openLayout("is_category_modal_component"));
 
   return (
     <>
@@ -34,9 +30,10 @@ const Fildes = ({
           title="Choose Category"
         />
       )}
+      {/* Category Selection Field */}
       <TextField
-        label={"Categories"}
-        value={category?.name}
+        label="Category"
+        value={category?.name || ""}
         focused
         className="!text-sm"
         InputProps={{
@@ -47,45 +44,61 @@ const Fildes = ({
               size="small"
               className="!py-2 !px-5"
             >
-              <span className="w-max">select</span>
+              Select
             </Button>
           ),
           readOnly: true,
         }}
+        inputProps={{
+          tabIndex: -1, // Prevent focus on the field
+        }}
       />
+
+      {/* Image Upload Field */}
       <UploadImages images={images} setImages={setImages} />
+
+      {/* Title Field */}
       <TextField
-        label={"Title"}
+        label="Title"
         placeholder="Post Title"
         {...register("title")}
         autoComplete="off"
-        errorMessage={errors?.title?.message}
+        error={!!errors?.title}
+        helperText={errors?.title?.message}
       />
+
+      {/* Price Field */}
       <TextField
-        label={"Price"}
+        label="Price"
         placeholder="Post Price"
         {...register("amount")}
         autoComplete="off"
-        errorMessage={errors?.amount?.message}
+        error={!!errors?.amount}
+        helperText={errors?.amount?.message}
       />
+
+      {/* Description Field */}
       <TextField
-        label={"Description"}
+        label="Description"
         placeholder="Post Description"
         {...register("content")}
         autoComplete="off"
-        errorMessage={errors?.content?.message}
         multiline
         rows={4}
+        error={!!errors?.content}
+        helperText={errors?.content?.message}
       />
     </>
   );
 };
+
 Fildes.propTypes = {
-  register: PropTypes.any,
-  errors: PropTypes.any,
-  images: PropTypes.any,
-  setImages: PropTypes.any,
-  category: PropTypes.any,
-  setCategory: PropTypes.any,
+  register: PropTypes.func.isRequired,
+  errors: PropTypes.object,
+  images: PropTypes.array.isRequired,
+  setImages: PropTypes.func.isRequired,
+  category: PropTypes.object,
+  setCategory: PropTypes.func.isRequired,
 };
+
 export default Fildes;

@@ -1,79 +1,67 @@
 import PropTypes from "prop-types";
 import BasicLayoutDesktop from "../../../layouts/desktop/basic_layout";
 import { LoadingScreenFixed } from "../../../shared/loader";
-// import PostBreadcrumbs from "../post_breadcrumbs";
 import { formatteCurrency } from "../../../utils/formatNumber";
 import { fromNow } from "../../../utils/dateFormat";
 import { Alert, Button } from "@mui/material";
 import Images from "../images";
-import { useEffect } from "react";
-import Supabase from "../../../lib/helper/ClientSupabase";
 
 const Desktop = ({ data, isLoading }) => {
-  useEffect(() => {
-    (async function () {
-      const { error } = await Supabase.auth.resend({
-        type: "signup",
-        email: "alimansi1382@gmail.com",
-        options: {
-          emailRedirectTo: "https://example.com/welcome",
-        },
-      });
-      console.log(error);
-    })();
-  }, []);
+  // Render loading state
+  if (isLoading) {
+    return (
+      <BasicLayoutDesktop>
+        <LoadingScreenFixed />
+      </BasicLayoutDesktop>
+    );
+  }
+
+  // Main content
   return (
     <BasicLayoutDesktop>
-      {!isLoading ? (
-        <div className="w-full flex-col flex justify-between gap-6 px-28 py-4">
-          {/* <PostBreadcrumbs
-            bread_crumb={data?.bread_crumb}
-            title={data?.data?.title}
-          /> */}
-          <div className="w-full flex justify-between gap-10">
-            <div className="flex flex-col gap-4 w-1/2">
-              <h5 className="text-xl text-gray-900 leading-10">
-                {data?.title}
-              </h5>
-              <div className=" text-sm lg:text-md w-2/3 text-left text-gray-600 ">
-                {data?.amount && data?.amount > 0
-                  ? formatteCurrency(data?.amount)
-                  : "Best Offer"}
-              </div>
-              <span className="text-gray-400 text-xs  mb-3">
-                {fromNow(data?.updatedAt)} in {data?.district}
-              </span>
-              {data?.isDelete ? (
-                <Alert icon={<></>} severity="error">
-                  آگهی حذف شده است
-                </Alert>
-              ) : (
-                <div className="w-full flex justify-between">
-                  <div className="flex flex-row gap-3 ">
-                    <Button
-                      size="medium"
-                      variant="contained"
-                      //   disabled={showPhone}
-                      //   onClick={setShowPhone.bind(this, true)}
-                    >
-                      Contact Info
-                    </Button>
-                  </div>
-                  <div className="flex flex-row gap-3 "></div>
-                </div>
-              )}
-              <hr className="w-full" />
+      <div className="w-full flex flex-col justify-between gap-6 px-28 py-4">
+        <div className="w-full flex justify-between gap-10">
+          {/* Left Section: Details */}
+          <div className="flex flex-col gap-4 w-1/2">
+            <h5 className="text-2xl text-gray-900 leading-10">{data?.title}</h5>
+            <div className="text-lg font-bold w-2/3 text-left text-gray-600">
+              {data?.amount && data?.amount > 0
+                ? formatteCurrency(data.amount)
+                : "Best Offer"}
             </div>
-            <div className="flex flex-col gap-6 w-1/2">
-              {data?.images[0] && <Images images={data?.images} />}
-            </div>
+            <span className="text-gray-400 text-base mb-3">
+              {fromNow(data?.created_at)}
+            </span>
+
+            {data?.is_delete ? (
+              <Alert icon={null} severity="error">
+                This Post Deleted
+              </Alert>
+            ) : (
+              <></>
+            )}
+          </div>
+
+          {/* Right Section: Images */}
+          <div className="flex flex-col gap-6 w-1/2">
+            {data?.images?.length > 0 && <Images images={data.images} />}
           </div>
         </div>
-      ) : (
-        <LoadingScreenFixed />
-      )}
+      </div>
     </BasicLayoutDesktop>
   );
 };
-Desktop.propTypes = { data: PropTypes.any, isLoading: PropTypes.bool };
+
+// PropTypes for strict type checking
+Desktop.propTypes = {
+  data: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    amount: PropTypes.number,
+    images: PropTypes.arrayOf(PropTypes.string),
+    is_delete: PropTypes.bool,
+    created_at: PropTypes.string.isRequired,
+  }).isRequired,
+  isLoading: PropTypes.bool.isRequired,
+};
+
 export default Desktop;

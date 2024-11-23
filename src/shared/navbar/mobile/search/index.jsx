@@ -1,7 +1,7 @@
 import { Dialog, DialogTitle, IconButton, TextField } from "@mui/material";
 import { useDispatch } from "react-redux";
 
-import { close_all } from "../../../../features/layout/layoutSlice";
+import { resetAll } from "../../../../features/layout/layoutSlice";
 import { useEffect, useState } from "react";
 import Supabase from "../../../../lib/helper/ClientSupabase";
 import { Link } from "react-router-dom";
@@ -12,7 +12,7 @@ const Index = () => {
   const [data, setData] = useState({});
 
   const onClose = () => {
-    dispatch(close_all());
+    dispatch(resetAll());
   };
   useEffect(() => {
     (async function () {
@@ -60,11 +60,7 @@ const Index = () => {
             key={index}
           >
             <span className="text-gray-800 text-sm">{value.name}</span>
-            {/* {value.parent && (
-                    <span className="text-gray-400 text-xs">
-                      در {value.parent.name}
-                    </span>
-                  )} */}
+
           </Link>
         ))
       ) : (

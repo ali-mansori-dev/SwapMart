@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
 import PropTypes from "prop-types";
-import { open_auth_modal } from "../features/layout/layoutSlice";
+import { openLayout } from "../features/layout/layoutSlice";
 import DotLoader from "../shared/loader/dot_loader";
 
 const AuthGuard = ({ component }) => {
@@ -13,7 +13,7 @@ const AuthGuard = ({ component }) => {
   useEffect(() => {
     if (!loading && !is_authed && !success) {
       setAuth(false);
-      // dispatch(open_auth_modal());
+      // dispatch(openLayout("is_auth_modal_open"));
     }
     if (!loading && is_authed) setAuth(true);
   }, [loading, is_authed, success, dispatch]);
@@ -31,7 +31,7 @@ const AuthGuard = ({ component }) => {
           You Must be Login
           <Button
             variant="contained"
-            onClick={() => dispatch(open_auth_modal())}
+            onClick={() => dispatch(openLayout("is_auth_modal_open"))}
           >
             Login
           </Button>

@@ -2,7 +2,7 @@ import { Typography, Button, Container, Skeleton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { open_auth_modal } from "../../../features/layout/layoutSlice";
+import { openLayout } from "../../../features/layout/layoutSlice";
 import UserDropDown from "./user_drop_down";
 import Logo from "../../../assets/Logo.svg";
 import Categories from "./categories";

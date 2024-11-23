@@ -17,10 +17,15 @@ const SinglePost = ({ isMobile }) => {
   const { isFetching, data } = useQuery(
     ["post_data", slug],
     () => FindPostbySlugFn(slug),
-    { keepPreviousData: false }
+    {
+      keepPreviousData: false,
+      staleTime: 5 * 60 * 1000, // Cache data for 5 minutes
+      retry: 2, // Retry fetching data up to 2 times on failure
+      refetchOnWindowFocus: false, // Prevent refetching on tab/window focus
+    }
   );
 
-  //viewed quer
+  //viewed query
   useEffect(() => {
     (async function () {
       if (is_authed && data?.id && user_info?.id) {

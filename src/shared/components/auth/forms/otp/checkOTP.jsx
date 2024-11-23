@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import PropTypes from "prop-types";
 
-import { close_all } from "../../../../../features/layout/layoutSlice";
+import { resetAll } from "../../../../../features/layout/layoutSlice";
 import { log_in } from "../../../../../features/auth/authSlice";
 import { checkotp } from "../../../../../queries/auth";
 import { checkOtpSchema } from "./schemas";
@@ -49,7 +49,7 @@ const CheckOTP = ({ mobile, expireCode }) => {
             userToken: result?.token,
           })
         );
-        dispatch(close_all());
+        dispatch(resetAll());
       })
       .catch((error) => {
         setLoading(false);

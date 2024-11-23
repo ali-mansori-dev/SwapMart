@@ -5,7 +5,7 @@ import { useMutation } from "react-query";
 // import { useDispatch } from "react-redux";
 // import { Link } from "react-router-dom";
 
-// import { close_all } from "../../../../../features/layout/layoutSlice";
+// import { resetAll } from "../../../../../features/layout/layoutSlice";
 // import { log_in } from "../../../../../features/auth/authSlice";
 // import { signin } from "../../../../../queries/auth";
 import { basicAuthSchema } from "./schemas";
