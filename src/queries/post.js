@@ -1,6 +1,27 @@
 import Supabase from "../lib/helper/ClientSupabase";
 
-export const fetchData = async () => {
+export const fetchAllPostData = async (slug) => {
+  if (slug) {
+    const { data: data2 } = await Supabase.rpc(
+      "get_category_and_children_json",
+      {
+        category_slug: slug,
+      }
+    );
+    const ids = await data2.map((value) => {
+      return value.id;
+    });
+
+    const { data, error } = await Supabase.from("sw_posts")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .in("category", ids);
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
   const { data, error } = await Supabase.from("sw_posts")
     .select("*")
     .order("created_at", { ascending: false });
@@ -22,20 +43,4 @@ export const FindPostbySlugFn = async (slug) => {
   } catch (error) {
     console.error(error);
   }
-};
-export const fetchMyPost = async () => {
-  // const response = await authorizedAxios.get(`${API_USER_URL}/my-post`);
-  // return response.data;
-};
-export const fetchMyBookmark = async () => {
-  // const response = await authorizedAxios.get(`${API_USER_URL}/my-saved`);
-  // return response.data;
-};
-export const fetchMyNotes = async () => {
-  // const response = await authorizedAxios.get(`${API_USER_URL}/my-note`);
-  // return response.data;
-};
-export const fetchMySeens = async () => {
-  // const response = await authorizedAxios.get(`${API_USER_URL}/my-seen`);
-  // return response.data;
 };

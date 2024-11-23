@@ -11,15 +11,17 @@ import { useQuery } from "react-query";
 import { useResponsive } from "../../../../context/ResponsiveContext";
 import { close_all } from "../../../../features/layout/layoutSlice";
 import { fetch_category_data } from "../../../../queries/category";
-import CategoryItem from "./category_item";
+
 import SideItem from "./side_item";
 import PropTypes from "prop-types";
+import RightSide from "./right_side";
 
 const Index = ({
   onCategorySelect = (e) => {
     return e;
   },
-  title='Categories',
+  title = "Categories",
+  all_item = false,
 }) => {
   const dispatch = useDispatch();
   const { isMobile } = useResponsive();
@@ -70,25 +72,19 @@ const Index = ({
                 />
               ))}
           </div>
-          <div className="flex flex-col w-3/4">
-            {category?.children && (
-              <>
-                {category?.children &&
-                  category?.children[0] &&
-                  category?.children?.map((item, index) => (
-                    <CategoryItem
-                      key={index}
-                      item={item}
-                      onCategorySelect={onCategorySelect}
-                    />
-                  ))}
-              </>
-            )}
-          </div>
+          <RightSide
+            category={category}
+            onCategorySelect={onCategorySelect}
+            all_item={all_item}
+          />
         </div>
       )}
     </Dialog>
   );
 };
-Index.propTypes = { onCategorySelect: PropTypes.any, title: PropTypes.string };
+Index.propTypes = {
+  onCategorySelect: PropTypes.any,
+  title: PropTypes.string,
+  all_item: PropTypes.bool,
+};
 export default Index;

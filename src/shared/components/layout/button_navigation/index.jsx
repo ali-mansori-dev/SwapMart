@@ -92,7 +92,7 @@ const ButtonNavigation = () => {
         ))}
       </BottomNavigation>
       {is_category_modal_component && (
-        <CategoryModal onCategorySelect={onCategoryItemClick} />
+        <CategoryModal onCategorySelect={onCategoryItemClick} all_item />
       )}
     </>
   );
