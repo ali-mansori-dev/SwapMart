@@ -5,7 +5,7 @@ import { memo } from "react";
 import { formatteCurrency } from "../../../utils/formatNumber";
 import { fromNow } from "../../../utils/dateFormat";
 
-function PostCard({ title, images, district, slug, amount, created_at }) {
+function PostCard({ title, images, slug, amount, created_at }) {
   return (
     <Link
       to={`/v/${slug}`}
@@ -29,8 +29,12 @@ function PostCard({ title, images, district, slug, amount, created_at }) {
           <>
             <img
               className="absolute w-[110px] h-full inset-0 object-cover object-top rounded-lg"
-              // src={`${images[0]}`}
-              // srcSet={`${images[0]}`}
+              // src={`${
+              //   import.meta.env.VITE_SUPABASE_URL
+              // }/storage/v1/object/images/${images[0]}`}
+              // srcSet={`${
+              //   import.meta.env.VITE_SUPABASE_URL
+              // }/storage/v1/object/images/${images[0]}`}
               src={`https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Glossary.svg`}
               alt={title}
               loading="lazy"

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 
 import PropTypes from "prop-types";
@@ -11,7 +10,12 @@ const Images = ({ images }) => {
         {images[0] ? (
           <img
             className="absolute w-full h-full inset-0 object-cover object-top lg:rounded-md"
-            src={`${images[imageIndex]}`}
+            src={`${
+              import.meta.env.VITE_SUPABASE_URL
+            }/storage/v1/object/images/${images[imageIndex]}`}
+            srcSet={`${
+              import.meta.env.VITE_SUPABASE_URL
+            }/storage/v1/object/images/${images[imageIndex]}`}
             alt="metal post thumbnail"
             loading="lazy"
           />
@@ -33,7 +37,12 @@ const Images = ({ images }) => {
             )}
             <img
               className="absolute w-full h-full inset-0 object-cover object-top rounded-md z-0"
-              src={`${image}`}
+              src={`${
+                import.meta.env.VITE_SUPABASE_URL
+              }/storage/v1/object/images/${image}`}
+              srcSet={`${
+                import.meta.env.VITE_SUPABASE_URL
+              }/storage/v1/object/images/${image}`}
               alt="metal post thumbnail"
               loading="lazy"
             />

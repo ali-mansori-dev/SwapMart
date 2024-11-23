@@ -30,9 +30,7 @@ const UploadImages = ({ images, setImages, uploadImageFn: noname }) => {
 
         //file name
         const fileName = `${Date.now()}.${ext}`;
-        const url = `${
-          import.meta.env.VITE_SUPABASE_URL
-        }/storage/v1/object/images/${fileName}`;
+        const url = fileName;
 
         const blob = makeBlob(file);
         setImages([
