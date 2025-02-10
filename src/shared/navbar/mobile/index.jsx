@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { openLayout, resetAll } from "../../../features/layout/layoutSlice";
+import { openLayout } from "../../../features/layout/layoutSlice";
 import location_icon from "../../../assets/icon/location-outline.svg";
 import chevron from "../../../assets/icon/chevron-down.svg";
 import Search from "./search/index";
@@ -22,9 +22,9 @@ const NavbarMobile = () => {
           Search on <span className="text-primary-30">SwapMart</span>
         </div>
         <div className="w-full inline-flex gap-1 justify-center rounded-lg items-center text-sm text-gray-600 cursor-pointer ">
-          <img src={location_icon} className="w-[16px] h-[16px]" />
+          <img src={location_icon} className="w-[16px] h-[16px]" alt="select_location" />
           <span className="w-full line-clamp-1">London, England</span>
-          <img src={chevron} className="w-[16px] h-[16px] -rotate-90" />
+          <img src={chevron} className="w-[16px] h-[16px] -rotate-90" alt="select" />
         </div>
       </div>
       {is_search_result_open && <Search />}

@@ -6,10 +6,12 @@ import { formatteCurrency } from "../../../utils/formatNumber";
 import { fromNow } from "../../../utils/dateFormat";
 
 function PostCard({ title, images = [], slug, amount, created_at }) {
+  console.log({ title, images, slug, amount, created_at });
+  
   const imageUrl = images[0]
-    ? `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/images/${
-        images[0]
-      }`
+    ? `${
+        import.meta.env.VITE_SUPABASE_URL
+      }/storage/v1/object/public/images/SwapMart/${images[0]}`
     : "https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Glossary.svg";
 
   return (
@@ -23,10 +25,10 @@ function PostCard({ title, images = [], slug, amount, created_at }) {
           {title}
         </div>
         <div className="flex flex-col">
-          <div className="text-gray-400 text-xs py-1">
+          <div className="text-gray-500 text-xs py-1">
             {amount && amount > 0 ? formatteCurrency(amount) : "Best Offer"}
           </div>
-          <div className="text-gray-400 text-xs">
+          <div className="text-gray-500 text-xs">
             <span>{fromNow(created_at)}</span>
           </div>
         </div>
@@ -37,12 +39,12 @@ function PostCard({ title, images = [], slug, amount, created_at }) {
         <img
           className="absolute w-full h-full inset-0 object-cover object-top rounded-lg"
           src={imageUrl}
-          alt={title || "Placeholder"}
+          alt={title || "place-holder"}
           loading="lazy"
-          onError={(e) => {
-            e.target.src =
-              "https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Glossary.svg";
-          }}
+          // onError={(e) => {
+          //   e.target.src =
+          //     "https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Glossary.svg";
+          // }}
         />
       </div>
     </Link>

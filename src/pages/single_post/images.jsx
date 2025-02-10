@@ -11,10 +11,10 @@ const Images = ({ images }) => {
             className="absolute w-full h-full inset-0 object-cover object-top lg:rounded-md"
             src={`${
               import.meta.env.VITE_SUPABASE_URL
-            }/storage/v1/object/images/${images[imageIndex]}`}
+            }/storage/v1/object/images/SwapMart/${images[imageIndex]}`}
             srcSet={`${
               import.meta.env.VITE_SUPABASE_URL
-            }/storage/v1/object/images/${images[imageIndex]}`}
+            }/storage/v1/object/images/SwapMart/${images[imageIndex]}`}
             alt="metal post thumbnail"
             loading="lazy"
           />
@@ -38,10 +38,10 @@ const Images = ({ images }) => {
               className="absolute w-full h-full inset-0 object-cover object-top rounded-md z-0"
               src={`${
                 import.meta.env.VITE_SUPABASE_URL
-              }/storage/v1/object/images/${image}`}
+              }/storage/v1/object/images/SwapMart/${image}`}
               srcSet={`${
                 import.meta.env.VITE_SUPABASE_URL
-              }/storage/v1/object/images/${image}`}
+              }/storage/v1/object/images/SwapMart/${image}`}
               alt="metal post thumbnail"
               loading="lazy"
             />
