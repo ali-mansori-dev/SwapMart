@@ -21,7 +21,8 @@ export const fetchAllPostData = async (slug) => {
     // Query posts, optionally filtered by category IDs
     const query = Supabase.from("sw_posts")
       .select("*")
-      .order("created_at", { ascending: false });
+      .order("created_at", { ascending: false })
+      .range(0, 8);
 
     if (ids.length) {
       query.in("category", ids);
@@ -50,7 +51,9 @@ export const FindPostbySlugFn = async (slug) => {
       .single(); // Fetches a single row, assuming `slug` is unique
 
     if (error) {
-      throw new Error(`Error fetching post by slug "${slug}": ${error.message}`);
+      throw new Error(
+        `Error fetching post by slug "${slug}": ${error.message}`
+      );
     }
 
     return data;
@@ -59,4 +62,3 @@ export const FindPostbySlugFn = async (slug) => {
     throw error; // Rethrow the error for the caller to handle if needed
   }
 };
-

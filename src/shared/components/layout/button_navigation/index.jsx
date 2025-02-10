@@ -2,10 +2,7 @@ import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import {
-  openLayout,
-  resetAll,
-} from "../../../../features/layout/layoutSlice";
+import { openLayout } from "../../../../features/layout/layoutSlice";
 import price_icon from "../../../../assets/icon/pricetag-outline.svg";
 import person_icon from "../../../../assets/icon/person-outline.svg";
 import home_icon from "../../../../assets/icon/home-outline.svg";
@@ -22,7 +19,8 @@ const ButtonNavigation = () => {
   // Handlers
   const handleChange = (event, newValue) => navigate(newValue);
   const openLoginModal = () => dispatch(openLayout("is_auth_modal_open"));
-  const openCategoryModal = () => dispatch(openLayout("is_category_modal_component"));
+  const openCategoryModal = () =>
+    dispatch(openLayout("is_category_modal_component"));
   const onCategoryItemClick = (item) => {
     if (item?.slug) navigate(`/${item.slug}`);
   };
@@ -91,7 +89,7 @@ const ButtonNavigation = () => {
               py: 1,
               "& img": { width: 17, color: "teal" },
             }}
-            icon={<img src={item.icon} alt={item.title} />}
+            icon={<img src={item.icon} alt={item?.title?.toLocaleLowerCase()||'buttom'} />}
           />
         ))}
       </BottomNavigation>

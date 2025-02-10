@@ -1,0 +1,52 @@
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+import "./styles.css";
+
+import { EffectFade, Navigation, Pagination } from "swiper/modules";
+
+export default function Slider() {
+  return (
+    <div className="mb-8 lg:h-[400px] select-none">
+      <Swiper
+        spaceBetween={30}
+        effect={"fade"}
+        navigation={true}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[EffectFade, Navigation, Pagination]}
+        className="mySwiper"
+      >
+        <SwiperSlide>
+          <img
+            loading="eager"
+            src="https://fwpdokjfwfokcqrgoanf.supabase.co/storage/v1/object/public/images/SwapMart/Slides/slide1.webp"
+          />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img
+            loading="eager"
+            src="https://fwpdokjfwfokcqrgoanf.supabase.co/storage/v1/object/public/images/SwapMart/Slides/slide2.webp"
+          />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img
+            loading="eager"
+            src="https://fwpdokjfwfokcqrgoanf.supabase.co/storage/v1/object/public/images/SwapMart/Slides/slide3.webp"
+          />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img
+            loading="eager"
+            src="https://fwpdokjfwfokcqrgoanf.supabase.co/storage/v1/object/public/images/SwapMart/Slides/slide4.webp"
+          />
+        </SwiperSlide>
+      </Swiper>
+    </div>
+  );
+}
