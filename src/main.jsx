@@ -3,12 +3,13 @@ import { createRoot } from "react-dom/client";
 import { CssBaseline } from "@mui/material";
 import { Provider } from "react-redux";
 import { StrictMode } from "react";
-import "./index.css";
 
+import "./index.css";
 import MuiContext from "./context/MuiContext.jsx";
 import store from "./app/store.js";
 import App from "./App.jsx";
 import { ResponsiveProvider } from "./context/ResponsiveContext.jsx";
+import { LoadingScreenFixed } from "./shared/loader";
 
 const queryClient = new QueryClient({
   defaultOptions: {

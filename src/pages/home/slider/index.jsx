@@ -21,6 +21,7 @@ export default function Slider() {
         }}
         modules={[EffectFade, Navigation, Pagination]}
         className="mySwiper"
+        autoplay
       >
         <SwiperSlide>
           <img

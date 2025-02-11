@@ -13,6 +13,7 @@ import { useResponsive } from "../../../../context/ResponsiveContext";
 import { resetAll } from "../../../../features/layout/layoutSlice";
 import PasswordForm from "../forms/password/";
 import OAuth from "../forms/oauth";
+import close from '../../../../assets/icon/close-outline.svg'
 
 const AuthModal = () => {
   const { is_auth_modal_open } = useSelector((state) => state.layout);
@@ -38,9 +39,9 @@ const AuthModal = () => {
         className="flex flex-row justify-between items-center gap-1 border-b border-gray-300 !py-2"
       >
         <div className="text-base  text-gray-800">Login to Account</div>
-        <IconButton onClick={onClose}>X{/* <X size={16} /> */}</IconButton>
+        <IconButton onClick={onClose}><img className="w-6" src={close}/></IconButton>
       </DialogTitle>
-      <DialogContent className="w-auto lg:!w-[430px] h-[calc(100%-100px)] lg:!max-h-[60vh] !py-6">
+      <DialogContent className="w-auto lg:!w-[430px] h-[calc(100%-100px)] lg:!max-h-[90vh] !py-6">
         <PasswordForm />
         <div className="py-4">
           <Divider>or</Divider>

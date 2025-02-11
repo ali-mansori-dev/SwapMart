@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import PropTypes from "prop-types";
 
-import { openLayout, resetAll } from "../../../features/layout/layoutSlice";
 import ChevrowDown from "../../../assets/icon/chevron-down.svg";
+import person from "../../../assets/icon/person-outline.svg";
+import cart from "../../../assets/icon/cart-outline.svg";
+import { openLayout, resetAll } from "../../../features/layout/layoutSlice";
 import { log_out } from "../../../features/auth/authSlice";
 import Supabase from "../../../lib/helper/ClientSupabase";
 
@@ -77,12 +79,12 @@ const UserDropDown = () => {
 
   return (
     <div>
-      <div className="relative">
+      <div className="relative flex flex-row gap-3">
         {is_authed ? (
           <Button
             size="small"
             className={`${is_user_drop_down_open && `!bg-gray-100`} !px-4`}
-            variant="text"
+            variant="outlined"
             onClick={toggle}
             endIcon={
               <span className="flex ">
@@ -102,9 +104,10 @@ const UserDropDown = () => {
         ) : (
           <Button
             size="small"
-            className={`${is_user_drop_down_open && `!bg-gray-100`}`}
-            variant="text"
+            className={`${is_user_drop_down_open && `!bg-gray-100`} !px-4 !text-sm`}
+            variant="outlined"
             onClick={() => dispatch(openLayout("is_auth_modal_open"))}
+            startIcon={<img src={person} className="w-[20px]"/>}
           >
             Sign in
           </Button>
@@ -130,6 +133,13 @@ const UserDropDown = () => {
             />
           </ul>
         )}
+        <Button
+          size="small"
+          className={`${is_user_drop_down_open && `!bg-gray-100`}`}
+          variant="outlined"
+        >
+          <img src={cart} className="w-[24px]" />
+        </Button>
       </div>
     </div>
   );

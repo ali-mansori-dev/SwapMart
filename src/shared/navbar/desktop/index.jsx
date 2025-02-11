@@ -16,7 +16,7 @@ function NavbarDesktop() {
   return (
     <Container maxWidth="lg">
       <div className="flex justify-between items-center h-[65px]">
-        <div className="flex flex-row gap-10 items-center">
+        <div className="flex flex-row gap-16 items-center">
           <Link to={`/`}>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               <img
@@ -31,22 +31,10 @@ function NavbarDesktop() {
               />
             </Typography>
           </Link>
-          {is_category_drop_open && <Categories />}
           <Search />
         </div>
         {is_authed}
         <div className="flex flex-row gap-3 items-center">
-          {loading ? (
-            <Skeleton width={100} height={50} />
-          ) : (
-            is_authed && (
-              <Link to={"/new"}>
-                <Button variant="contained" size="small">
-                  sell
-                </Button>
-              </Link>
-            )
-          )}
           {loading ? <Skeleton width={100} height={50} /> : <UserDropDown />}
         </div>
       </div>

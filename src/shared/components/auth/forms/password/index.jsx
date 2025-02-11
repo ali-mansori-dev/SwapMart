@@ -2,12 +2,6 @@ import { Button, CircularProgress, TextField } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-// import { useDispatch } from "react-redux";
-// import { Link } from "react-router-dom";
-
-// import { resetAll } from "../../../../../features/layout/layoutSlice";
-// import { log_in } from "../../../../../features/auth/authSlice";
-// import { signin } from "../../../../../queries/auth";
 import { basicAuthSchema } from "./schemas";
 import Supabase from "../../../../../lib/helper/ClientSupabase";
 import AlertComponent from "../../../notifications/alert_component";
@@ -68,7 +62,7 @@ const PasswordForm = () => {
           </span>
         </div>
 
-        <AlertComponent data={alert} />
+        {/* <AlertComponent data={alert} /> */}
         <Button variant="contained" type="submit" fullWidth>
           {loading ? (
             <CircularProgress size="30px" color="inherit" />

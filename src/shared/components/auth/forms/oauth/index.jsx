@@ -3,10 +3,16 @@ import Supabase from "../../../../../lib/helper/ClientSupabase";
 
 const OAuth = () => {
   const handleGoogle = async () => {
-    await Supabase.auth.signInWithOAuth({ provider: "google" });
+    await Supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: "https://swap-mart.vercel.app/" },
+    });
   };
   const handleGithub = async () => {
-    await Supabase.auth.signInWithOAuth({ provider: "google" });
+    await Supabase.auth.signInWithOAuth({
+      provider: "github",
+      options: { redirectTo: "https://swap-mart.vercel.app/" },
+    });
   };
   return (
     <div className="w-full flex flex-col gap-4">
