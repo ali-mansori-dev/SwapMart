@@ -7,7 +7,7 @@ import "swiper/css/pagination";
 
 import "./styles.css";
 
-import { EffectFade, Navigation, Pagination } from "swiper/modules";
+import { EffectFade, Navigation, Pagination, Autoplay } from "swiper/modules";
 
 export default function Slider() {
   return (
@@ -19,7 +19,7 @@ export default function Slider() {
         pagination={{
           clickable: true,
         }}
-        modules={[EffectFade, Navigation, Pagination]}
+        modules={[EffectFade, Navigation, Pagination, Autoplay]}
         className="mySwiper"
         autoplay
       >
