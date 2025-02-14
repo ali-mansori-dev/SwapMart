@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Supabase from "../../lib/helper/ClientSupabase";
+import Supabase from "../lib/helper/ClientSupabase";
 
 export function useChildCategories(parentSlug) {
   const [data, setData] = useState(null);

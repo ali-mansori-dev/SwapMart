@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
-import PostCardSkeleton from "../../shared/components/post/post_card_skeleton";
-import PostCard from "../../shared/components/post/post_card";
+import PostCardSkeleton from "../../shared/components/product/product_card_skeleton";
+import PostCard from "../../shared/components/product/product_card";
 import EmptyState from "./empty_state";
 import React from "react";
 import { CircularProgress } from "@mui/material";

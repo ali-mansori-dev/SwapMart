@@ -5,10 +5,10 @@ import PropTypes from "prop-types";
 
 import ChevrowDown from "../../../assets/icon/chevron-down.svg";
 import person from "../../../assets/icon/person-outline.svg";
-import cart from "../../../assets/icon/cart-outline.svg";
 import { openLayout, resetAll } from "../../../features/layout/layoutSlice";
 import { log_out } from "../../../features/auth/authSlice";
 import Supabase from "../../../lib/helper/ClientSupabase";
+import CartDialog from "./cart_dialog";
 
 const DropItemComponent = ({
   title,
@@ -87,19 +87,12 @@ const UserDropDown = () => {
             variant="outlined"
             onClick={toggle}
             endIcon={
-              <span className="flex ">
+              <span className="flex">
                 <img className="w-4 h-4" src={ChevrowDown} alt="chevrow-down" />
               </span>
             }
           >
-            <img
-              src={user_info?.user_metadata?.avatar_url}
-              onError={(e) =>
-                (e.target.src = `https://fwpdokjfwfokcqrgoanf.supabase.co/storage/v1/object/public/images/person-circle-outline.svg`)
-              }
-              className="w-8 h-8 rounded-full border border-gray-300"
-              alt="avatar_pictures"
-            />
+            <img src={person} className="w-[20px]"/>
           </Button>
         ) : (
           <Button
@@ -114,7 +107,7 @@ const UserDropDown = () => {
         )}
         {is_user_drop_down_open && (
           <ul
-            className="absolute bg-white border border-gray-300 rounded-md w-[170px] mt-1 overflow-hidden shadow"
+            className="absolute top-[100%] bg-white border border-gray-300 rounded-md w-[170px] mt-1 overflow-hidden shadow"
             onBlur={toggle}
           >
             <DropItemComponent
@@ -133,13 +126,7 @@ const UserDropDown = () => {
             />
           </ul>
         )}
-        <Button
-          size="small"
-          className={`${is_user_drop_down_open && `!bg-gray-100`}`}
-          variant="outlined"
-        >
-          <img src={cart} className="w-[24px]" />
-        </Button>
+        <CartDialog/>
       </div>
     </div>
   );

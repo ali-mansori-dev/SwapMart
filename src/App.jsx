@@ -9,7 +9,7 @@ import MyBookmark from "./pages/panel/my_saved";
 import AuthModal from "./shared/components/auth/modal";
 import Dashboard from "./pages/panel/dashboard";
 import AuthGuard from "./middleware/AuthGuard";
-import SinglePost from "./pages/single_post";
+import SingleProducts from "./pages/product";
 import MyNotes from "./pages/panel/my_notes";
 import CreatePost from "./pages/create_post";
 import MySeens from "./pages/panel/my_seens";
@@ -18,6 +18,12 @@ import Signup from "./pages/signup";
 import Signin from "./pages/signin";
 import Home from "./pages/home";
 import Category from "./pages/category";
+import FilterPage from "./pages/filter";
+import CartPage from "./pages/cart";
+import PaymentSuccess from "./pages/success";
+import NotFound from "./pages/notfound/index";
+import LoadingModal from "./shared/components/modal/loading";
+import PaymentFailure from "./pages/failure";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -51,15 +57,18 @@ const App = () => {
   return (
     <Router>
       <ScrollToTop />
-
+      {/* <LoadingModal/> */}
       <Routes>
         <Route path="/" element={<Home isMobile={isMobile} />} />
-        <Route path="/:slug" element={<Home isMobile={isMobile} />} />
+        <Route path="/cart" element={<CartPage isMobile={isMobile} />} />
+        <Route path="/success" element={<PaymentSuccess isMobile={isMobile} />} />
+        <Route path="/failure" element={<PaymentFailure isMobile={isMobile} />} />
         <Route path="/category/:slug" element={<Category isMobile={isMobile} />} />
+        <Route path="/filter/:slug" element={<FilterPage isMobile={isMobile} />} />
         <Route path="/new" element={<CreatePost isMobile={isMobile} />} />
         <Route path="/signup" element={<Signup isMobile={isMobile} />} />
         <Route path="/signin" element={<Signin isMobile={isMobile} />} />
-        <Route path="/v/:slug" element={<SinglePost isMobile={isMobile} />} />
+        <Route path="/v/:id" element={<SingleProducts isMobile={isMobile} />} />
         <Route path="/my-panel">
           <Route
             path="dashboard"
@@ -86,6 +95,7 @@ const App = () => {
             element={<AuthGuard component={<MySeens isMobile={isMobile} />} />}
           />
         </Route>
+        <Route path="*" element={<NotFound isMobile={isMobile} />} />
       </Routes>
       <AuthModal />
     </Router>

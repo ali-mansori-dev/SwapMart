@@ -38,27 +38,32 @@ export const fetchAllPostData = async (slug) => {
   }
 };
 
-export const FindPostbySlugFn = async (slug) => {
-  if (!slug) {
-    console.error("Error: Slug is required to fetch a post.");
+export const FindPostbyIdFn = async (id) => {
+  if (!id) {
+    console.error("Error: id is required to fetch a post.");
     return null;
   }
 
   try {
-    const { data, error } = await Supabase.from("sw_posts")
+    const { data, error } = await Supabase.from("sw_products")
       .select("*")
-      .eq("slug", slug)
-      .single(); // Fetches a single row, assuming `slug` is unique
+      .eq("id", id)
+      .single(); // Fetches a single row, assuming `id` is unique
 
     if (error) {
-      throw new Error(
-        `Error fetching post by slug "${slug}": ${error.message}`
-      );
+      throw new Error(`Error fetching post by slug "${id}": ${error.message}`);
     }
 
-    return data;
+    const { data: brand_data, error: brand_error } = await Supabase.from(
+      "sw_brands"
+    )
+      .select("*")
+      .eq("slug", data?.brand_slug)
+      .single();
+
+    return { ...data, brand: brand_data };
   } catch (error) {
     console.error("FindPostbySlugFn Error:", error.message);
-    throw error; // Rethrow the error for the caller to handle if needed
+    throw error;
   }
 };

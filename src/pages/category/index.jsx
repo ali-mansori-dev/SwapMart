@@ -2,10 +2,10 @@ import PropTypes from "prop-types";
 import React from "react";
 import Mobile from "./mobile";
 import Desktop from "./desktop";
-import { useChildCategories } from "./useChildCategories";
 import { useParams } from "react-router-dom";
+import { useChildCategories } from "../../hooks/useChildCategories";
 
-const FilterPage = ({ isMobile }) => {
+const CategoryPage = ({ isMobile }) => {
   const { slug } = useParams();
 
   const { data, loading, error } = useChildCategories(slug);
@@ -16,7 +16,7 @@ const FilterPage = ({ isMobile }) => {
     <Desktop data={data} loading={loading} error={error} />
   );
 };
-FilterPage.propTypes = {
+CategoryPage.propTypes = {
   isMobile: PropTypes.bool.isRequired,
 };
-export default FilterPage;
+export default CategoryPage;

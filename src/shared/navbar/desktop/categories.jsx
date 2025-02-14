@@ -47,7 +47,7 @@ const Categories = () => {
               <CircularProgress size="30px" color="inherit" />
             ) : (
               <>
-                <div className="w-1/4 flex flex-col gap-2 border-r pr-3">
+                <div className="w-1/4 flex flex-col gap-2 border-r ps-3">
                   {data?.map((value, index) => (
                     <Link
                       key={index}

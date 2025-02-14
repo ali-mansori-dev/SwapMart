@@ -1,17 +1,13 @@
-import { Typography, Button, Container, Skeleton } from "@mui/material";
+import { Typography, Container, Skeleton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { openLayout } from "../../../features/layout/layoutSlice";
 import UserDropDown from "./user_drop_down";
 import Logo from "../../../assets/Logo.svg";
-import Categories from "./categories";
 import Search from "./search";
 
 function NavbarDesktop() {
-  const dispatch = useDispatch();
   const { is_authed, loading } = useSelector((redux) => redux.auth);
-  const { is_category_drop_open } = useSelector((redux) => redux.layout);
 
   return (
     <Container maxWidth="lg">

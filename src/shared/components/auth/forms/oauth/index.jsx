@@ -5,13 +5,13 @@ const OAuth = () => {
   const handleGoogle = async () => {
     await Supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: "https://swap-mart.vercel.app/" },
+      options: { redirectTo: "http://localhost:3000/" },
     });
   };
   const handleGithub = async () => {
     await Supabase.auth.signInWithOAuth({
       provider: "github",
-      options: { redirectTo: "https://swap-mart.vercel.app/" },
+      options: { redirectTo: "http://localhost:3000/" },
     });
   };
   return (

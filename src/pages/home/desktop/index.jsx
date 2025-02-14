@@ -1,12 +1,10 @@
 import PropTypes from "prop-types";
 
 import BasicLayoutDesktop from "../../../layouts/desktop/basic_layout";
-import CardsPreview from "../cards_preview";
 import Slider from "../slider";
 import CategorySection from "../category";
-import Footer from "../../../shared/footer";
-import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import Brands from "../brands";
 
 const Desktop = ({ data, isLoading, lastItemRef, hasNextPage }) => {
   return (
@@ -34,11 +32,11 @@ const Desktop = ({ data, isLoading, lastItemRef, hasNextPage }) => {
             Have your new set installed locally by our network of experts.
           </span>
         </div>
-        <Link className="text-primary-60 font-bold bg-white rounded-full px-5 py-2">
+        <Link className="text-primary-60 font-bold bg-white rounded-full px-5 py-3">
           Show Top Brands
         </Link>
       </div>
-      <div className="w-full bg-slate-200 mb-10 rounded-lg h-[300px]"></div>
+      <Brands />
     </BasicLayoutDesktop>
   );
 };

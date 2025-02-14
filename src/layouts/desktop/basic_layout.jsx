@@ -25,7 +25,7 @@ const BasicLayoutDesktop = ({ children, searchText, filter = [] }) => {
             ))}
           </div>
         )}
-        <Container maxWidth="lg" className="">{children}</Container>
+        <Container maxWidth="lg" className="pb-8">{children}</Container>
       </main>
       <Footer />
     </>

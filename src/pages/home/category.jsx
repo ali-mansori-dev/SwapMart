@@ -21,8 +21,8 @@ const CategorySection = () => {
     <div className="flex flex-row justify-around my-12 h-[139px]">
       {isLoading ? (
         <>
-          {Array.from({ length: 7 }).map((_, index) => (
-            <div key={index} className="flex flex-col items-center gap-3">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <div key={index} className="w-1/6 flex flex-col items-center gap-3">
               <Skeleton variant="circular" width={90} height={90} />
               <Skeleton variant="text" height={24} width={100} />
             </div>
@@ -31,7 +31,7 @@ const CategorySection = () => {
       ) : (
         <>
           {data?.map((item, index) => (
-            <span className="flex-1">
+            <span className="w-1/6 flex-1">
               <Link
                 key={index}
                 to={`/category/${item.slug}`}
