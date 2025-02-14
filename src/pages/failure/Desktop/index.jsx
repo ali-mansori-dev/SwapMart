@@ -1,4 +1,4 @@
-import React from "react";
+
 import BasicLayoutDesktop from "../../../layouts/desktop/basic_layout";
 import Lottie from "react-lottie";
 import successAnimation from "../../../lotties/Failure.json";

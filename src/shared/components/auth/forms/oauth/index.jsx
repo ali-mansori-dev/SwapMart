@@ -2,16 +2,21 @@ import { Button } from "@mui/material";
 import Supabase from "../../../../../lib/helper/ClientSupabase";
 
 const OAuth = () => {
+  const redirectTo =
+    import.meta.env.VITE_NODE_ENV === "development"
+      ? "http://localhost:3000/"
+      : "https://swap-mart.vercel.app/";
+
   const handleGoogle = async () => {
     await Supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: "http://localhost:3000/" },
+      options: { redirectTo },
     });
   };
   const handleGithub = async () => {
     await Supabase.auth.signInWithOAuth({
       provider: "github",
-      options: { redirectTo: "http://localhost:3000/" },
+      options: { redirectTo },
     });
   };
   return (
