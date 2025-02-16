@@ -11,7 +11,7 @@ function NavbarDesktop() {
   const { is_authed, loading } = useSelector((redux) => redux.auth);
 
   const defaultOptions = {
-    loop: true,
+    loop: false,
     autoplay: true,
     animationData: successAnimation,
     rendererSettings: {

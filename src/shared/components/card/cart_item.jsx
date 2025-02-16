@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
-import React from "react";
 import { Link } from "react-router-dom";
 import { formatteCurrency } from "../../../utils/formatNumber";
-import CartButton from "./product_card";
+import CartButton from "./cart_button/index";
 import Image from "../image";
 
 const CartItem = ({ id, image, title, price }) => {

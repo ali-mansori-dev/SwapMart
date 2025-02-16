@@ -54,9 +54,7 @@ export const FindPostbyIdFn = async (id) => {
       throw new Error(`Error fetching post by slug "${id}": ${error.message}`);
     }
 
-    const { data: brand_data, error: brand_error } = await Supabase.from(
-      "sw_brands"
-    )
+    const { data: brand_data } = await Supabase.from("sw_brands")
       .select("*")
       .eq("slug", data?.brand_slug)
       .single();

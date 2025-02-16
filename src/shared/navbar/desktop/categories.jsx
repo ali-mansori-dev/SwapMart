@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, CircularProgress } from "@mui/material";
 import { useQuery } from "react-query";
-import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetch_category_data } from "../../../queries/category";

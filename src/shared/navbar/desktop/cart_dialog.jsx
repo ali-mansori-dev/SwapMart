@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import cart from "../../../assets/icon/cart-outline.svg";
 import { Badge, Button } from "@mui/material";
 import { useSelector } from "react-redux";

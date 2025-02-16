@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
 import PropTypes from "prop-types";
 
 import ChevrowDown from "../../../assets/icon/chevron-down.svg";
@@ -83,8 +83,10 @@ const UserDropDown = () => {
         {is_authed ? (
           <Button
             size="small"
-            className={`${is_user_drop_down_open && `!bg-gray-100`} !px-4`}
-            variant="outlined"
+            className={`${
+              is_user_drop_down_open && `!bg-gray-100`
+            } !px-4 !py-1`}
+            variant="text"
             onClick={toggle}
             endIcon={
               <span className="flex">
@@ -92,15 +94,26 @@ const UserDropDown = () => {
               </span>
             }
           >
-            <img src={person} className="w-[20px]"/>
+            <Avatar
+              sx={{
+                width: 40,
+                height: 40,
+                fontSize: 18,
+                backgroundColor: "gainsboro",
+              }}
+            >
+              <img src={person} className="w-[20px]" />
+            </Avatar>
           </Button>
         ) : (
           <Button
             size="small"
-            className={`${is_user_drop_down_open && `!bg-gray-100`} !px-4 !text-sm`}
+            className={`${
+              is_user_drop_down_open && `!bg-gray-100`
+            } !px-4 !text-sm`}
             variant="outlined"
             onClick={() => dispatch(openLayout("is_auth_modal_open"))}
-            startIcon={<img src={person} className="w-[20px]"/>}
+            startIcon={<img src={person} className="w-[20px]" />}
           >
             Sign in
           </Button>
@@ -126,7 +139,7 @@ const UserDropDown = () => {
             />
           </ul>
         )}
-        <CartDialog/>
+        <CartDialog />
       </div>
     </div>
   );

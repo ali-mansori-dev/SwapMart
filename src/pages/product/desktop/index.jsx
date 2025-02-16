@@ -3,7 +3,7 @@ import BasicLayoutDesktop from "../../../layouts/desktop/basic_layout";
 import { formatteCurrency } from "../../../utils/formatNumber";
 import { Alert, CircularProgress } from "@mui/material";
 import Images from "../images";
-import CartButton from "../../../shared/components/card/product_card";
+import CartButton from "../../../shared/components/card/cart_button/index";
 
 const Desktop = ({ data, isLoading }) => {
   // Render loading state

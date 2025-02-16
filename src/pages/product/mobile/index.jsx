@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import { IconButton } from "@mui/material";
 
 import BasicLayoutMobile from "../../../layouts/mobile/single_layout";
 import { formatteCurrency } from "../../../utils/formatNumber";
@@ -7,8 +6,6 @@ import { LoadingScreenFixed } from "../../../shared/loader";
 import { fromNow } from "../../../utils/dateFormat";
 import Images from "../images";
 import MainContainer from "../../../shared/container";
-import bookmark_icon from "../../../assets/icon/bookmark-outline.svg";
-import bookmark_fill_icon from "../../../assets/icon/bookmark.svg";
 
 const Mobile = ({ data, isLoading }) => {
   return (

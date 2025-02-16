@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import ImageComponent from "../../shared/components/image";
 
 const Images = ({ images }) => {
   const [imageIndex, setImageIndex] = useState(0);
@@ -7,24 +8,7 @@ const Images = ({ images }) => {
   return (
     <div className="flex flex-col gap-3">
       <div className="relative w-full h-[280px] lg:w-[380px] lg:h-[350px] pb-2/3 lg:rounded-md">
-        {images && images?.length > 0 ? (
-          <img
-            className="absolute w-full h-full inset-0 object-cover object-top lg:rounded-md"
-            src={`${
-              import.meta.env.VITE_SUPABASE_URL
-            }/storage/v1/object/images/SwapMart/${images.at(imageIndex)}`}
-            srcSet={`${
-              import.meta.env.VITE_SUPABASE_URL
-            }/storage/v1/object/images/SwapMart/${images.at(imageIndex)}`}
-            alt="metal post thumbnail"
-            loading="lazy"
-          />
-        ) : (
-          <img
-            className="relative w-full h-[280px] border lg:w-[380px] lg:h-[350px] pb-2/3 lg:rounded-md"
-            src="https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Glossary.svg"
-          />
-        )}
+        <ImageComponent src={images?.at(imageIndex)} className='w-full h-full lg:rounded-md' />
       </div>
       <div className="flex flex-row gap-4 max-w-[460px] h-[100p] lg:px-0 px-3">
         {images?.slice(0, 5).map((image, index) => (

@@ -4,7 +4,7 @@ import { memo } from "react";
 
 import { formatteCurrency } from "../../../utils/formatNumber";
 import Image from "../image";
-import CartButton from "../card/product_card";
+import CartButton from "../card/cart_button/index";
 
 function PostCard({ title, image = [], id, price, created_at }) {
   return (
@@ -36,7 +36,7 @@ PostCard.propTypes = {
   image: PropTypes.arrayOf(PropTypes.string),
   id: PropTypes.string.isRequired,
   price: PropTypes.number,
-  created_at: PropTypes.string.isRequired,
+  created_at: PropTypes.string,
 };
 
 export default memo(PostCard);

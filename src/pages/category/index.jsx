@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import React from "react";
 import Mobile from "./mobile";
 import Desktop from "./desktop";
 import { useParams } from "react-router-dom";
