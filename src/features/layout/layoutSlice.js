@@ -6,6 +6,7 @@ const initialState = {
   is_user_drop_down_open: false,
   is_search_result_open: false,
   is_category_modal_component: false,
+  is_cart_modal_open: false,
 };
 
 export const layoutSlice = createSlice({

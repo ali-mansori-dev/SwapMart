@@ -7,8 +7,8 @@ const Images = ({ images }) => {
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="relative w-full h-[280px] lg:w-[380px] lg:h-[350px] pb-2/3 lg:rounded-md">
-        <ImageComponent src={images?.at(imageIndex)} className='w-full h-full lg:rounded-md' />
+      <div className="relative w-full h-[280px] lg:w-[380px] lg:h-[380px] pb-2/3 lg:rounded-md">
+        <ImageComponent src={images?.at(imageIndex)} className='w-full h-full lg:rounded-md object-cover' />
       </div>
       <div className="flex flex-row gap-4 max-w-[460px] h-[100p] lg:px-0 px-3">
         {images?.slice(0, 5).map((image, index) => (

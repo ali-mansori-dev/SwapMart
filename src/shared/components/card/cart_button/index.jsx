@@ -1,57 +1,90 @@
 import { useSelector, useDispatch } from "react-redux";
 import { add_to_cart, decrease_qty } from "../../../../features/cart/cartSlice";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import trash from "../../../../assets/icon/trash-outline.svg";
+import add from "../../../../assets/icon/add-outline.svg";
+import remove from "../../../../assets/icon/remove-outline.svg";
 import PropTypes from "prop-types";
-import {
-  addIncreaseCartItemsToLocalStorage,
-  removeDecreaseCartItemsToLocalStorage,
-} from "./functions";
+import Supabase from "../../../../lib/helper/ClientSupabase";
 
 const CartButton = ({ data }) => {
-  const productId = data?.id;
+  const productId = data?.product_id;
 
   const dispatch = useDispatch();
-
   const allCartsData = useSelector((state) => state.cart.cartItems);
+  const { is_authed } = useSelector((state) => state.auth);
 
-  const cartsData = allCartsData?.find((item) => item.id === productId);
+  const cartsData = allCartsData?.find((item) => item.product_id === productId);
 
-  // const { is_authed } = useSelector((state) => state.auth);
+  const syncToSupabase = async (cartData) => {
+    console.log(cartData);
 
-  //   const saveCartItem = (cartItemData) => {
-  //     console.log(is_authed, cartItemData);
+    const { data, error } = await Supabase.from("sw_cart")
+      .upsert(cartData, {
+        onConflict: ["id"],
+      })
+      .select("*")
+      .single();
 
-  //     if (!is_authed) return addIncreaseCartItemsToLocalStorage(cartItemData);
-  //     addCartItemsToSupabase(cartItemData);
-  //   };
-
-  // sw_cart
-  const addToCartHandle = (e) => {
-    e.preventDefault();
-    // const dataProp = is_authed ? data : data;
-    dispatch(add_to_cart(data));
-    addIncreaseCartItemsToLocalStorage(data);
+    if (error) {
+      console.error("Error syncing to Supabase:", error);
+    }
+    return data;
   };
-  const DeleteFromCartHandle = (e) => {
+
+  const addToCartHandle = async (e) => {
+    e.preventDefault();
+
+  //   if (is_authed) {
+  //     const responsedata = await syncToSupabase({
+  //       ...cartsData,
+  //       product_id: productId,
+
+  //       quantity: cartsData?.quantity ? cartsData?.quantity + 1 : 1,
+  //     });
+  //     return dispatch(add_to_cart(responsedata));
+  //   }
+    dispatch(add_to_cart(data));
+  };
+
+  const DeleteFromCartHandle = async (e) => {
     e.preventDefault();
     dispatch(decrease_qty(productId));
-    removeDecreaseCartItemsToLocalStorage(data);
   };
 
   return (
     <div>
       {cartsData?.quantity > 0 ? (
         <div className="cart-controls w-full flex justify-between items-center">
-          <Button onClick={DeleteFromCartHandle}>
+          <IconButton
+            sx={{
+              width: 38,
+              height: 38,
+              border: "1px solid",
+              borderColor: "gainsboro",
+            }}
+            onClick={DeleteFromCartHandle}
+          >
             {cartsData?.quantity <= 1 ? (
               <img src={trash} className="w-4 py-1" />
             ) : (
-              "-"
+              <img src={remove} className="w-4 py-1" />
             )}
-          </Button>
-          <span className="">{cartsData?.quantity}</span>
-          <Button onClick={addToCartHandle}>+</Button>
+          </IconButton>
+          <span className="w-full min-w-[48px] text-center">
+            {cartsData?.quantity}
+          </span>
+          <IconButton
+            sx={{
+              width: 38,
+              height: 38,
+              border: "1px solid",
+              borderColor: "gainsboro",
+            }}
+            onClick={addToCartHandle}
+          >
+            <img src={add} className="w-4 py-1" />
+          </IconButton>
         </div>
       ) : (
         <Button
@@ -66,5 +99,6 @@ const CartButton = ({ data }) => {
     </div>
   );
 };
+
 CartButton.propTypes = { data: PropTypes.any };
 export default CartButton;
