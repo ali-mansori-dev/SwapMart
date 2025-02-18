@@ -6,15 +6,15 @@ import { StrictMode } from "react";
 
 import "./index.css";
 import MuiContext from "./context/MuiContext.jsx";
-import store from "./app/store.js";
+import store, { persistor } from "./app/store.js";
 import App from "./App.jsx";
 import { ResponsiveProvider } from "./context/ResponsiveContext.jsx";
-import { LoadingScreenFixed } from "./shared/loader";
+import { PersistGate } from "redux-persist/integration/react";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      refetchOnWindowFocus: false, // Disable refetch globally
+      refetchOnWindowFocus: false,
     },
   },
 });
@@ -22,14 +22,16 @@ const queryClient = new QueryClient({
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <MuiContext>
-          <CssBaseline />
-          <ResponsiveProvider>
-            <App />
-          </ResponsiveProvider>
-        </MuiContext>
-      </QueryClientProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <QueryClientProvider client={queryClient}>
+          <MuiContext>
+            <CssBaseline />
+            <ResponsiveProvider>
+              <App />
+            </ResponsiveProvider>
+          </MuiContext>
+        </QueryClientProvider>
+      </PersistGate>
     </Provider>
   </StrictMode>
 );

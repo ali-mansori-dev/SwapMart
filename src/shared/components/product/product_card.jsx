@@ -6,7 +6,7 @@ import { formatteCurrency } from "../../../utils/formatNumber";
 import Image from "../image";
 import CartButton from "../card/cart_button/index";
 
-function PostCard({ title, image = [], id, price, created_at }) {
+function PostCard({ title, image = [], id, price }) {
   return (
     <Link
       to={`/v/${id}`}
@@ -25,7 +25,7 @@ function PostCard({ title, image = [], id, price, created_at }) {
         <h6 className="text-sm text-gray-700 pb-12 h-[28px]">
           {price && price > 0 ? formatteCurrency(price) : "Best Offer"}
         </h6>
-        <CartButton data={{ title, image, id, price, created_at }} />
+        <CartButton data={{ product_id: id, image, title, price }} />
       </div>
     </Link>
   );

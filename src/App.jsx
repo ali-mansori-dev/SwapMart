@@ -22,8 +22,8 @@ import FilterPage from "./pages/filter";
 import CartPage from "./pages/cart";
 import PaymentSuccess from "./pages/success";
 import NotFound from "./pages/notfound/index";
-import LoadingModal from "./shared/components/modal/loading";
 import PaymentFailure from "./pages/failure";
+import NetworkStatus from "./shared/components/networkStatus";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -57,14 +57,26 @@ const App = () => {
   return (
     <Router>
       <ScrollToTop />
-      {/* <LoadingModal/> */}
+      <NetworkStatus />
       <Routes>
         <Route path="/" element={<Home isMobile={isMobile} />} />
         <Route path="/cart" element={<CartPage isMobile={isMobile} />} />
-        <Route path="/success" element={<PaymentSuccess isMobile={isMobile} />} />
-        <Route path="/failure" element={<PaymentFailure isMobile={isMobile} />} />
-        <Route path="/category/:slug" element={<Category isMobile={isMobile} />} />
-        <Route path="/filter/:slug" element={<FilterPage isMobile={isMobile} />} />
+        <Route
+          path="/success"
+          element={<PaymentSuccess isMobile={isMobile} />}
+        />
+        <Route
+          path="/failure"
+          element={<PaymentFailure isMobile={isMobile} />}
+        />
+        <Route
+          path="/category/:slug"
+          element={<Category isMobile={isMobile} />}
+        />
+        <Route
+          path="/filter/:slug"
+          element={<FilterPage isMobile={isMobile} />}
+        />
         <Route path="/new" element={<CreatePost isMobile={isMobile} />} />
         <Route path="/signup" element={<Signup isMobile={isMobile} />} />
         <Route path="/signin" element={<Signin isMobile={isMobile} />} />

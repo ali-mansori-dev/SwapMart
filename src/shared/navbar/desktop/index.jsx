@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Lottie from "react-lottie";
 
 import successAnimation from "../../../lotties/Logo.json";
-import UserDropDown from "./user_drop_down";
+import UserDropDown from "./user_drop_down/index";
 import Search from "./search";
 
 function NavbarDesktop() {

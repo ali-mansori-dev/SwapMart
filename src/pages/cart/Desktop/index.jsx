@@ -8,7 +8,6 @@ import CartItem from "../../../shared/components/card/cart_item";
 const Desktop = ({ cartItems, totalQuantity, totalPrice }) => {
   return (
     <BasicLayoutDesktop>
-      Cherry pick
       <div className="flex justify-between gap-6 pb-40">
         <div className="w-3/4">
           {totalQuantity > 0 ? (
