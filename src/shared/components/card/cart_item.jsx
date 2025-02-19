@@ -5,8 +5,6 @@ import CartButton from "./cart_button/index";
 import Image from "../image";
 
 const CartItem = ({ id, product_id, image, title, price }) => {
-  console.log({ id, image, title, price });
-
   return (
     <Link
       to={`/v/${product_id}`}

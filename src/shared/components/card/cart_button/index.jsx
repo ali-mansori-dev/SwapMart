@@ -1,55 +1,39 @@
 import { useSelector, useDispatch } from "react-redux";
 import { add_to_cart, decrease_qty } from "../../../../features/cart/cartSlice";
-import { Button, IconButton } from "@mui/material";
+import { Button, CircularProgress, IconButton } from "@mui/material";
 import trash from "../../../../assets/icon/trash-outline.svg";
 import add from "../../../../assets/icon/add-outline.svg";
 import remove from "../../../../assets/icon/remove-outline.svg";
 import PropTypes from "prop-types";
-import Supabase from "../../../../lib/helper/ClientSupabase";
+import { useState } from "react";
+import { addToSupabase, removeFromSupabase } from "./functions";
 
 const CartButton = ({ data }) => {
+  const [loading, setIsloading] = useState(false);
   const productId = data?.product_id;
 
   const dispatch = useDispatch();
   const allCartsData = useSelector((state) => state.cart.cartItems);
-  const { is_authed } = useSelector((state) => state.auth);
+  const { is_authed, user_info } = useSelector((state) => state.auth);
 
   const cartsData = allCartsData?.find((item) => item.product_id === productId);
 
-  const syncToSupabase = async (cartData) => {
-    console.log(cartData);
-
-    const { data, error } = await Supabase.from("sw_cart")
-      .upsert(cartData, {
-        onConflict: ["id"],
-      })
-      .select("*")
-      .single();
-
-    if (error) {
-      console.error("Error syncing to Supabase:", error);
-    }
-    return data;
-  };
-
   const addToCartHandle = async (e) => {
     e.preventDefault();
+    setIsloading(true);
 
-  //   if (is_authed) {
-  //     const responsedata = await syncToSupabase({
-  //       ...cartsData,
-  //       product_id: productId,
-
-  //       quantity: cartsData?.quantity ? cartsData?.quantity + 1 : 1,
-  //     });
-  //     return dispatch(add_to_cart(responsedata));
-  //   }
+    if (is_authed) await addToSupabase(data, user_info);
     dispatch(add_to_cart(data));
+    setIsloading(false);
   };
 
   const DeleteFromCartHandle = async (e) => {
     e.preventDefault();
+    setIsloading(true);
+
+    if (is_authed) await removeFromSupabase(data, user_info);
     dispatch(decrease_qty(productId));
+    setIsloading(false);
   };
 
   return (
@@ -63,6 +47,7 @@ const CartButton = ({ data }) => {
               border: "1px solid",
               borderColor: "gainsboro",
             }}
+            disabled={loading}
             onClick={DeleteFromCartHandle}
           >
             {cartsData?.quantity <= 1 ? (
@@ -72,7 +57,13 @@ const CartButton = ({ data }) => {
             )}
           </IconButton>
           <span className="w-full min-w-[48px] text-center">
-            {cartsData?.quantity}
+            {loading ? (
+              <span className="w-[100px]">
+                <CircularProgress size={24} color="warning" />
+              </span>
+            ) : (
+              cartsData?.quantity
+            )}
           </span>
           <IconButton
             sx={{
@@ -81,6 +72,7 @@ const CartButton = ({ data }) => {
               border: "1px solid",
               borderColor: "gainsboro",
             }}
+            disabled={loading}
             onClick={addToCartHandle}
           >
             <img src={add} className="w-4 py-1" />
@@ -91,9 +83,16 @@ const CartButton = ({ data }) => {
           fullWidth
           variant="contained"
           size="small"
+          disabled={loading}
           onClick={addToCartHandle}
         >
-          add to cart
+          {loading ? (
+            <span className="w-[90px] h-[22px]">
+              <CircularProgress size={23} color="white" />
+            </span>
+          ) : (
+            "add to cart"
+          )}
         </Button>
       )}
     </div>
