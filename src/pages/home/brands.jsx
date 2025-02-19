@@ -1,11 +1,10 @@
-import React from "react";
 import { useQuery } from "react-query";
 import { fetchBrands } from "./functions";
 import { Skeleton } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const Brands = () => {
-  const { data, isLoading, error } = useQuery("fetchBrands", fetchBrands);
+  const { data, isLoading } = useQuery("fetchBrands", fetchBrands);
 
   return (
     <div className="flex flex-col gap-10 items-center">
@@ -22,7 +21,7 @@ const Brands = () => {
               </div>
             ))
           : data?.map((item, index) => (
-              <span className="w-1/6 flex-1">
+              <span key={index} className="w-1/6 flex-1">
                 <Link
                   key={index}
                   to={`/category/${item.slug}`}

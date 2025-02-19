@@ -56,7 +56,9 @@ const Desktop = ({ data, isLoading }) => {
                   : "Best Offer"}
               </span>
             </div>
-            <CartButton data={data} />
+            <CartButton
+              data={{ product_id: data?.id, ...data, id: undefined }}
+            />
           </div>
         </div>
       </div>
@@ -67,11 +69,13 @@ const Desktop = ({ data, isLoading }) => {
 // PropTypes for strict type checking
 Desktop.propTypes = {
   data: PropTypes.shape({
+    id: PropTypes.string,
     title: PropTypes.string,
-    amount: PropTypes.number,
+    price: PropTypes.number,
     image: PropTypes.arrayOf(PropTypes.string),
     is_delete: PropTypes.bool,
   }),
+  brand: PropTypes.any,
   isLoading: PropTypes.bool,
 };
 

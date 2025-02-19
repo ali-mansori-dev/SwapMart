@@ -59,6 +59,7 @@ const ImageComponent = ({
       width={width}
       height={height}
       loading="lazy"
+      decoding="async"
       className={className}
     />
   );

@@ -1,58 +1,56 @@
 import Supabase from "../../../../lib/helper/ClientSupabase";
 
-const addIncreaseCartItemsToLocalStorage = (data) => {
-  const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-  const existingProductIndex = storedCart.findIndex(
-    (item) => item.id === data.id
-  );
+const addToSupabase = async (cartData, user_info) => {
+  const { data: existing_data, error } = await Supabase.from("sw_cart")
+    .select("*")
+    .eq("product_id", cartData?.product_id)
+    .eq("user_id", user_info?.id)
+    .single();
 
-  if (existingProductIndex >= 0) {
-    storedCart[existingProductIndex].quantity += 1;
-  } else {
-    storedCart.push({ ...data, quantity: 1 });
+  if (error) {
+    console.error("Error syncing to Supabase:", error);
   }
+  if (existing_data)
+    return await Supabase.from("sw_cart")
+      .update({
+        quantity: existing_data.quantity + 1,
+      })
+      .eq("id", existing_data?.id)
+      .select()
+      .single();
 
-  localStorage.setItem("cart", JSON.stringify(storedCart));
+  return await Supabase.from("sw_cart")
+    .insert({ ...cartData, quantity: 1 })
+    .select()
+    .single();
 };
-const removeDecreaseCartItemsToLocalStorage = (data) => {
-  console.log(data);
+const removeFromSupabase = async (cartData, user_info) => {
+  console.log(cartData);
+  
+  const { data: existing_data, error } = await Supabase.from("sw_cart")
+    .select("*")
+    .eq("product_id", cartData?.product_id)
+    .eq("user_id", user_info?.id)
+    .single();
 
-  const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-  const existingProductIndex = storedCart.findIndex(
-    (item) => item.id === data.id
-  );
-  console.log(existingProductIndex);
+    console.log(existing_data);
+    
 
-  if (existingProductIndex === undefined) return;
-
-  if (storedCart[existingProductIndex].quantity > 1) {
-    storedCart[existingProductIndex].quantity -= 1;
-  } else {
-    storedCart.splice(existingProductIndex, 1);
+  if (error) {
+    console.error("Error syncing to Supabase:", error);
   }
+  if (!existing_data) return;
 
-  localStorage.setItem("cart", JSON.stringify(storedCart));
-};
-const addIncreaseCartItemsToSupabase = async (data) => {
-  try {
-    const { data: user_data } = await Supabase.auth.getUser();
-    const { error } = await Supabase.from("sw_cart").insert({
-      product_id: data?.id,
-      quantity: 1,
-    });
+  if (existing_data?.quantity > 1)
+    return await Supabase.from("sw_cart")
+      .update({
+        quantity: existing_data.quantity - 1,
+      })
+      .eq("id", existing_data?.id)
+      .select()
+      .single();
 
-    if (error) {
-      console.error("Error adding to Supabase:", error);
-    } else {
-      console.log("Product added to Supabase successfully");
-    }
-  } catch (err) {
-    console.error("Error with Supabase:", err);
-  }
+  return await Supabase.from("sw_cart").delete().eq("id", existing_data?.id);
 };
 
-export {
-  addIncreaseCartItemsToLocalStorage,
-  removeDecreaseCartItemsToLocalStorage,
-  addIncreaseCartItemsToSupabase,
-};
+export { addToSupabase, removeFromSupabase };
