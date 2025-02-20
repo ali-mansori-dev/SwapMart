@@ -57,8 +57,8 @@ body {
   width: max-content !important;
   left: 50% !important;
   border-radius: 20px;
-  padding-right: 8px;
-  padding-left: 8px;
+  padding-inline-start: 6px;
+  padding-inline-end: 6px;
   transform: translate(-50%, -50%) !important;
 }
 .swiper-pagination-bullet-active{

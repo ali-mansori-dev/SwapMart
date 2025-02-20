@@ -24,9 +24,26 @@ import PaymentSuccess from "./pages/success";
 import NotFound from "./pages/notfound/index";
 import PaymentFailure from "./pages/failure";
 import NetworkStatus from "./shared/components/networkStatus";
+import { add_to_cart, clear_cart } from "./features/cart/cartSlice";
 
 const App = () => {
   const dispatch = useDispatch();
+
+  const syncSupabaseToRedux = async () => {
+    const {
+      data: { user },
+    } = await Supabase.auth.getUser();
+
+    const { data } = await Supabase.from("sw_cart")
+      .select("*")
+      .eq("user_id", user?.id);
+
+    if (data?.length > 0) {
+      dispatch(clear_cart());
+      data.map((item) => dispatch(add_to_cart(item)));
+    }
+  };
+
   Supabase.auth.onAuthStateChange((event, session) => {
     switch (event) {
       case "INITIAL_SESSION":
@@ -44,6 +61,7 @@ const App = () => {
               access_token: session?.user?.access_token,
             })
           );
+        syncSupabaseToRedux();
         return;
       case "SIGNED_OUT":
         dispatch(log_out());

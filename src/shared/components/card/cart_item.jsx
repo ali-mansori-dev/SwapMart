@@ -14,7 +14,7 @@ const CartItem = ({ id, product_id, image, title, price }) => {
         src={image?.at(0)}
         height={100}
         width={100}
-        className="rounded-lg border border-gray-200 w-[100px] h-[100px]"
+        className="rounded-lg border border-gray-200 object-cover w-[100px] h-[100px]"
       />
       <div className="w-full flex flex-col gap-1">
         <span className="text-base font-semibold line-clamp-1">{title}</span>

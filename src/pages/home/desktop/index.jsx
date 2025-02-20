@@ -6,7 +6,7 @@ import CategorySection from "../category";
 import { Link } from "react-router-dom";
 import Brands from "../brands";
 
-const Desktop = ({ data, isLoading, lastItemRef, hasNextPage }) => {
+const Desktop = () => {
   return (
     <BasicLayoutDesktop>
       <Slider />

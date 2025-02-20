@@ -18,39 +18,48 @@ const CategorySection = () => {
   const { data, isLoading } = useQuery("parent_category", fetchItems);
 
   return (
-    <div className="flex flex-row justify-around my-12 h-[139px]">
+    <ul className="flex flex-row flex-wrap gap-2 justify-around my-8 lg:my-10 h-[84px] lg:h-[139px]">
       {isLoading ? (
         <>
-          {Array.from({ length: 6 }).map((_, index) => (
-            <div key={index} className="w-1/6 flex flex-col items-center gap-3">
-              <Skeleton variant="circular" width={90} height={90} />
-              <Skeleton variant="text" height={24} width={100} />
-            </div>
+          {Array.from({ length: 5 }).map((_, index) => (
+            <li
+              key={index}
+              className="w-1/4 flex-1 flex flex-col items-center gap-2 lg:gap-3"
+            >
+              <div className="w-[52px] h-[52px] lg:w-[90px] lg:h-[90px]">
+                <Skeleton variant="rounded" sx={{ height: "100%" }} />
+              </div>
+              <div className="w-[52px] h-[16px] lg:w-[90px] lg:h-[24px]">
+                <Skeleton variant="text" sx={{ height: "100%" }} />
+              </div>
+            </li>
           ))}
         </>
       ) : (
         <>
           {data?.map((item, index) => (
-            <span className="w-1/6 flex-1">
+            <li key={index} className="w-1/4 flex-1">
               <Link
                 key={index}
                 to={`/category/${item.slug}`}
-                className="flex flex-col items-center gap-3"
+                className="flex flex-col items-center gap-2 lg:gap-3"
               >
-                <div className="bg-gray-200 rounded-full p-6 w-[90px] h-[90px]">
+                <div className="bg-gray-200 rounded-xl flex justify-center items-center w-[52px] h-[52px] lg:w-[90px] lg:h-[90px]">
                   <img
                     src={icons[item?.icon]}
-                    className="w-10"
+                    className="w-6 lg:w-10"
                     alt="home-icon"
                   />
                 </div>
-                <span>{item?.name}</span>
+                <h3 className="text-xs lg:text-base text-center line-clamp-1">
+                  {item?.name}
+                </h3>
               </Link>
-            </span>
+            </li>
           ))}
         </>
       )}
-    </div>
+    </ul>
   );
 };
 
