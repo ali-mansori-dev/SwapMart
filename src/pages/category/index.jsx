@@ -1,8 +1,9 @@
-import PropTypes from "prop-types";
-import Mobile from "./mobile";
-import Desktop from "./desktop";
 import { useParams } from "react-router-dom";
+import PropTypes from "prop-types";
+
 import { useChildCategories } from "../../hooks/useChildCategories";
+import Desktop from "./desktop";
+import Mobile from "./mobile";
 
 const CategoryPage = ({ isMobile }) => {
   const { slug } = useParams();

@@ -5,12 +5,14 @@ import Slider from "../slider";
 import CategorySection from "../category";
 import { Link } from "react-router-dom";
 import Brands from "../brands";
+import TodaysOfferse from "../todays_offerse";
 
 const Desktop = () => {
   return (
     <BasicLayoutDesktop>
       <Slider />
       <CategorySection />
+      <TodaysOfferse />
       <div className="flex gap-10 pb-10">
         <img
           loading="lazy"

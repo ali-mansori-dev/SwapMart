@@ -1,7 +1,7 @@
 import { AppBar } from "@mui/material";
+import PropTypes from "prop-types";
 
 import MainContainer from "../../shared/container";
-import PropTypes from "prop-types";
 
 const InitialLayoutMobile = ({ children }) => {
   return (
