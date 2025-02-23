@@ -5,22 +5,24 @@ import Slider from "../slider";
 import CategorySection from "../category";
 import { Link } from "react-router-dom";
 import Brands from "../brands";
+import TodaysOfferse from "../todays_offerse";
 
 const Mobile = () => {
   return (
     <BasicLayoutMobile>
       <Slider />
       <CategorySection />
-      <div className="flex gap-2 mb-8 z-0">
+      <TodaysOfferse />
+      <div className="flex mb-8 z-0">
         <img
           loading="lazy"
           src="https://fwpdokjfwfokcqrgoanf.supabase.co/storage/v1/object/public/images/SwapMart/Banner/banner1.webp"
-          className="w-full bg-slate-100 object-cover rounded-2xl h-[100px]"
+          className="w-[calc(50%-4px)] bg-slate-100 object-cover rounded-2xl h-[100px] me-1"
         />
         <img
           loading="lazy"
           src="https://fwpdokjfwfokcqrgoanf.supabase.co/storage/v1/object/public/images/SwapMart/Banner/banner2.webp"
-          className="w-full bg-slate-100 object-cover rounded-2xl h-[100px]"
+          className="w-[calc(50%-4px)] bg-slate-100 object-cover rounded-2xl h-[100px] ms-1"
         />
       </div>
       <div className="w-full bg-primary-40 text-white h-[192px] mb-8 rounded-2xl flex flex-col justify-between items-start gap-6 p-4">

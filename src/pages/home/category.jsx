@@ -1,7 +1,8 @@
-import { useQuery } from "react-query";
-import Supabase from "../../lib/helper/ClientSupabase";
-import { Link } from "react-router-dom";
 import { Skeleton } from "@mui/material";
+import { Link } from "react-router-dom";
+import { useQuery } from "react-query";
+
+import Supabase from "../../lib/helper/ClientSupabase";
 import icons from "../../shared/icons.js";
 
 const CategorySection = () => {
@@ -18,7 +19,7 @@ const CategorySection = () => {
   const { data, isLoading } = useQuery("parent_category", fetchItems);
 
   return (
-    <ul className="flex flex-row flex-wrap gap-2 justify-around my-8 lg:my-10 h-[84px] lg:h-[139px]">
+    <ul className="flex flex-row flex-wrap gap-2 justify-around my-8 lg:my-10 h-max min-h-[84px] lg:min-h-[139px]">
       {isLoading ? (
         <>
           {Array.from({ length: 5 }).map((_, index) => (

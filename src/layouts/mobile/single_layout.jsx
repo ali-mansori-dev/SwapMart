@@ -44,6 +44,7 @@ const SingleLayoutMobile = ({
             {children}
           </MainContainer>
         )}
+        {buttonNavigation}
       </main>
     </>
   );

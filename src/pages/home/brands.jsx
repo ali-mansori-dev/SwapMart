@@ -1,10 +1,10 @@
-import { useQuery } from "react-query";
+import { Autoplay, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { Skeleton } from "@mui/material";
 import { Link } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { useQuery } from "react-query";
 
 import { fetchBrands } from "./functions";
-import { Pagination } from "swiper/modules";
 
 const Brands = () => {
   const { data, isLoading } = useQuery("fetchBrands", fetchBrands);
@@ -32,7 +32,8 @@ const Brands = () => {
             spaceBetween: 50,
           },
         }}
-        modules={[Pagination]}
+        modules={[Pagination, Autoplay]}
+        autoplay
         className="mySwiper"
       >
         {isLoading

@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
-import PropTypes from "prop-types";
 import { useQuery } from "react-query";
+import PropTypes from "prop-types";
 
 import { FindPostbyIdFn } from "../../queries/post";
-import Mobile from "./mobile";
 import Desktop from "./desktop";
+import Mobile from "./mobile";
 
 const SinglePost = ({ isMobile }) => {
   const { id } = useParams();

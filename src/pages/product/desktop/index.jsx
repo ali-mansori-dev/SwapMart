@@ -1,9 +1,10 @@
+import { Alert, CircularProgress } from "@mui/material";
 import PropTypes from "prop-types";
+
+import CartButton from "../../../shared/components/card/cart_button/index";
 import BasicLayoutDesktop from "../../../layouts/desktop/basic_layout";
 import { formatteCurrency } from "../../../utils/formatNumber";
-import { Alert, CircularProgress } from "@mui/material";
 import Images from "../images";
-import CartButton from "../../../shared/components/card/cart_button/index";
 
 const Desktop = ({ data, isLoading }) => {
   // Render loading state
@@ -29,14 +30,16 @@ const Desktop = ({ data, isLoading }) => {
 
           {/* Left Section: Details */}
           <div className="flex flex-col gap-4 w-1/2">
-            <h5 className="text-2xl text-gray-900 leading-10">{data?.title}</h5>
+            <h5 className="text-2xl text-gray-900 leading-10 font-bold">
+              {data?.title}
+            </h5>
             <div className="flex flex-row items-center gap-4">
               <img
                 src={data?.brand?.image}
                 className="w-[50px] h-[50px]"
                 loading="lazy"
               />
-              <span className="text-lg font-bold">{data?.brand?.name}</span>
+              <span className="text-lg ">{data?.brand?.name}</span>
             </div>
 
             {data?.is_delete ? (
@@ -74,9 +77,11 @@ Desktop.propTypes = {
     price: PropTypes.number,
     image: PropTypes.arrayOf(PropTypes.string),
     is_delete: PropTypes.bool,
+    brand: PropTypes.shape({
+      image: PropTypes.string,
+      name: PropTypes.string,
+    }),
   }),
-  brand: PropTypes.any,
   isLoading: PropTypes.bool,
 };
-
 export default Desktop;

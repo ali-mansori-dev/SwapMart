@@ -1,8 +1,8 @@
-import PropTypes from "prop-types";
-import React from "react";
-import Mobile from "./Mobile";
-import Desktop from "./Desktop";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
+
+import Desktop from "./Desktop";
+import Mobile from "./Mobile";
 
 const CartPage = ({ isMobile }) => {
   const { cartItems, totalQuantity, totalPrice } = useSelector(

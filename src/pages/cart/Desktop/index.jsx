@@ -1,9 +1,9 @@
-import React from "react";
-import BasicLayoutDesktop from "../../../layouts/desktop/basic_layout";
 import { Button } from "@mui/material";
 import PropTypes from "prop-types";
-import { formatteCurrency } from "../../../utils/formatNumber";
+
+import BasicLayoutDesktop from "../../../layouts/desktop/basic_layout";
 import CartItem from "../../../shared/components/card/cart_item";
+import { formatteCurrency } from "../../../utils/formatNumber";
 
 const Desktop = ({ cartItems, totalQuantity, totalPrice }) => {
   return (
@@ -29,7 +29,7 @@ const Desktop = ({ cartItems, totalQuantity, totalPrice }) => {
     </BasicLayoutDesktop>
   );
 };
-Desktop.prototype = {
+Desktop.propTypes = {
   cartItems: PropTypes.array,
   totalQuantity: PropTypes.number,
   totalPrice: PropTypes.number,

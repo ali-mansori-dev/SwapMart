@@ -1,18 +1,16 @@
-import React from "react";
-import BasicLayoutDesktop from "../../../layouts/desktop/basic_layout";
-import PropTypes from "prop-types";
-import PostCard from "../../../shared/components/product/product_card";
 import {
-  Accordion,
   AccordionActions,
   AccordionDetails,
   AccordionSummary,
-  Button,
-  CircularProgress,
-  Skeleton,
-  Slider,
   Typography,
+  Accordion,
+  Button,
+  Slider,
 } from "@mui/material";
+import PropTypes from "prop-types";
+
+import BasicLayoutDesktop from "../../../layouts/desktop/basic_layout";
+import PostCard from "../../../shared/components/product/product_card";
 import chevron from "../../../assets/icon/chevron-down.svg";
 
 const Desktop = ({ data, loading }) => {
@@ -20,7 +18,6 @@ const Desktop = ({ data, loading }) => {
     <BasicLayoutDesktop>
       <div className="flex flex-row-reverse gap-8 relative">
         <div className="w-1/4 h-[80vh] border rounded-lg sticky top-20">
-          {" "}
           <Accordion>
             <AccordionSummary
               expandIcon={<img src={chevron} className="w-4" />}
@@ -33,9 +30,7 @@ const Desktop = ({ data, loading }) => {
               <Slider
                 getAriaLabel={() => "Temperature range"}
                 value={[15, 60]}
-                // onChange={handleChange}
                 valueLabelDisplay="auto"
-                // getAriaValueText={valuetext}
               />
             </AccordionDetails>
             <AccordionActions>
@@ -45,11 +40,12 @@ const Desktop = ({ data, loading }) => {
           </Accordion>
         </div>
         <div className="w-3/4 grid grid-cols-3 gap-5 ">
-          {loading
-            ? Array.from({ length: 6 }).map((_, index) => (
-                <div key={index} className="bg-gray-100 h-[332px]"></div>
-              ))
-            : data?.map((item, index) => <PostCard {...item} key={index} />)}
+          {loading &&
+            Array.from({ length: 6 }).map((_, index) => (
+              <div key={index} className="bg-gray-100 h-[332px]"></div>
+            ))}
+          {data &&
+            data?.map((item, index) => <PostCard {...item} key={index} />)}
         </div>
       </div>
     </BasicLayoutDesktop>

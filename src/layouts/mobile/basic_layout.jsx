@@ -10,13 +10,12 @@ const BasicLayoutMobile = ({ children, searchText, filter = [] }) => {
       <Navbar searchText={searchText} />
       <main
         className={`${
-          filter?.length > 0 ? `mt-[122px]` : `mt-[59px]`
+          filter?.length > 0 ? `mt-[122px]` : `mt-[59px] `
         } mb-[165px] pb-72`}
       >
         <Container maxWidth="lg" className="h-[calc(100vh-170px)] !py-4">
           {children}
         </Container>
-        <div className="h-28"></div>
       </main>
       <ButtonNavigation />
     </>

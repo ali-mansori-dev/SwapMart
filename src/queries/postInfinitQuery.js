@@ -1,4 +1,5 @@
 import { useInfiniteQuery } from "react-query";
+
 import Supabase from "../lib/helper/ClientSupabase";
 
 const PAGE_SIZE = 9;

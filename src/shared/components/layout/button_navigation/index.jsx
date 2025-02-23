@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { openLayout } from "../../../../features/layout/layoutSlice";
-import price_icon from "../../../../assets/icon/pricetag-outline.svg";
+import cart_icon from "../../../../assets/icon/cart-outline.svg";
 import person_icon from "../../../../assets/icon/person-outline.svg";
 import home_icon from "../../../../assets/icon/home-outline.svg";
 import grid_icon from "../../../../assets/icon/grid-outline.svg";
@@ -36,7 +36,7 @@ const ButtonNavigation = () => {
             link: "#",
             onClick: openCategoryModal,
           },
-          { title: "Sell", icon: price_icon, link: "/new" },
+          { title: "Cart", icon: cart_icon, link: "/cart" },
           {
             title: "Profile",
             icon: person_icon,
@@ -51,6 +51,7 @@ const ButtonNavigation = () => {
             link: "#",
             onClick: openCategoryModal,
           },
+          { title: "Cart", icon: cart_icon, link: "/cart" },
           {
             title: "Login",
             icon: login_icon,

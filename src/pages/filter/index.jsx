@@ -1,10 +1,11 @@
-import React, { useRef } from "react";
-import Mobile from "./Mobile";
-import Desktop from "./Desktop";
-import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
+// import React, { useRef } from "react";
+import PropTypes from "prop-types";
+
+// import { useInfiniteItems } from "../../queries/postInfinitQuery";
 import useFilterProducts from "../../hooks/useFilterProducts";
-import { useInfiniteItems } from "../../queries/postInfinitQuery";
+import Desktop from "./Desktop";
+import Mobile from "./Mobile";
 
 const FilterPage = ({ isMobile }) => {
   const { slug } = useParams();

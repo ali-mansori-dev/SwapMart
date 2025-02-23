@@ -1,4 +1,3 @@
-import axios from "axios";
 import Supabase from "../lib/helper/ClientSupabase";
 
 const fetch_category_data = async () => {
